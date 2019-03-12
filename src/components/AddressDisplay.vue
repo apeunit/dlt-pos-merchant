@@ -5,13 +5,13 @@
       Show this QR Code to receive tokens.<br>
       (If people really like you, you may use this screen a lot!)
     </p>
-    <vue-qrcode :value="account.pub" :options="{ size: 300 }"></vue-qrcode>
+    <qrcode :value="account.pub" :options="{ size: 300 }"></qrcode>
   </div>
 </template>
 
 <script>
 import { AeButton, AeAddress, AeAmountInput } from '@aeternity/aepp-components'
-import VueQrcode from '@xkeshi/vue-qrcode'
+import VueQrcode from '@chenfengyuan/vue-qrcode'
 
 export default {
   name: 'AddressDisplay',
