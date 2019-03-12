@@ -7,7 +7,6 @@ import getRouter from './router'
 import store from './store'
 import VueSocketIO from 'vue-socket.io'
 import Ae from '@aeternity/aepp-sdk/es/ae/universal'
-import MemoryAccount from '@aeternity/aepp-sdk/es/account/memory.js'
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)
@@ -30,13 +29,11 @@ async function initAe (store) {
     await Ae({
       url: 'https://sdk-testnet.aepps.com',
       internalUrl: 'https://sdk-testnet.aepps.com',
-      networkId: 'aet_ua', // or any other networkId your client should connect to
-      accounts: [
-        MemoryAccount({ keypair: {
-          secretKey: '565ea7300f070858838a0bd6c3fe6640f7591c825536ef84126ad1fda02a13804f067606e2f0cb38fed7a1f2a8ca7696330ae2cd8fa9187960ebbd0962f6798a',
-          publicKey: 'ak$bobS3qRvWfDxCpmedQYzp3xrK5jVUS4MSto99QrCdySSMjYnd'
-        } })
-      ]
+      networkId: 'ae_uat', // or any other networkId your client should connect to
+      keypair: {
+        secretKey: '565ea7300f070858838a0bd6c3fe6640f7591c825536ef84126ad1fda02a13804f067606e2f0cb38fed7a1f2a8ca7696330ae2cd8fa9187960ebbd0962f6798a',
+        publicKey: 'ak_bobS3qRvWfDxCpmedQYzp3xrK5jVUS4MSto99QrCdySSMjYnd'
+      }
     })
   )
 }
