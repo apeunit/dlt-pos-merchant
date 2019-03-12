@@ -4,15 +4,15 @@
       Sorry there currently is no Beer left at the bar
     </div>
     <div>
-      <vue-qrcode :value="fullInfo" :options="{ size: 300 }"></vue-qrcode>
+      <qrcode :value="fullInfo" :options="{ size: 300 }"></qrcode>
     </div>
   </div>
 </template>
 
 <script>
-import VueQrcode from '@xkeshi/vue-qrcode'
+import VueQrcode from '@chenfengyuan/vue-qrcode'
 // const { AeternityClient, Crypto } = require('@aeternity/aepp-sdk')
-import { Crypto } from '@aeternity/aepp-sdk'
+import { sign, verify, decodeBase58Check } from '@aeternity/aepp-sdk/es/utils/crypto.js'
 
 export default {
   name: 'BeerHash',
@@ -48,7 +48,7 @@ export default {
   methods: {
     signHash (beerHash, privateKey) {
       const tx = beerHash
-      const sig = Crypto.sign(tx, Buffer.from(privateKey, 'hex'))
+      const sig = sign(tx, Buffer.from(privateKey, 'hex'))
       const sigBase64 = Buffer.from(sig).toString('base64')
       return sigBase64
     },
@@ -56,8 +56,8 @@ export default {
       // this isnt needed here, just as a poc on how to use verify
       const sigBuffer = Buffer.from(sigBase64, 'base64')
       const hashBuffer = Buffer.from(beerHash)
-      const pub = Crypto.decodeBase58Check(pubKey.split('_')[1])
-      const verified = Crypto.verify(hashBuffer, sigBuffer, pub)
+      const pub = decodeBase58Check(pubKey.split('_')[1])
+      const verified = verify(hashBuffer, sigBuffer, pub)
       return verified
     }
   },

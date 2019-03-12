@@ -3,7 +3,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const distFolder = path.resolve(__dirname, 'dist')
@@ -40,23 +41,29 @@ module.exports = {
     }),
     new HtmlWebpackHarddiskPlugin(),
     new ExtractTextPlugin('style.css?[hash]'),
-    new CleanWebpackPlugin([distFolder]),
+    new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: distFolder }),
     new CopyWebpackPlugin([
       {
         from: 'static',
         to: '',
         ignore: ['.*']
       }
-    ])
+    ]),
+    new VueLoaderPlugin(),
     // debug bundle (for optimisation)
-    // new BundleAnalyzerPlugin()
+    new BundleAnalyzerPlugin()
   ],
   module: {
     rules: [
       {
         test: /\.js$/,
-        loader: jsLoader,
-        exclude: /node_modules/
+        // standard setting for most bundlers web-app setup
+        // entirely excludes the node_modules folder
+        exclude: [/node_modules/],
+        // ...but when using external ES Modules you need to
+        // include required externals ES modules (eg. our Aepp-SDK) like so:
+        include: [/node_modules\/@aeternity/, /node_modules\/rlp/, /node_modules\/vue-qrcode-reader/],
+        loader: jsLoader
       },
       {
         test: /\.(s?[ac]ss)$/,
@@ -64,8 +71,8 @@ module.exports = {
           fallback: 'vue-style-loader',
           use: [
             'css-loader',
-            'sass-loader',
-            'postcss-loader'
+            'postcss-loader',
+            'sass-loader'
           ]
           // publicPath: '/dist'
         })
