@@ -1,6 +1,5 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
-import { AeternityClient } from '@aeternity/aepp-sdk'
 
 Vue.use(Vuex)
 
@@ -13,11 +12,13 @@ const store = new Vuex.Store({
     },
     balance: 0,
     beerHashes: [],
-    beerPrice: 1000,
-    barPubKey: 'ak$3TRJBCvcvaegewQkexWVQkt7bEFf1tCvhvj6jfErZQNWyJ4NoyxUwkGrVVWDefxPpPEiY534fTutPaURn72HrGKCYaNWPM',
-    websocketUrl: 'https://republica-pos.aepps.com',
+    beerPrice: 1000, // TODO: this should be in ae now
+    // TODO: new key format
+    barPubKey: 'ak_PcEB3fSN9mPDWbVyrvHWUjyBAwVncXWHmXpb7zKFPGW2QJ5wr',
+    websocketUrl: 'https://republica-pos.aepps.com', // TODO: this should something like pos.store.aepps.com
     socketConnected: false,
-    barState: null
+    barState: null,
+    ae: null
   },
   getters: {
     lastBeerHash (state) {
@@ -26,30 +27,35 @@ const store = new Vuex.Store({
       }
       return state.beerHashes[0]
     },
-    client () {
-      const provider = new AeternityClient.providers.HttpProvider(
-        'republica.aepps.com',
-        443,
-        { secured: true, internal: false }
-      )
-      return new AeternityClient(provider)
+    ae (state) {
+      return state.ae
     },
-    clientInternal () {
-      const provider = new AeternityClient.providers.HttpProvider(
-        'republica.aepps.com',
-        443,
-        { secured: true, internal: true }
-      )
-      return new AeternityClient(provider)
+    client (state) { // TODO: this should be updated to the latest sdk
+      return state.ae
     }
+    // clientInternal() { // TODO: this should be updated to the latest sdk and is not necesary
+    //   const provider = new AeternityClient.providers.HttpProvider(
+    //     'republica.aepps.com',
+    //     443,
+    //     { secured: true, internal: true }
+    //   )
+    //   return new AeternityClient(provider)
+    // }
   },
   mutations: {
-    setAccount (state, {pub, priv, name}) {
+    setAccount (state, { pub, priv, name }) {
       state.account.pub = pub
       state.account.priv = priv
       state.account.name = name
       // eslint-disable-next-line no-undef
       localStorage.setItem('account', JSON.stringify(state.account))
+      state.ae.setKeypair({
+        secretKey: state.account.priv,
+        publicKey: state.account.pub
+      })
+    },
+    setAe (state, ae) {
+      state.ae = ae
     },
     setBalance (state, newBalance) {
       state.balance = newBalance
@@ -87,13 +93,18 @@ const store = new Vuex.Store({
     async updateBalance ({ commit, state, getters }) {
       const pubKey = state.account.pub
       if (pubKey) {
-        try {
-          const balance = await getters.clientInternal.accounts.getBalance(pubKey)
-          commit('setBalance', balance)
-          return balance
-        } catch (err) {
-          console.log(err)
-        }
+        state.ae
+          .balance(pubKey, { format: false })
+          .then(balance => {
+            // logs current balance of 'A_PUB_ADDRESS'
+            console.log('balance', balance)
+            commit('setBalance', balance)
+            return balance
+          })
+          .catch(e => {
+            // logs error
+            console.log(e)
+          })
       }
       return 0
     }

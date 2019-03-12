@@ -1,4 +1,4 @@
-# Beer Æpp
+# Ice Æpp (same as Beer Æpp)
 
 ## Overview
 
@@ -54,7 +54,7 @@ yarn install
 ## Start the application
 
 ```
-yarn start:dev
+yarn run start:dev
 ```
 
 The current form should be self explainatory.
@@ -66,7 +66,7 @@ The current form should be self explainatory.
 yarn install
 
 # serve with hot reload at localhost:8080
-yarn start:dev
+yarn run start:dev
 
 # build for production with minification
 yarn build
