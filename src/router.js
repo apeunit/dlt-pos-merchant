@@ -92,7 +92,7 @@ export default (store) => {
 
   router.beforeEach((to, from, next) => {
     // when account credentials are passed as query
-    const {p: pub, k: priv, n: name} = to.query
+    const { p: pub, k: priv, n: name } = to.query
     if (pub && priv && name) {
       const account = { pub, priv, name }
       // only if not logged in or account changed
@@ -103,7 +103,7 @@ export default (store) => {
         store.commit('setBeerHashes', [])
       }
       // remove query params and keep on routing
-      next({name: to.name, query: null})
+      next({ name: to.name, query: null })
     } else {
       next()
     }

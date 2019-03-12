@@ -16,7 +16,7 @@
       <div class="qr-warning" v-if="qrWarning">
         {{qrWarning}}
       </div>
-      <qrcode-reader @decode="onDecode" @init="onInit"></qrcode-reader>
+      <qrcode-stream @decode="onDecode" @init="onInit"></qrcode-stream>
     </div>
 
     <div v-if="state === 'addressLookup'" class="shell">
@@ -193,7 +193,7 @@
 
 <script>
 import { AeButton, AeInput, AeAddressInput, AeAmountInput, AeLabel, AeLoader, AeAddress, AeModalLight, AeIdentityAvatar, AeIcon, AeDivider } from '@aeternity/aepp-components'
-import { QrcodeReader } from 'vue-qrcode-reader'
+import { QrcodeStream } from 'vue-qrcode-reader'
 
 export default {
   name: 'Send',
@@ -205,7 +205,7 @@ export default {
     AeAmountInput,
     AeLabel,
     AeLoader,
-    QrcodeReader,
+    QrcodeStream,
     AeModalLight,
     AeIdentityAvatar,
     AeIcon,
