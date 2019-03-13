@@ -15,7 +15,7 @@ const store = new Vuex.Store({
     beerPrice: 1000, // TODO: this should be in ae now
     // TODO: new key format
     barPubKey: 'ak_PcEB3fSN9mPDWbVyrvHWUjyBAwVncXWHmXpb7zKFPGW2QJ5wr',
-    websocketUrl: 'https://republica-pos.aepps.com', // TODO: this should something like pos.store.aepps.com
+    websocketUrl: 'http://localhost:5000', // TODO: this should something like pos.store.aepps.com
     socketConnected: false,
     barState: null,
     ae: null
