@@ -25,7 +25,7 @@ Vue.use(new VueSocketIO({
   }
 }))
 
-// p=ak$bobS3qRvWfDxCpmedQYzp3xrK5jVUS4MSto99QrCdySSMjYnd&k=565ea7300f070858838a0bd6c3fe6640f7591c825536ef84126ad1fda02a13804f067606e2f0cb38fed7a1f2a8ca7696330ae2cd8fa9187960ebbd0962f6798a&n=aet_ua
+// p=ak_bobS3qRvWfDxCpmedQYzp3xrK5jVUS4MSto99QrCdySSMjYnd&k=565ea7300f070858838a0bd6c3fe6640f7591c825536ef84126ad1fda02a13804f067606e2f0cb38fed7a1f2a8ca7696330ae2cd8fa9187960ebbd0962f6798a&n=aet_ua
 async function initAe (store) {
   store.commit(
     'setAe',
