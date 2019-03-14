@@ -87,14 +87,14 @@
           </div>
         </div>
         <ae-button
-          size="smaller"
+          size="small"
           type="exciting"
           uppercase
           @click="modalVisible = false"
           slot="buttons"
         >cancel</ae-button>
         <ae-button
-          size="smaller"
+          size="small"
           type="dramatic"
           uppercase
           @click="buyBeer(barPubKey)"

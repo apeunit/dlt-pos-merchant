@@ -11,15 +11,13 @@
 
 <script>
 import { AeButton, AeAddress, AeAmountInput } from '@aeternity/aepp-components'
-import VueQrcode from '@chenfengyuan/vue-qrcode'
 
 export default {
   name: 'AddressDisplay',
   components: {
     AeButton,
     AeAddress,
-    AeAmountInput,
-    VueQrcode
+    AeAmountInput
   },
   data () {
     return {
