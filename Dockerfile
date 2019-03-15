@@ -1,9 +1,5 @@
-FROM node:10.14.0
+FROM nginx:1.15.9-alpine
 WORKDIR /app
-COPY dist /app/dist
-COPY server.js /app/
-COPY package.json /app/
-RUN npm install connect-history-api-fallback@1.6.0 express@4.16.4
-RUN npm cache clean --force
-CMD [ "npm", "start" ]
-EXPOSE 3000
+COPY dist/ /usr/share/nginx/html
+COPY ./config/nginx.conf /etc/nginx/nginx.conf
+EXPOSE 80
