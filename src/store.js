@@ -1,5 +1,6 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
+import Ae from '@aeternity/aepp-sdk/es/ae/universal'
 
 Vue.use(Vuex)
 
@@ -107,6 +108,20 @@ const store = new Vuex.Store({
           })
       }
       return 0
+    },
+    async initAe ({ commit, state, getters }) {
+      commit(
+        'setAe',
+        await Ae({
+          url: 'https://testnet.mdw.aepps.com',
+          internalUrl: 'https://testnet.mdw.aepps.com',
+          networkId: 'ae_uat', // or any other networkId your client should connect to
+          keypair: {
+            secretKey: '',
+            publicKey: ''
+          }
+        })
+      )
     }
   }
 })

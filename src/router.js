@@ -90,14 +90,16 @@ export default (store) => {
     routes
   })
 
-  router.beforeEach((to, from, next) => {
+  router.beforeEach(async (to, from, next) => {
     // when account credentials are passed as query
     const { p: pub, k: priv, n: name } = to.query
     if (pub && priv && name) {
       const account = { pub, priv, name }
-      // only if not logged in or account changed
       if (!store.state.account.pub || store.state.account.pub !== account.pub) {
         // set account in store
+        if(!store.state.ae){
+          await store.dispatch('initAe')
+        }
         store.commit('setAccount', account)
         // remove existing beers
         store.commit('setBeerHashes', [])
