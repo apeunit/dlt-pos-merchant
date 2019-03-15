@@ -4,6 +4,7 @@ import Ae from '@aeternity/aepp-sdk/es/ae/universal'
 // import BigNumber from "./bignumber.mjs"
 
 Vue.use(Vuex)
+const randomHash = Math.random().toString(36).substring(7)
 
 const store = new Vuex.Store({
   state: {
@@ -20,12 +21,35 @@ const store = new Vuex.Store({
     socketConnected: false,
     barState: null,
     ae: null,
-    messages: [
-      {
-        id: Math.random().toString(36).substring(7),
-        content: 'stuff, maybe even HTML code'
+    chatMessages: {
+      en: [
+        {
+          id: randomHash,
+          content: 'stuff, maybe even <strong>HTML code<strong>'
+        }
+      ],
+      de: [
+        {
+          id: randomHash,
+          content: 'Dingen, vielleicht auch <strong>HTML code<strong>'
+        }
+      ]
+    },
+    // Ready translated locale messages
+    i18nTexts: {
+      en: {
+        message: {
+          hello: 'hello world! I\'m a text in your lnaguage',
+          youhavetokens: 'You have tokens'
+        }
+      },
+      de: {
+        message: {
+          hello: 'hallo Welt, Ich bin ein Text in deiner Sprache. Ümlaut!',
+          youhavetokens: 'Du hast tokens'
+        }
       }
-    ]
+    }
   },
   getters: {
     lastBeerHash (state) {
@@ -37,20 +61,12 @@ const store = new Vuex.Store({
     ae (state) {
       return state.ae
     },
-    messages (state) {
-      return state.messages
+    chatMessages (state) {
+      return state.chatMessages
     },
     client (state) { // TODO: this should be updated to the latest sdk
       return state.ae
     }
-    // clientInternal() { // TODO: this should be updated to the latest sdk and is not necesary
-    //   const provider = new AeternityClient.providers.HttpProvider(
-    //     'republica.aepps.com',
-    //     443,
-    //     { secured: true, internal: true }
-    //   )
-    //   return new AeternityClient(provider)
-    // }
   },
   mutations: {
     setAccount (state, { pub, priv, name }) {
@@ -70,10 +86,10 @@ const store = new Vuex.Store({
     setBalance (state, newBalance) {
       state.balance = newBalance
     },
-    addMessage (state, message) {
-      state.messages.push(message)
+    addMessage (state, { message, lang }) {
+      state.chatMessages[lang].push(message)
       // eslint-disable-next-line no-undef
-      localStorage.setItem('messages', JSON.stringify(state.messages))
+      localStorage.setItem('chatMessages', JSON.stringify(state.chatMessages))
     },
     addBeerHash (state, beerHash) {
       state.beerHashes.unshift(beerHash)

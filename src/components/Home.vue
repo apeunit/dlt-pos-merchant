@@ -1,33 +1,19 @@
 <template>
   <div class="home shell">
     <div v-if="account && account.pub">
-      <div class="logo">
-        <Logo></Logo>
-      </div>
-      <div class="cross">
-        <p class="center">
+      <div class="text-center">
+        <div class="logo">
+          <Logo></Logo>
+        </div>
+        <p class="py-4">
           +
         </p>
-      </div>
-      <div class="title">
         <h1>
           HANNOVER MESSE 2019
         </h1>
-      </div>
-      <div class="bg-purple text-white sm:bg-green md:bg-blue md:text-yellow lg:bg-red xl:bg-orange ...">
-        Test
-      </div>
-      <div class="intro-text">
-        <p style="padding:2vw;">
-          æternity is an open source blockchain that builds on decentralized cryptographic P2P technology.
+        <p class="pb-12">
+          {{ $t("message.hello") }}
         </p>
-        <p style="padding:2vw;">
-          We want to start a decentralized
-          digital revolution. But first we want
-          to give you beer.
-        </p>
-      </div>
-      <div class="action">
         <router-link to="start" class="rounded-full bg-black text-white py-2 px-8 no-underline">
           Give me tokens for beer!
         </router-link>

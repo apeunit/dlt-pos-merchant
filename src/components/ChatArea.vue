@@ -1,13 +1,14 @@
 <template>
-  <div class="h-full bg-purple pb-32" v-bind:class="{orderDone: isOrderDone}"
+  <div class="h-full bg-purpl" v-bind:class="{orderDone: isOrderDone}"
     v-chat-scroll="{always: true, smooth: true}">
     order is done
     <div class="bg-black text-white overflow-x-hidden overflow-y-auto bg-red"
-      v-if="hasTokensForBeer && beerAvailable && t">
-      you have tokens {{itemPrice}}
-      <ul>
-        <li v-bind:key="msg.id" class="h-32 border-2 border-black" v-for="msg in messages">
-          {{ msg.id }} - {{ msg.content }}
+        v-if="hasTokensForBeer && beerAvailable && t">
+      {{ $t("message.youhavetokens") }} {{itemPrice}}
+      <ul class="list-reset">
+        <li v-bind:key="msg.id" class="h-32 border-b-1"
+          v-for="msg in chatMessages[$i18n.locale]"
+          v-html="msg.content">
         </li>
       </ul>
     </div>
@@ -51,8 +52,8 @@ export default {
     ae () {
       return this.$store.getters.ae
     },
-    messages () {
-      return this.$store.getters.messages
+    chatMessages () {
+      return this.$store.getters.chatMessages
     },
     hasTokensForBeer () {
       return this.balance >= this.itemPrice + 1

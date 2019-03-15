@@ -1,6 +1,6 @@
 <template>
   <div class="header" v-bind:class="{fixedPos: isOrdersActive}">
-    <div class="w-full pin-t fixed bg-white shell flex">
+    <div class="w-full pin-t fixed bg-white shell flex border-b-1 border-black">
       <div class="back-arrow"
       v-if="$route.path =='/about' || $route.path =='/orders' || $route.path =='/impressum'">
         <router-link to='/more'>
