@@ -1,22 +1,22 @@
 <template>
   <div class="header" v-bind:class="{fixedPos: isOrdersActive}">
-    <div class="header-container shell">
+    <div class="w-full pin-t fixed bg-white shell flex">
       <div class="back-arrow"
       v-if="$route.path =='/about' || $route.path =='/orders' || $route.path =='/impressum'">
         <router-link to='/more'>
           <ae-icon name="chevron" rotate="180" />
         </router-link>
       </div>
-      <div class="item address-icon" style="display:flex; align-items:center;">
+      <div class="w-1/2 flex items-center">
         <!-- <ae-identity-avatar :address='account.pub'></ae-identity-avatar> -->
         <ae-identity-avatar :address="account.pub"></ae-identity-avatar>
         <span>
           {{account.name}}
         </span>
       </div>
-      <div class="item account-ballance">
-        <h4>
-          {{balance}}
+      <div class="w-1/2 flex items-center">
+        <h4 class="text-right">
+          {{balance}} Ape Coins
         </h4>
       </div>
     </div>
@@ -56,47 +56,6 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-.header {
-  box-shadow: 0 3px #f0f0f0;
-  position:relative;
-  background: #fff;
-}
-.header-container {
-  display: flex;
-  align-items: center;
-}
-.header-container .item {
-  display: flex;
-  flex: 1;
-}
-.account-ballance h4{
-  width: 100%;
-  text-align: right;
-}
-.address-icon {
-  text-transform:capitalize;
-  font-weight:400;
-  color: #1e1e1e;
-  span {
-    text-indent:10px;
-    text-overflow: ellipsis;
-    overflow:hidden;
-  }
-}
-.avatar {
-  width:30px !important;
-  height:30px !important;
-}
-.fixedPos {
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  background: #fff;
-  z-index:3;
-}
-.back-arrow {
-  margin-right: 2%;
-}
+<style lang="css">
+
 </style>

@@ -40,7 +40,7 @@ export default {
     },
     noOfBeer () {
       if (this.beerTx && this.beerTx.tx && this.beerTx.tx.amount) {
-        return Math.ceil(this.beerTx.tx.amount / this.$store.state.beerPrice)
+        return Math.ceil(this.beerTx.tx.amount / this.$store.state.itemPrice)
       }
       return ''
     }

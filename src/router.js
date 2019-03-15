@@ -1,5 +1,5 @@
 import Router from 'vue-router'
-import BeerButton from './components/BeerButton.vue'
+import ChatArea from './components/ChatArea.vue'
 import AddressDisplay from './components/AddressDisplay.vue'
 import Home from './components/Home.vue'
 import Send from './components/Send.vue'
@@ -19,9 +19,9 @@ export default (store) => {
       props: route => ({ query: route.query })
     },
     {
-      path: '/buy',
-      name: 'buy-beer',
-      component: BeerButton,
+      path: '/start',
+      name: 'ChatArea',
+      component: ChatArea,
       beforeEnter (to, from, next) {
         if (!store.state.account || !store.state.account.priv) return next({ name: 'home' })
         next()
@@ -97,7 +97,7 @@ export default (store) => {
       const account = { pub, priv, name }
       if (!store.state.account.pub || store.state.account.pub !== account.pub) {
         // set account in store
-        if(!store.state.ae){
+        if (!store.state.ae) {
           await store.dispatch('initAe')
         }
         store.commit('setAccount', account)

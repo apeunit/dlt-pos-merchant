@@ -7,12 +7,15 @@ import getRouter from './router'
 import store from './store'
 import VueSocketIO from 'vue-socket.io'
 import VueQrcode from '@chenfengyuan/vue-qrcode'
+import './assets/css/tailwind.css'
+import VueChatScroll from 'vue-chat-scroll'
 
 Vue.component(VueQrcode.name, VueQrcode)
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)
 Vue.use(VeeValidate)
+Vue.use(VueChatScroll)
 
 Vue.use(new VueSocketIO({
   debug: true,
@@ -47,19 +50,19 @@ new Vue({
   },
   async beforeMount () {
     await store.dispatch('initAe')
-        try {
-          // eslint-disable-next-line no-undef
-          let account = JSON.parse(localStorage.getItem('account'))
-          if (account) {
-            store.commit('setAccount', account)
-          }
-          // eslint-disable-next-line no-undef
-          let beerHashes = JSON.parse(localStorage.getItem('beerHashes'))
-          if (beerHashes) {
-            store.commit('setBeerHashes', beerHashes)
-          }
-        } catch (e) {
-          console.log(e)
-        }
+    try {
+      // eslint-disable-next-line no-undef
+      let account = JSON.parse(localStorage.getItem('account'))
+      if (account) {
+        store.commit('setAccount', account)
+      }
+      // eslint-disable-next-line no-undef
+      let beerHashes = JSON.parse(localStorage.getItem('beerHashes'))
+      if (beerHashes) {
+        store.commit('setBeerHashes', beerHashes)
+      }
+    } catch (e) {
+      console.log(e)
+    }
   }
 }).$mount('#app')

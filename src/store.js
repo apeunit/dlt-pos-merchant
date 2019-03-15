@@ -1,6 +1,7 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
 import Ae from '@aeternity/aepp-sdk/es/ae/universal'
+// import BigNumber from "./bignumber.mjs"
 
 Vue.use(Vuex)
 
@@ -13,13 +14,18 @@ const store = new Vuex.Store({
     },
     balance: 0,
     beerHashes: [],
-    beerPrice: 1000, // TODO: this should be in ae now
-    // TODO: new key format
+    itemPrice: 1000000000000000000,
     barPubKey: 'ak_BARmHG4mjUeUKY522wxyv7Q8hMEVpC5Qm9GSpuSiSLv17B1sg',
-    websocketUrl: 'http://api.pos.apeunit.com', // TODO: this should something like pos.store.aepps.com
+    websocketUrl: 'http://localhost:5000', // https://api.pos.apeunit.com
     socketConnected: false,
     barState: null,
-    ae: null
+    ae: null,
+    messages: [
+      {
+        id: Math.random().toString(36).substring(7),
+        content: 'stuff, maybe even HTML code'
+      }
+    ]
   },
   getters: {
     lastBeerHash (state) {
@@ -30,6 +36,9 @@ const store = new Vuex.Store({
     },
     ae (state) {
       return state.ae
+    },
+    messages (state) {
+      return state.messages
     },
     client (state) { // TODO: this should be updated to the latest sdk
       return state.ae
@@ -60,6 +69,11 @@ const store = new Vuex.Store({
     },
     setBalance (state, newBalance) {
       state.balance = newBalance
+    },
+    addMessage (state, message) {
+      state.messages.push(message)
+      // eslint-disable-next-line no-undef
+      localStorage.setItem('messages', JSON.stringify(state.messages))
     },
     addBeerHash (state, beerHash) {
       state.beerHashes.unshift(beerHash)

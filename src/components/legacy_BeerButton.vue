@@ -97,12 +97,12 @@
           size="small"
           type="dramatic"
           uppercase
-          @click="buyBeer(barPubKey)"
+          @click="startConversation(barPubKey)"
           slot="buttons"
         >sign</ae-button>
       </ae-modal-light>
       <ae-button type="dramatic" @click="showModal()" :inactive="!isValidInput">🍺 Order Beer</ae-button>
-      <!-- <button @click="buyBeer(barPubKey)" class="beer-btn"
+      <!-- <button @click="startConversation(barPubKey)" class="beer-btn"
       :class="{ 'beer-btn--busy': ajaxCall.status == 'busy',
       'beer-btn--idle': ajaxCall.status == 'idle',
       'beer-btn--ready': ajaxCall.status == 'ready'
@@ -161,7 +161,7 @@
         style="text-align: center;padding:0 10px;"
       >Show this QR at the æternity stand &amp; pick up your beer(s).</p>
       <BeerHash :bHash="txHash"></BeerHash>
-      <router-link to="buy">
+      <router-link to="start">
         <ae-button type="boring" @click="resetScreen()">I picked up my beer</ae-button>
       </router-link>
     </div>
@@ -282,7 +282,7 @@ export default {
     onClick (...strings) {
       console.log(strings[0] + strings[1])
     },
-    async buyBeer (receiver) {
+    async startConversation (receiver) {
       // check first if there is beer
       if (!this.beerAvailable) {
         // TODO: display errors
