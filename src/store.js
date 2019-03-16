@@ -13,10 +13,11 @@ const store = new Vuex.Store({
     },
     balance: 0,
     beerHashes: [],
-    beerPrice: 1000, // TODO: this should be in ae now
+    beerPrice: 1000000000000000000, // TODO: this should be in ae now
     // TODO: new key format
     barPubKey: 'ak_BARmHG4mjUeUKY522wxyv7Q8hMEVpC5Qm9GSpuSiSLv17B1sg',
-    websocketUrl: 'http://api.pos.apeunit.com', // TODO: this should something like pos.store.aepps.com
+    // websocketUrl: 'https://api.pos.apeunit.com',
+    websocketUrl: 'http://localhost:5000', // TODO: this should something like pos.store.aepps.com
     socketConnected: false,
     barState: null,
     ae: null
@@ -113,8 +114,8 @@ const store = new Vuex.Store({
       commit(
         'setAe',
         await Ae({
-          url: 'https://testnet.mdw.aepps.com',
-          internalUrl: 'https://testnet.mdw.aepps.com',
+          url: 'https://sdk-testnet.aepps.com',
+          internalUrl: 'https://sdk-testnet.aepps.com',
           networkId: 'ae_uat', // or any other networkId your client should connect to
           keypair: {
             secretKey: '',

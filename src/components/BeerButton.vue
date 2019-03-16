@@ -295,7 +295,7 @@ export default {
       this.ajaxCall.status = 'idle'
       try {
         console.log(`executing spend tx...`)
-        const txHash = await this.ae.spend(receiver, parseInt(amount)) // params: (receiver, amount, account sending, { fee = 1, nonce })
+        const txHash = await this.ae.spend(parseInt(amount), receiver) // params: (receiver, amount, account sending, { fee = 1, nonce })
         this.txHash = txHash
         this.$store.commit('addBeerHash', txHash)
         this.ajaxCall.status = 'ready'
