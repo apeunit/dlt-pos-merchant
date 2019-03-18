@@ -29,7 +29,8 @@ export default {
     fullInfo () {
       // sending as string, for the QR scanning with NETUM bar/qr scanner
       // return this.beerHash + ' ' + this.beerHashSignature
-      return this.bHash + ' ' + this.beerHashSignature
+      console.log(this.bHash)
+      return this.bHash.hash + ' ' + this.beerHashSignature
     },
     beerHash () {
       return this.$route.params.beerHash
