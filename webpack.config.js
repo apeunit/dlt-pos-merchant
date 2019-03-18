@@ -23,7 +23,7 @@ module.exports = {
     contentBase: './dist/',
     https: false,
     host: 'localhost',
-    port: 8080,
+    port: 9080,
     hot: true,
     inline: true,
     stats: { colors: true }
@@ -36,7 +36,7 @@ module.exports = {
       inject: true,
       title: 'Beer æpp',
       baseUrl: '/',
-      APIUrl: 'http://localhost:8080/',
+      APIUrl: 'http://localhost:9080/',
       alwaysWriteToDisk: true
     }),
     new HtmlWebpackHarddiskPlugin(),
@@ -51,7 +51,7 @@ module.exports = {
     ]),
     new VueLoaderPlugin(),
     // debug bundle (for optimisation)
-    new BundleAnalyzerPlugin()
+    // new BundleAnalyzerPlugin()
   ],
   module: {
     rules: [

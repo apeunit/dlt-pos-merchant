@@ -13,6 +13,7 @@
 import VueQrcode from '@chenfengyuan/vue-qrcode'
 // const { AeternityClient, Crypto } = require('@aeternity/aepp-sdk')
 import { sign, verify, decodeBase58Check } from '@aeternity/aepp-sdk/es/utils/crypto.js'
+import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
 
 export default {
   name: 'BeerHash',
@@ -30,13 +31,10 @@ export default {
       // sending as string, for the QR scanning with NETUM bar/qr scanner
       // return this.beerHash + ' ' + this.beerHashSignature
       console.log(this.bHash)
-      return this.bHash.hash + ' ' + this.beerHashSignature
+      return this.bHash.hash + ' ' + this.signHash(this.bHash.hash, this.account.priv)
     },
     beerHash () {
       return this.$route.params.beerHash
-    },
-    beerHashSignature () {
-      return this.signHash(this.bHash, this.account.priv)
     },
     beerAvailable () {
       return this.$store.state.barState === 'open'
@@ -47,11 +45,11 @@ export default {
     }
   },
   methods: {
-    signHash (beerHash, privateKey) {
-      const tx = beerHash
-      const sig = sign(tx, Buffer.from(privateKey, 'hex'))
-      const sigBase64 = Buffer.from(sig).toString('base64')
-      return sigBase64
+    signHash (txHash, privateKey) {
+      const sig = sign(Buffer.from(txHash), Buffer.from(privateKey, 'hex'))
+      const encodedSig = encode(sig, 'sg')
+      console.log("signHash encoded", encodedSig)
+      return encodedSig
     },
     verifyHash (beerHash, sigBase64, pubKey) {
       // this isnt needed here, just as a poc on how to use verify
@@ -66,6 +64,8 @@ export default {
   }
 }
 </script>
+
+
 
 <style scoped lang="scss">
 
