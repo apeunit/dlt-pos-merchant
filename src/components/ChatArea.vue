@@ -10,7 +10,7 @@
             class="h-32 border-b-1"
             v-bind:class="msgClass(msg)"
             v-for="msg in chatMessages[$i18n.locale]">
-              <chat-message :content="msg.content" />
+              <chat-message :content="msg.content" :buttons="msg.buttons" />
         </li>
       </ul>
     </div>

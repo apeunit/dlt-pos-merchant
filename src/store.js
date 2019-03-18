@@ -4,7 +4,6 @@ import Ae from '@aeternity/aepp-sdk/es/ae/universal'
 // import BigNumber from "./bignumber.mjs"
 
 Vue.use(Vuex)
-const randomHash = Math.random().toString(36).substring(7)
 
 const store = new Vuex.Store({
   state: {
@@ -22,19 +21,95 @@ const store = new Vuex.Store({
     socketConnected: false,
     barState: null,
     ae: null,
-    chatMessages: {
+    chatMessagesList: {
       en: [
         {
-          id: randomHash,
-          content: 'stuff, maybe even <strong>HTML code<strong>',
-          from: 'computer' // or 'user'
+          id: 'transfer',
+          content: 'Ready to receive?!?!?!',
+          from: 'computer', // or 'user'
+          buttons: [
+            {
+              title: 'Scan',
+              action: 'transfer-scan'
+            },
+            {
+              title: 'Name',
+              action: 'transfer-name'
+            }
+          ]
         }
       ],
       de: [
         {
-          id: randomHash,
+          id: 'transfer',
+          content: 'Bereit zu empfangen?!?!?!',
+          from: 'computer', // or 'user'
+          buttons: [
+            {
+              title: 'Scan',
+              action: 'transfer-scan'
+            },
+            {
+              title: 'Name',
+              action: 'transfer-name'
+            }
+          ]
+        }
+      ]
+    },
+    chatMessages: {
+      en: [
+        {
+          id: 'welcome-1',
+          content: 'stuff, maybe even <strong>HTML code<strong>',
+          from: 'computer', // or 'user'
+          buttons: []
+        },
+        {
+          id: 'welcome-2',
+          content: 'stuff, maybe even <strong>HTML code<strong>',
+          from: 'computer', // or 'user'
+          buttons: [
+            {
+              title: 'Order',
+              action: 'order'
+            },
+            {
+              title: 'Transfer',
+              action: 'transfer'
+            },
+            {
+              title: 'Receive',
+              action: 'receive'
+            }
+          ]
+        }
+      ],
+      de: [
+        {
+          id: 'welcome-1',
           content: 'Dingen, vielleicht auch <strong>HTML code<strong>',
-          from: 'computer' // or 'user'
+          from: 'computer', // or 'user'
+          buttons: []
+        },
+        {
+          id: 'welcome-2',
+          content: 'Dingen, vielleicht auch <strong>HTML code<strong>',
+          from: 'computer', // or 'user'
+          buttons: [
+            {
+              title: 'Bestellen',
+              action: 'order'
+            },
+            {
+              title: 'Transfer',
+              action: 'transfer'
+            },
+            {
+              title: 'Bekommen',
+              action: 'receive'
+            }
+          ]
         }
       ]
     },
@@ -55,6 +130,12 @@ const store = new Vuex.Store({
     }
   },
   getters: {
+    currentLang (state) {
+      return state.currentLang
+    },
+    chatMessagesList (state) {
+      return state.chatMessagesList
+    },
     lastBeerHash (state) {
       if (state.beerHashes.length <= 0) {
         return null
