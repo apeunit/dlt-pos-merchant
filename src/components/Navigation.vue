@@ -22,9 +22,11 @@
     methods: {
       addMessage () {
         const randomHash = Math.random().toString(36).substring(7)
-        const enMsg = { id: randomHash, content: 'EN message' }
+
+        const enMsg = { id: randomHash, content: 'EN message', from: 'user' }
         this.$store.commit('addMessage', { message: enMsg, lang: 'en' })
-        const deMsg = { id: randomHash, content: 'DE message' }
+
+        const deMsg = { id: randomHash, content: 'DE message', from: 'user' }
         this.$store.commit('addMessage', { message: deMsg, lang: 'de' })
       }
     }

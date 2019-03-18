@@ -8,6 +8,7 @@ const randomHash = Math.random().toString(36).substring(7)
 
 const store = new Vuex.Store({
   state: {
+    currentLang: 'de',
     account: {
       pub: null,
       priv: null,
@@ -17,7 +18,7 @@ const store = new Vuex.Store({
     beerHashes: [],
     itemPrice: 1000000000000000000,
     barPubKey: 'ak_BARmHG4mjUeUKY522wxyv7Q8hMEVpC5Qm9GSpuSiSLv17B1sg',
-    websocketUrl: 'http://localhost:5000', // https://api.pos.apeunit.com
+    websocketUrl: 'https://api.pos.apeunit.com', // 'http://localhost:5000'
     socketConnected: false,
     barState: null,
     ae: null,
@@ -25,13 +26,15 @@ const store = new Vuex.Store({
       en: [
         {
           id: randomHash,
-          content: 'stuff, maybe even <strong>HTML code<strong>'
+          content: 'stuff, maybe even <strong>HTML code<strong>',
+          from: 'computer' // or 'user'
         }
       ],
       de: [
         {
           id: randomHash,
-          content: 'Dingen, vielleicht auch <strong>HTML code<strong>'
+          content: 'Dingen, vielleicht auch <strong>HTML code<strong>',
+          from: 'computer' // or 'user'
         }
       ]
     },
@@ -129,6 +132,17 @@ const store = new Vuex.Store({
           .then(balance => {
             // logs current balance of 'A_PUB_ADDRESS'
             console.log('balance', balance)
+            const randomHash = Math.random().toString(36).substring(7)
+
+            let msgBalance = {}
+            if (state.currentLang === 'de') {
+              msgBalance = { id: randomHash, content: `Deine balance ist ${balance}`, from: 'computer' }
+            } else {
+              msgBalance = { id: randomHash, content: `Your balance is now ${balance}`, from: 'computer' }
+            }
+
+            // eslint-disable-next-line no-undef
+            commit('addMessage', { message: msgBalance, lang: state.currentLang })
             commit('setBalance', balance)
             return balance
           })

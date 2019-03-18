@@ -1,8 +1,8 @@
 <template>
   <div id="app" class="h-screen">
-    <Header v-show="$route.path!=='/'"></Header>
+    <Header></Header>
     <router-view class="h-full overflow-x-hidden py-16"></router-view>
-    <Navigation v-show="$route.path!=='/'"></Navigation>
+    <Navigation></Navigation>
   </div>
 </template>
 

@@ -4,7 +4,6 @@ import AddressDisplay from './components/AddressDisplay.vue'
 import Home from './components/Home.vue'
 import Send from './components/Send.vue'
 import BeerHash from './components/BeerHash.vue'
-import More from './components/More.vue'
 import Impressum from './components/Impressum.vue'
 import About from './components/About.vue'
 import Orders from './components/Orders.vue'
@@ -49,15 +48,6 @@ export default (store) => {
       path: '/beer/:beerHash',
       name: 'beer',
       component: BeerHash,
-      beforeEnter (to, from, next) {
-        if (!store.state.account || !store.state.account.priv) return next({ name: 'home' })
-        next()
-      }
-    },
-    {
-      path: '/more',
-      name: 'more',
-      component: More,
       beforeEnter (to, from, next) {
         if (!store.state.account || !store.state.account.priv) return next({ name: 'home' })
         next()

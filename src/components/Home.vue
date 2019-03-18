@@ -1,7 +1,7 @@
 <template>
-  <div class="home shell">
-    <div v-if="account && account.pub">
-      <div class="text-center">
+  <div class="home shell flex justify-center">
+    <div v-if="account && account.pub" class="flex items-center w-64">
+      <div class="text-center flex flex-col self-center w-64">
         <div class="logo">
           <Logo></Logo>
         </div>
@@ -14,7 +14,8 @@
         <p class="pb-12">
           {{ $t("message.hello") }}
         </p>
-        <router-link to="start" class="rounded-full bg-black text-white py-2 px-8 no-underline">
+        <locale-switch/>
+        <router-link to="start" class="flex self-center rounded-full bg-black text-white py-2 px-8 no-underline block w-64">
           Give me tokens for beer!
         </router-link>
       </div>
@@ -27,11 +28,12 @@
 
 <script>
 import Logo from './Logo.vue'
-
+import LocaleSwitch from './LocaleSwitch.vue'
 export default {
   name: 'Home',
   components: {
-    Logo
+    Logo,
+    LocaleSwitch
   },
   computed: {
     account () {

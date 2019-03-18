@@ -2,13 +2,15 @@
   <div class="h-full bg-purpl" v-bind:class="{orderDone: isOrderDone}"
     v-chat-scroll="{always: true, smooth: true}">
     order is done
-    <div class="bg-black text-white overflow-x-hidden overflow-y-auto bg-red"
+    <div class="text-black overflow-x-hidden overflow-y-auto bg-white"
         v-if="hasTokensForBeer && beerAvailable && t">
       {{ $t("message.youhavetokens") }} {{itemPrice}}
       <ul class="list-reset">
-        <li v-bind:key="msg.id" class="h-32 border-b-1"
-          v-for="msg in chatMessages[$i18n.locale]"
-          v-html="msg.content">
+        <li v-bind:key="msg.id"
+            class="h-32 border-b-1"
+            v-bind:class="msgClass(msg)"
+            v-for="msg in chatMessages[$i18n.locale]">
+              <chat-message :content="msg.content" />
         </li>
       </ul>
     </div>
@@ -17,11 +19,13 @@
 
 <script>
 import BeerHash from './BeerHash.vue'
+import ChatMessage from './ChatMessage.vue'
 
 export default {
   name: 'ChatArea',
   components: {
-    BeerHash
+    BeerHash,
+    ChatMessage
   },
   data () {
     return {
@@ -88,6 +92,12 @@ export default {
     }
   },
   methods: {
+    msgClass (msg) {
+      return {
+        'text-right': msg.from == 'user',
+        'text-left': msg.from == 'computer'
+      }
+    },
     onClick (...strings) {
       console.log(strings[0] + strings[1])
     },
