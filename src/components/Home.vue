@@ -3,7 +3,9 @@
     <div v-if="account && account.pub" class="flex items-center w-64">
       <div class="text-center flex flex-col self-center w-64">
         <div class="logo">
-          <Logo></Logo>
+          <router-link to="/">
+            <Logo></Logo>
+          </router-link>
         </div>
         <p class="py-4">
           +

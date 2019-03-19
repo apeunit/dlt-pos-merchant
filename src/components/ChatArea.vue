@@ -1,16 +1,15 @@
 <template>
   <div class="h-full bg-purpl" v-bind:class="{orderDone: isOrderDone}"
-    v-chat-scroll="{always: true, smooth: true}">
-    order is done
+    v-chat-scroll="{always: true, smooth: true, scrollonremoved: true}">
     <div class="text-black overflow-x-hidden overflow-y-auto bg-white"
         v-if="hasTokensForBeer && beerAvailable && t">
-      {{ $t("message.youhavetokens") }} {{itemPrice}}
+        {{ $t("message.youhavetokens") }} {{itemPrice}}
       <ul class="list-reset">
-        <li v-bind:key="msg.id"
+        <li v-bind:key="$index"
             class="h-32 border-b-1"
             v-bind:class="msgClass(msg)"
-            v-for="msg in chatMessages[$i18n.locale]">
-              <chat-message :content="msg.content" :buttons="msg.buttons" />
+            v-for="(msg, $index) in chatHistory[$i18n.locale]">
+              <chat-message :last="$index == chatHistory[$i18n.locale].length - 1" :msg="msg" />
         </li>
       </ul>
     </div>
@@ -56,8 +55,14 @@ export default {
     ae () {
       return this.$store.getters.ae
     },
-    chatMessages () {
-      return this.$store.getters.chatMessages
+    chatMessagesList () {
+      return this.$store.getters.chatMessagesList
+    },
+    chatHistory () {
+      return this.$store.getters.chatHistory
+    },
+    chatStarted () {
+      return this.$store.getters.chatStarted
     },
     hasTokensForBeer () {
       return this.balance >= this.itemPrice + 1
@@ -95,7 +100,8 @@ export default {
     msgClass (msg) {
       return {
         'text-right': msg.from == 'user',
-        'text-left': msg.from == 'computer'
+        'text-left': msg.from == 'computer',
+        'text-left text-grey': msg.from == 'computer-action'
       }
     },
     onClick (...strings) {
@@ -158,6 +164,13 @@ export default {
     }
   },
   mounted () {
+    // start chat, by picking first message.
+    if (!this.chatStarted) {
+      const firstMsg = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'welcome-1')
+      this.$store.commit('addMessage', { message: firstMsg, lang: this.$i18n.locale })
+      console.log('start CHAT')
+      this.$store.commit('setChatStarted', true)
+    }
     // hack to disable direct token input
     if (this.$refs.tokensCount) {
       const tokenInput = this.$refs.tokensCount.$el.querySelector('input')
@@ -165,6 +178,10 @@ export default {
         tokenInput.readOnly = true
       }
     }
+  },
+  beforeDestroy () {
+    this.$store.commit('cleanNextMessages')
+    console.log('before destroy CHAT AREA')
   }
 }
 </script>

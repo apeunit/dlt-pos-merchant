@@ -2,7 +2,9 @@
   <div class="header">
     <div class="w-full pin-t fixed bg-black text-white shell flex border-b-1 justify-end">
       <div class="w-1/2 flex">
-        <Logo class="self-center"></Logo>
+        <router-link to="/" class="self-center">
+          <Logo></Logo>
+        </router-link>
       </div>
       <div class="w-1/2 flex justify-around align-middle">
         <h4 class="text-right self-center">

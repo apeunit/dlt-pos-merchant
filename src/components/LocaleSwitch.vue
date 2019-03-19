@@ -9,6 +9,11 @@
 <script>
 export default {
   name: 'LocaleSwitch',
+  watch: {
+    '$i18n.locale': function (newVal, old) {
+      this.$store.commit('setCurrentLang', newVal)
+    }
+  },
   data () {
     return { langs: ['de', 'en'] }
   }

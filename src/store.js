@@ -7,6 +7,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
+    chatStarted: false,
     currentLang: 'de',
     account: {
       pub: null,
@@ -24,94 +25,225 @@ const store = new Vuex.Store({
     chatMessagesList: {
       en: [
         {
+          id: 'welcome-1',
+          content: '<strong>Welcome!</strong> Things, maybe in <strong>HTML code<strong>',
+          from: 'computer', // or 'user'
+          next: 'welcome-2'
+        },
+        {
+          id: 'welcome-2',
+          content: '<strong>Wilkommen 2!</strong> Things, maybe in <strong>HTML code<strong>',
+          from: 'computer', // or 'user'
+          next: 'welcome-3'
+        },
+        {
+          id: 'welcome-3',
+          content: '<strong>Wilkommen 3!</strong> Things, maybe in <strong>HTML code<strong>',
+          from: 'computer', // or 'user'
+          next: 'welcome-4'
+        },
+        {
+          id: 'welcome-4',
+          content: 'Was möchten Sie tun?',
+          from: 'computer', // or 'user'
+          buttons: [
+            {
+              title: 'Bestellen',
+              action: 'order',
+              type: 'message'
+            },
+            {
+              title: 'Transfer',
+              action: 'transfer',
+              type: 'message'
+            },
+            {
+              title: 'Bekommen',
+              action: 'receive',
+              type: 'message'
+            }
+          ]
+        },
+        {
           id: 'transfer',
-          content: 'Ready to receive?!?!?!',
+          content: 'I want to transfer',
+          from: 'user', // or 'user'
+          next: 'transfer-2'
+        },
+        {
+          id: 'transfer-2',
+          content: 'Ready to transfer?!?!?!',
           from: 'computer', // or 'user'
           buttons: [
             {
               title: 'Scan',
-              action: 'transfer-scan'
+              action: 'transferScan',
+              type: 'function'
             },
             {
               title: 'Name',
-              action: 'transfer-name'
+              action: 'transferName',
+              type: 'function'
+            },
+            {
+              title: 'Explain',
+              action: 'explain-transfer',
+              type: 'message-white'
+            },
+            {
+              title: 'Nevermind',
+              action: 'welcome-4',
+              type: 'message-white'
+            }
+          ]
+        },
+        {
+          id: 'explain-transfer',
+          content: 'I need you to explain me the transfer...what is <strong>Name</strong> and what is <strong>Scan</strong>?!?!?',
+          from: 'user', // or 'user'
+          next: 'explain-transfer-2'
+        },
+        {
+          id: 'explain-transfer-2',
+          content: 'This is the explanation for transfer: blabla blabla blabla blabla blabla',
+          from: 'computer', // or 'user'
+          buttons: [
+            {
+              title: 'Scan',
+              action: 'transferScan',
+              type: 'function'
+            },
+            {
+              title: 'Name',
+              action: 'transferName',
+              type: 'function'
+            },
+            {
+              title: 'Explain',
+              action: 'explain-transfer',
+              type: 'message-white'
+            },
+            {
+              title: 'Nevermind',
+              action: 'welcome-4',
+              type: 'message-white'
             }
           ]
         }
       ],
       de: [
         {
+          id: 'welcome-1',
+          content: '<strong>Wilkommen!</strong> Dingen, vielleicht auch <strong>HTML code<strong>',
+          from: 'computer', // or 'user'
+          next: 'welcome-2'
+        },
+        {
+          id: 'welcome-2',
+          content: '<strong>Wilkommen 2!</strong> Dingen, vielleicht auch <strong>HTML code<strong>',
+          from: 'computer', // or 'user'
+          next: 'welcome-3'
+        },
+        {
+          id: 'welcome-3',
+          content: '<strong>Wilkommen 3!</strong> Dingen, vielleicht auch <strong>HTML code<strong>',
+          from: 'computer', // or 'user'
+          next: 'welcome-4'
+        },
+        {
+          id: 'welcome-4',
+          content: 'Was möchten Sie tun?',
+          from: 'computer', // or 'user'
+          buttons: [
+            {
+              title: 'Bestellen',
+              action: 'order',
+              type: 'message'
+            },
+            {
+              title: 'Transfer',
+              action: 'transfer',
+              type: 'message'
+            },
+            {
+              title: 'Bekommen',
+              action: 'receive',
+              type: 'message'
+            }
+          ]
+        },
+        {
           id: 'transfer',
-          content: 'Bereit zu empfangen?!?!?!',
+          content: 'Ich möchte gerne umziehen',
+          from: 'user', // or 'user'
+          next: 'transfer-2'
+        },
+        {
+          id: 'transfer-2',
+          content: 'Bereit zu transfer?!?!?!',
+          from: 'computer', // or 'user'
+          next: undefined,
+          buttons: [
+            {
+              title: 'Scan',
+              action: 'transferScan',
+              type: 'function'
+            },
+            {
+              title: 'Name',
+              action: 'transferName',
+              type: 'function'
+            },
+            {
+              title: 'Explain',
+              action: 'explain-transfer',
+              type: 'message-white'
+            },
+            {
+              title: 'Nevermind',
+              action: 'welcome-4',
+              type: 'message-white'
+            }
+          ]
+        },
+        {
+          id: 'explain-transfer',
+          content: 'Bitte give me Transfererklärung! Was ist <strong>Name</strong> und was ist <strong>Scan</strong>?!?',
+          from: 'user', // or 'user'
+          next: 'explain-transfer-2'
+        },
+        {
+          id: 'explain-transfer-2',
+          content: 'Dies ist die Transfererklärung: blabla blabla blabla blabla blabla',
           from: 'computer', // or 'user'
           buttons: [
             {
               title: 'Scan',
-              action: 'transfer-scan'
+              action: 'transferScan',
+              type: 'function'
             },
             {
               title: 'Name',
-              action: 'transfer-name'
+              action: 'transferName',
+              type: 'function'
+            },
+            {
+              title: 'Explain',
+              action: 'explain-transfer',
+              type: 'message-white'
+            },
+            {
+              title: 'Nevermind',
+              action: 'welcome-4',
+              type: 'message-white'
             }
           ]
         }
       ]
     },
-    chatMessages: {
-      en: [
-        {
-          id: 'welcome-1',
-          content: 'stuff, maybe even <strong>HTML code<strong>',
-          from: 'computer', // or 'user'
-          buttons: []
-        },
-        {
-          id: 'welcome-2',
-          content: 'stuff, maybe even <strong>HTML code<strong>',
-          from: 'computer', // or 'user'
-          buttons: [
-            {
-              title: 'Order',
-              action: 'order'
-            },
-            {
-              title: 'Transfer',
-              action: 'transfer'
-            },
-            {
-              title: 'Receive',
-              action: 'receive'
-            }
-          ]
-        }
-      ],
-      de: [
-        {
-          id: 'welcome-1',
-          content: 'Dingen, vielleicht auch <strong>HTML code<strong>',
-          from: 'computer', // or 'user'
-          buttons: []
-        },
-        {
-          id: 'welcome-2',
-          content: 'Dingen, vielleicht auch <strong>HTML code<strong>',
-          from: 'computer', // or 'user'
-          buttons: [
-            {
-              title: 'Bestellen',
-              action: 'order'
-            },
-            {
-              title: 'Transfer',
-              action: 'transfer'
-            },
-            {
-              title: 'Bekommen',
-              action: 'receive'
-            }
-          ]
-        }
-      ]
+    chatHistory: {
+      en: [],
+      de: []
     },
     // Ready translated locale messages
     i18nTexts: {
@@ -130,6 +262,9 @@ const store = new Vuex.Store({
     }
   },
   getters: {
+    chatStarted (state) {
+      return state.chatStarted
+    },
     currentLang (state) {
       return state.currentLang
     },
@@ -145,14 +280,31 @@ const store = new Vuex.Store({
     ae (state) {
       return state.ae
     },
-    chatMessages (state) {
-      return state.chatMessages
+    chatHistory (state) {
+      return state.chatHistory
     },
     client (state) { // TODO: this should be updated to the latest sdk
       return state.ae
     }
   },
   mutations: {
+    cleanNextMessages (state) {
+      state.chatHistory.en.forEach(function (o) {
+        console.log(o)
+        if (o.hasOwnProperty('next')) {
+          delete o.next
+        }
+      })
+      state.chatHistory.de.forEach(function (o) {
+        if (o.hasOwnProperty('next')) {
+          delete o.next
+        }
+      })
+      console.log(state.chatHistory)
+    },
+    setChatStarted (state, started) {
+      state.chatStarted = started
+    },
     setAccount (state, { pub, priv, name }) {
       state.account.pub = pub
       state.account.priv = priv
@@ -164,6 +316,10 @@ const store = new Vuex.Store({
         publicKey: state.account.pub
       })
     },
+    setCurrentLang (state, lang) {
+      console.log(`setting ${lang}!`)
+      state.currentLang = lang
+    },
     setAe (state, ae) {
       state.ae = ae
     },
@@ -171,9 +327,20 @@ const store = new Vuex.Store({
       state.balance = newBalance
     },
     addMessage (state, { message, lang }) {
-      state.chatMessages[lang].push(message)
+      let clonedMsg = Object.assign({}, message)
+      state.chatHistory[lang].push(clonedMsg)
       // eslint-disable-next-line no-undef
-      localStorage.setItem('chatMessages', JSON.stringify(state.chatMessages))
+      localStorage.setItem('chatHistory', JSON.stringify(state.chatHistory))
+    },
+    removeMessage (state, { messageId, lang }) {
+      const newMessages = state.chatHistory[lang].filter(function (obj) {
+        console.log(obj.id !== messageId)
+        return obj.id !== messageId
+      })
+      console.log('newMessages', newMessages)
+      state.chatHistory[lang] = newMessages
+      // eslint-disable-next-line no-undef
+      localStorage.setItem('chatHistory', JSON.stringify(state.chatHistory))
     },
     addBeerHash (state, beerHash) {
       state.beerHashes.unshift(beerHash)
@@ -212,18 +379,18 @@ const store = new Vuex.Store({
           .balance(pubKey, { format: false })
           .then(balance => {
             // logs current balance of 'A_PUB_ADDRESS'
-            console.log('balance', balance)
-            const randomHash = Math.random().toString(36).substring(7)
 
-            let msgBalance = {}
-            if (state.currentLang === 'de') {
-              msgBalance = { id: randomHash, content: `Deine balance ist ${balance}`, from: 'computer' }
-            } else {
-              msgBalance = { id: randomHash, content: `Your balance is now ${balance}`, from: 'computer' }
-            }
+            // SEND NEW MESSAGE on BALANCE UPDATE:
+            // console.log('balance', balance)
+            // const randomHash = Math.random().toString(36).substring(7)
+            // let msgBalance = {}
+            // if (state.currentLang === 'de') {
+            //   msgBalance = { id: randomHash, content: `Deine balance ist ${balance}`, from: 'computer' }
+            // } else {
+            //   msgBalance = { id: randomHash, content: `Your balance is now ${balance}`, from: 'computer' }
+            // }
+            // commit('addMessage', { message: msgBalance, lang: state.currentLang })
 
-            // eslint-disable-next-line no-undef
-            commit('addMessage', { message: msgBalance, lang: state.currentLang })
             commit('setBalance', balance)
             return balance
           })
