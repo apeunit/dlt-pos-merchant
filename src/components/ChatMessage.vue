@@ -1,10 +1,10 @@
 <template>
   <div>
     <p v-html="msg.content"></p>
-    <div v-if="last">
+    <div v-if="isLast">
       <button v-bind:key="`${key}`"
               v-for="(button, key) in msg.buttons"
-              @click="executeBtnAction(button.action, button.type, $event)"
+              @click="executeBtnAction(button.action, button.type, button.params, $event)"
               class="rounded-full px-4 py-2"
               v-bind:class="msgClass(button.type)">
         {{ button.title }}
@@ -17,13 +17,8 @@
     name: 'ChatMessage',
     props: [
       'msg',
-      'last'
+      'isLast'
     ],
-    data () {
-      return {
-
-      }
-    },
     computed: {
       chatMessagesList () {
         return this.$store.getters.chatMessagesList
@@ -40,7 +35,7 @@
           'bg-white text-black border-2-black': type == 'message-white'
         }
       },
-      executeBtnAction (action, type, evt) {
+      executeBtnAction (action, type, params, evt) {
         alert(`get message ID: ${action}, ${type}`)
 
         switch (type) {
@@ -54,7 +49,7 @@
           case 'function':
             // execute a Function (of this Component)
             console.log(`xecute ${action}`)
-            this[action]('arg')
+            this[action](params)
             break
         }
 
@@ -101,11 +96,45 @@
       removeWaitMessage ({ locale }) {
         this.$store.commit('removeMessage', { messageId: 'wait', lang: locale })
       },
+      transferCoins (arg) {
+        // here show screen to tranfer by scan or by name
+        var scanOrName = prompt(`you triggered the "Transfer! with arg ${arg}" "scan" or "name"?`);
+        switch(scanOrName) {
+          case "scan":
+            this.transferScan (arg)
+            break;
+          case "name":
+            this.transferName (arg)
+            break;
+        }
+      },
       transferScan (arg) {
         alert(`you triggered the "Transfer Scan Function! wit arg ${arg}"`)
       },
       transferName (arg) {
         alert(`you triggered the "Transfer Name Function! wit arg ${arg}"`)
+      },
+      orderItem (arg){
+        alert(`you triggered the "Order Item Function! wit arg ${arg}"`)
+      },
+      getFreeCoin (arg){
+        alert(`you triggered the "Get Free coin Function! wit arg ${arg}"`)
+      },
+      showQR (arg){
+        alert(`you triggered the "Show QR! with arg ${arg}"`)
+      },
+      chooseLang (lang){
+        this.$i18n.locale = lang
+        this.$store.commit('setCurrentLang', lang)
+        this.startConvo()
+      },
+      startConvo () {
+        // start chat, by picking first message.
+        if (!this.chatStarted) {
+          const firstMsg = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'welcome-1')
+          this.$store.commit('addMessage', { message: firstMsg, lang: this.$i18n.locale })
+          this.$store.commit('setChatStarted', true)
+        }
       }
     },
     mounted () {
@@ -115,5 +144,3 @@
     }
   }
 </script>
-<style lang="scss">
-</style>

@@ -1,7 +1,6 @@
 import Router from 'vue-router'
 import ChatArea from './components/ChatArea.vue'
 import AddressDisplay from './components/AddressDisplay.vue'
-import Home from './components/Home.vue'
 import Send from './components/Send.vue'
 import BeerHash from './components/BeerHash.vue'
 import Impressum from './components/Impressum.vue'
@@ -13,25 +12,16 @@ export default (store) => {
   const routes = [
     {
       path: '/',
-      name: 'home',
-      component: Home,
-      props: route => ({ query: route.query })
-    },
-    {
-      path: '/start',
       name: 'ChatArea',
-      component: ChatArea,
-      beforeEnter (to, from, next) {
-        if (!store.state.account || !store.state.account.priv) return next({ name: 'home' })
-        next()
-      }
+      props: route => ({ query: route.query }),
+      component: ChatArea
     },
     {
       path: '/address',
       name: 'address',
       component: AddressDisplay,
       beforeEnter (to, from, next) {
-        if (!store.state.account || !store.state.account.priv) return next({ name: 'home' })
+        if (!store.state.account || !store.state.account.priv) return next({ name: 'ChatArea' })
         next()
       }
     },
@@ -40,7 +30,7 @@ export default (store) => {
       name: 'send',
       component: Send,
       beforeEnter (to, from, next) {
-        if (!store.state.account || !store.state.account.priv) return next({ name: 'home' })
+        if (!store.state.account || !store.state.account.priv) return next({ name: 'ChatArea' })
         next()
       }
     },
@@ -49,7 +39,7 @@ export default (store) => {
       name: 'beer',
       component: BeerHash,
       beforeEnter (to, from, next) {
-        if (!store.state.account || !store.state.account.priv) return next({ name: 'home' })
+        if (!store.state.account || !store.state.account.priv) return next({ name: 'ChatArea' })
         next()
       }
     },

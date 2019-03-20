@@ -24,114 +24,27 @@ const store = new Vuex.Store({
     ae: null,
     chatMessagesList: {
       en: [
-        {
-          id: 'welcome-1',
-          content: '<strong>Welcome!</strong> Things, maybe in <strong>HTML code<strong>',
-          from: 'computer', // or 'user'
-          next: 'welcome-2'
-        },
-        {
-          id: 'welcome-2',
-          content: '<strong>Wilkommen 2!</strong> Things, maybe in <strong>HTML code<strong>',
-          from: 'computer', // or 'user'
-          next: 'welcome-3'
-        },
-        {
-          id: 'welcome-3',
-          content: '<strong>Wilkommen 3!</strong> Things, maybe in <strong>HTML code<strong>',
-          from: 'computer', // or 'user'
-          next: 'welcome-4'
-        },
-        {
-          id: 'welcome-4',
-          content: 'Was möchten Sie tun?',
-          from: 'computer', // or 'user'
-          buttons: [
-            {
-              title: 'Bestellen',
-              action: 'order',
-              type: 'message'
-            },
-            {
-              title: 'Transfer',
-              action: 'transfer',
-              type: 'message'
-            },
-            {
-              title: 'Bekommen',
-              action: 'receive',
-              type: 'message'
-            }
-          ]
-        },
-        {
-          id: 'transfer',
-          content: 'I want to transfer',
-          from: 'user', // or 'user'
-          next: 'transfer-2'
-        },
-        {
-          id: 'transfer-2',
-          content: 'Ready to transfer?!?!?!',
-          from: 'computer', // or 'user'
-          buttons: [
-            {
-              title: 'Scan',
-              action: 'transferScan',
-              type: 'function'
-            },
-            {
-              title: 'Name',
-              action: 'transferName',
-              type: 'function'
-            },
-            {
-              title: 'Explain',
-              action: 'explain-transfer',
-              type: 'message-white'
-            },
-            {
-              title: 'Nevermind',
-              action: 'welcome-4',
-              type: 'message-white'
-            }
-          ]
-        },
-        {
-          id: 'explain-transfer',
-          content: 'I need you to explain me the transfer...what is <strong>Name</strong> and what is <strong>Scan</strong>?!?!?',
-          from: 'user', // or 'user'
-          next: 'explain-transfer-2'
-        },
-        {
-          id: 'explain-transfer-2',
-          content: 'This is the explanation for transfer: blabla blabla blabla blabla blabla',
-          from: 'computer', // or 'user'
-          buttons: [
-            {
-              title: 'Scan',
-              action: 'transferScan',
-              type: 'function'
-            },
-            {
-              title: 'Name',
-              action: 'transferName',
-              type: 'function'
-            },
-            {
-              title: 'Explain',
-              action: 'explain-transfer',
-              type: 'message-white'
-            },
-            {
-              title: 'Nevermind',
-              action: 'welcome-4',
-              type: 'message-white'
-            }
-          ]
-        }
       ],
       de: [
+        {
+          id: 'intro',
+          content: '<strong>Wilkommen!</strong> Choose sprache',
+          from: 'computer', // or 'user'
+          buttons: [
+            {
+              title: '🇩🇪',
+              action: 'chooseLang',
+              params: 'de',
+              type: 'function'
+            },
+            {
+              title: '🇬🇧',
+              action: 'chooseLang',
+              params: 'en',
+              type: 'function'
+            }
+          ]
+        },
         {
           id: 'welcome-1',
           content: '<strong>Wilkommen!</strong> Dingen, vielleicht auch <strong>HTML code<strong>',
@@ -148,10 +61,10 @@ const store = new Vuex.Store({
           id: 'welcome-3',
           content: '<strong>Wilkommen 3!</strong> Dingen, vielleicht auch <strong>HTML code<strong>',
           from: 'computer', // or 'user'
-          next: 'welcome-4'
+          next: 'question-main'
         },
         {
-          id: 'welcome-4',
+          id: 'question-main',
           content: 'Was möchten Sie tun?',
           from: 'computer', // or 'user'
           buttons: [
@@ -173,25 +86,60 @@ const store = new Vuex.Store({
           ]
         },
         {
-          id: 'transfer',
-          content: 'Ich möchte gerne umziehen',
+          id: 'receive',
+          content: 'Ich mochte transfer',
           from: 'user', // or 'user'
-          next: 'transfer-2'
+          next: 'question-receive'
         },
         {
-          id: 'transfer-2',
-          content: 'Bereit zu transfer?!?!?!',
+          id: 'question-receive',
+          content: 'OK, DE: bitte show your QR or receive one free',
           from: 'computer', // or 'user'
-          next: undefined,
           buttons: [
             {
-              title: 'Scan',
-              action: 'transferScan',
+              title: 'Show QR to receive',
+              action: 'showQR',
               type: 'function'
             },
             {
-              title: 'Name',
-              action: 'transferName',
+              title: '🐦 1 free Ape Coin for a Tweet',
+              action: 'getFreeCoin',
+              type: 'function'
+            },
+            {
+              title: 'Nevermind',
+              action: 'cancel-message',
+              type: 'message-white'
+            }
+          ]
+        },
+        {
+          id: 'order',
+          content: 'Ich möchte bitte eis bestellen',
+          from: 'user', // or 'user'
+          next: 'question-order'
+        },
+        {
+          id: 'question-order',
+          content: 'Gut! Vie fiel?',
+          from: 'computer', // or 'user'
+          buttons: [
+            {
+              title: '🍦',
+              action: 'orderItem',
+              params: 1,
+              type: 'function'
+            },
+            {
+              title: '🍦🍦',
+              action: 'orderItem',
+              params: 2,
+              type: 'function'
+            },
+            {
+              title: '🍦🍦🍦',
+              params: 3,
+              action: 'orderItem',
               type: 'function'
             },
             {
@@ -201,7 +149,93 @@ const store = new Vuex.Store({
             },
             {
               title: 'Nevermind',
-              action: 'welcome-4',
+              action: 'cancel-message',
+              type: 'message-white'
+            }
+          ]
+        },
+        {
+          id: 'explain-order',
+          content: 'Bitte explain stuff about ice cream',
+          from: 'user', // or 'user'
+          next: 'explain-question-order'
+        },
+        {
+          id: 'explain-question-order',
+          content: 'German explanation about ordering',
+          from: 'computer', // or 'user'
+          next: undefined,
+          buttons: [
+            {
+              title: '🍦',
+              action: 'transferScan',
+              type: 'function'
+            },
+            {
+              title: '🍦🍦',
+              action: 'transferName',
+              type: 'function'
+            },
+            {
+              title: '🍦🍦🍦',
+              action: 'explain-transfer',
+              type: 'message-white'
+            },
+            {
+              title: 'Nevermind',
+              action: 'cancel-message',
+              type: 'message-white'
+            },
+            {
+              title: 'Explain',
+              action: 'explain-order',
+              type: 'message-white'
+            }
+          ]
+        },
+        {
+          id: 'cancel-message',
+          content: 'Ich möchte bitte beenden',
+          from: 'user', // or 'user'
+          next: 'question-main'
+        },
+        {
+          id: 'transfer',
+          content: 'Ich möchte gerne umziehen',
+          from: 'user', // or 'user'
+          next: 'question-transfer'
+        },
+        {
+          id: 'question-transfer',
+          content: 'Bereit zu transfer?!?!?!',
+          from: 'computer', // or 'user'
+          buttons: [
+            {
+              title: '1 Ape Coin',
+              action: 'transferCoins',
+              params: 1,
+              type: 'function'
+            },
+            {
+              title: '2 Ape Coins',
+              action: 'transferCoins',
+              params: 2,
+              type: 'function'
+            },
+            {
+              title: 'All my Ape Coins',
+              action: 'transferCoins',
+              params: 'all',
+              type: 'function'
+            },
+            {
+              title: 'Explain',
+              action: 'explain-transfer',
+              type: 'message-white'
+            },
+            {
+              title: 'Nevermind',
+              action: 'cancel-message',
               type: 'message-white'
             }
           ]
@@ -210,10 +244,10 @@ const store = new Vuex.Store({
           id: 'explain-transfer',
           content: 'Bitte give me Transfererklärung! Was ist <strong>Name</strong> und was ist <strong>Scan</strong>?!?',
           from: 'user', // or 'user'
-          next: 'explain-transfer-2'
+          next: 'explain-question-transfer'
         },
         {
-          id: 'explain-transfer-2',
+          id: 'explain-question-transfer',
           content: 'Dies ist die Transfererklärung: blabla blabla blabla blabla blabla',
           from: 'computer', // or 'user'
           buttons: [
@@ -234,7 +268,7 @@ const store = new Vuex.Store({
             },
             {
               title: 'Nevermind',
-              action: 'welcome-4',
+              action: 'cancel-message',
               type: 'message-white'
             }
           ]
@@ -378,30 +412,16 @@ const store = new Vuex.Store({
         state.ae
           .balance(pubKey, { format: false })
           .then(balance => {
-            // logs current balance of 'A_PUB_ADDRESS'
-
-            // SEND NEW MESSAGE on BALANCE UPDATE:
-            // console.log('balance', balance)
-            // const randomHash = Math.random().toString(36).substring(7)
-            // let msgBalance = {}
-            // if (state.currentLang === 'de') {
-            //   msgBalance = { id: randomHash, content: `Deine balance ist ${balance}`, from: 'computer' }
-            // } else {
-            //   msgBalance = { id: randomHash, content: `Your balance is now ${balance}`, from: 'computer' }
-            // }
-            // commit('addMessage', { message: msgBalance, lang: state.currentLang })
-
             commit('setBalance', balance)
             return balance
           })
           .catch(e => {
-            // logs error
             console.log(e)
           })
       }
       return 0
     },
-    async initAe ({ commit, state, getters }) {
+    async initAe ({ commit, state, getters, dispatch }) {
       commit(
         'setAe',
         await Ae({

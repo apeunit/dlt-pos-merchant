@@ -2,20 +2,15 @@
   <div id="app" class="h-screen">
     <Header></Header>
     <router-view class="h-full overflow-x-hidden py-16"></router-view>
-    <!-- <Navigation></Navigation> -->
   </div>
 </template>
 
 <script>
-import { AeHeader, AeButton } from '@aeternity/aepp-components'
 import Header from './components/Header.vue'
-// import Navigation from './components/Navigation.vue'
 
 export default {
   name: 'app',
   components: {
-    AeHeader,
-    AeButton,
     Header
   },
   computed: {
@@ -26,7 +21,11 @@ export default {
   methods: {
   },
   mounted () {
-    this.$store.dispatch('updateBalance')
+    // update balance after 5sec (wait for 'initAe' in store)
+    setTimeout(() => {
+      this.$store.dispatch('updateBalance')
+    }, 5000);
+    // update balance every 10sec (poll)
     setInterval(() => {
       this.$store.dispatch('updateBalance')
     }, 10000)

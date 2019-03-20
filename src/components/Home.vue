@@ -23,7 +23,7 @@
       </div>
     </div>
     <div v-else>
-      <span>You are not logged in. Please visit this by opening the provided short url</span>
+      <span>Getting account...</span>
     </div>
   </div>
 </template>
