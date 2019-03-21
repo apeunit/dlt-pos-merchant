@@ -9,60 +9,73 @@ import Orders from './components/Orders.vue'
 import Transactions from './components/Transactions.vue'
 
 export default (store) => {
-  const routes = [
-    {
-      path: '/',
-      name: 'ChatArea',
-      props: route => ({ query: route.query }),
-      component: ChatArea
-    },
-    {
-      path: '/address',
-      name: 'address',
-      component: AddressDisplay,
-      beforeEnter (to, from, next) {
-        if (!store.state.account || !store.state.account.priv) return next({ name: 'ChatArea' })
-        next()
+  const routes = [{
+    path: '/',
+    name: 'ChatArea',
+    props: route => ({
+      query: route.query
+    }),
+    component: ChatArea
+  },
+  {
+    path: '/address',
+    name: 'address',
+    component: AddressDisplay,
+    beforeEnter (to, from, next) {
+      if (!store.state.account || !store.state.account.priv) {
+        return next({
+          name: 'ChatArea'
+        })
       }
-    },
-    {
-      path: '/send',
-      name: 'send',
-      component: Send,
-      beforeEnter (to, from, next) {
-        if (!store.state.account || !store.state.account.priv) return next({ name: 'ChatArea' })
-        next()
-      }
-    },
-    {
-      path: '/beer/:beerHash',
-      name: 'beer',
-      component: BeerHash,
-      beforeEnter (to, from, next) {
-        if (!store.state.account || !store.state.account.priv) return next({ name: 'ChatArea' })
-        next()
-      }
-    },
-    {
-      path: '/impressum',
-      name: 'impressum',
-      component: Impressum
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: About
-    },
-    {
-      path: '/orders',
-      name: 'orders',
-      component: Orders
-    },
-    {
-      path: '/transactions',
-      name: 'transactions',
-      component: Transactions
+      next()
     }
+  },
+  {
+    path: '/send',
+    name: 'send',
+    component: Send,
+    beforeEnter (to, from, next) {
+      if (!store.state.account || !store.state.account.priv) {
+        return next({
+          name: 'ChatArea'
+        })
+      }
+      next()
+    }
+  },
+  {
+    path: '/beer/:beerHash',
+    name: 'beer',
+    component: BeerHash,
+    beforeEnter (to, from, next) {
+      if (!store.state.account || !store.state.account.priv) {
+        return next({
+          name: 'ChatArea'
+        })
+      }
+      next()
+    }
+  },
+  {
+    path: '/impressum',
+    name: 'impressum',
+    component: Impressum
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: About
+  },
+  {
+    path: '/orders',
+    name: 'orders',
+    component: Orders
+  },
+  {
+    path: '/transactions',
+    name: 'transactions',
+    component: Transactions
+  }
   ]
 
   const router = new Router({
@@ -72,9 +85,17 @@ export default (store) => {
 
   router.beforeEach(async (to, from, next) => {
     // when account credentials are passed as query
-    const { p: pub, k: priv, n: name } = to.query
+    const {
+      p: pub,
+      k: priv,
+      n: name
+    } = to.query
     if (pub && priv && name) {
-      const account = { pub, priv, name }
+      const account = {
+        pub,
+        priv,
+        name
+      }
       if (!store.state.account.pub || store.state.account.pub !== account.pub) {
         // set account in store
         if (!store.state.ae) {
@@ -85,7 +106,10 @@ export default (store) => {
         store.commit('setBeerHashes', [])
       }
       // remove query params and keep on routing
-      next({ name: to.name, query: null })
+      next({
+        name: to.name,
+        query: null
+      })
     } else {
       next()
     }

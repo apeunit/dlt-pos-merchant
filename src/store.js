@@ -28,7 +28,8 @@ const store = new Vuex.Store({
     chatHistory: {
       en: [],
       de: []
-    }},
+    }
+  },
   getters: {
     chatStarted (state) {
       return state.chatStarted
@@ -51,7 +52,7 @@ const store = new Vuex.Store({
     chatHistory (state) {
       return state.chatHistory
     },
-    client (state) { // TODO: this should be updated to the latest sdk
+    client (state) {
       return state.ae
     }
   },
@@ -73,7 +74,11 @@ const store = new Vuex.Store({
     setChatStarted (state, started) {
       state.chatStarted = started
     },
-    setAccount (state, { pub, priv, name }) {
+    setAccount (state, {
+      pub,
+      priv,
+      name
+    }) {
       state.account.pub = pub
       state.account.priv = priv
       state.account.name = name
@@ -94,13 +99,19 @@ const store = new Vuex.Store({
     setBalance (state, newBalance) {
       state.balance = newBalance
     },
-    addMessage (state, { message, lang }) {
+    addMessage (state, {
+      message,
+      lang
+    }) {
       let clonedMsg = Object.assign({}, message)
       state.chatHistory[lang].push(clonedMsg)
       // eslint-disable-next-line no-undef
       localStorage.setItem('chatHistory', JSON.stringify(state.chatHistory))
     },
-    removeMessage (state, { messageId, lang }) {
+    removeMessage (state, {
+      messageId,
+      lang
+    }) {
       const newMessages = state.chatHistory[lang].filter(function (obj) {
         console.log(obj.id !== messageId)
         return obj.id !== messageId
@@ -140,11 +151,17 @@ const store = new Vuex.Store({
     }
   },
   actions: {
-    async updateBalance ({ commit, state, getters }) {
+    async updateBalance ({
+      commit,
+      state,
+      getters
+    }) {
       const pubKey = state.account.pub
       if (pubKey) {
         state.ae
-          .balance(pubKey, { format: false })
+          .balance(pubKey, {
+            format: false
+          })
           .then(balance => {
             commit('setBalance', balance)
             return balance
@@ -155,7 +172,12 @@ const store = new Vuex.Store({
       }
       return 0
     },
-    async initAe ({ commit, state, getters, dispatch }) {
+    async initAe ({
+      commit,
+      state,
+      getters,
+      dispatch
+    }) {
       commit(
         'setAe',
         await Ae({

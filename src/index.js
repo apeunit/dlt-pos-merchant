@@ -54,8 +54,7 @@ new Vue({
   router: getRouter(store),
   store,
   render: h => h(App),
-  mounted () {
-  },
+  mounted () {},
   async beforeMount () {
     await store.dispatch('initAe')
     try {
