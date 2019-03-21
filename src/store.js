@@ -151,11 +151,7 @@ const store = new Vuex.Store({
     }
   },
   actions: {
-    async updateBalance ({
-      commit,
-      state,
-      getters
-    }) {
+    async updateBalance ({ commit, state }) {
       const pubKey = state.account.pub
       if (pubKey) {
         state.ae
@@ -172,17 +168,12 @@ const store = new Vuex.Store({
       }
       return 0
     },
-    async initAe ({
-      commit,
-      state,
-      getters,
-      dispatch
-    }) {
+    async initAe ({ commit }) {
       commit(
         'setAe',
         await Ae({
-          url: 'https://testnet.mdw.aepps.com',
-          internalUrl: 'https://testnet.mdw.aepps.com',
+          url: 'https://sdk-testnet.aepps.com',
+          internalUrl: 'https://sdk-testnet.aepps.com',
           networkId: 'ae_uat', // or any other networkId your client should connect to
           keypair: {
             secretKey: '',
@@ -190,6 +181,16 @@ const store = new Vuex.Store({
           }
         })
       )
+    },
+    async transfer ({ commit, state, getters, dispatch }, { amount, receiver }) {
+      /**
+       *  TODO: check for same account. user balance etc
+       */
+      console.log(amount, receiver)
+      const spendTx = await getters.client.spend(amount, receiver)
+      dispatch('updateBalance')
+      console.log(spendTx)
+      return spendTx
     }
   }
 })

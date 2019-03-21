@@ -115,7 +115,8 @@
         alert(`you triggered the "Transfer Name Function! wit arg ${arg}"`)
       },
       orderItem (arg){
-        alert(`you triggered the "Order Item Function! wit arg ${arg}"`)
+        const price =  Number(arg) * Number(this.$store.state.itemPrice)
+        this.$store.dispatch('transfer', {amount: price, receiver: this.$store.state.barPubKey})
       },
       getFreeCoin (arg){
         alert(`you triggered the "Get Free coin Function! wit arg ${arg}"`)
