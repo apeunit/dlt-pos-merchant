@@ -9,7 +9,7 @@
         </div>
         <div class="w-1/2 flex justify-end align-middle">
           <div class="text-right self-center font-sans text-sm mr-4">
-            4 Ape Coins
+            {{balance}} Ape Coins
           </div>
           <ae-identity-avatar :address="account.pub"></ae-identity-avatar>
         </div>
