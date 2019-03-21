@@ -84,20 +84,3 @@ export default {
   }
 }
 </script>
-<style lang='scss'>
-  .fab {
-    color:#f7296e;
-    font-size:17px;
-    margin: 10px;
-  }
-  .about .ae-icon {
-    transform: rotate(-40deg);
-  }
-  .list-item:last-child {
-    border-bottom:0;
-  }
-
-  .more-bottom a {
-    text-decoration: none;
-  }
-</style>

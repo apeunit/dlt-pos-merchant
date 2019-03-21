@@ -65,7 +65,7 @@
       wait (fn, par) {
         return new Promise((resolve) => {
           // wait 3s before calling fn(par)
-          setTimeout(() => resolve(fn(par)), 3000)
+          setTimeout(() => resolve(fn(par)), 30)
         })
       },
       sendNextMessage (msg) {

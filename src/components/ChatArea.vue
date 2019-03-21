@@ -1,17 +1,15 @@
 <template>
-  <div class="h-full w-full" v-chat-scroll="{always: true, smooth: true, scrollonremoved: true}">
-    <div v-if="account && account.pub" class="flex items-center w-full">
-      <div class="h-full w-full">
-        <div class="text-black overflow-x-hidden overflow-y-auto bg-white">
-          <ul class="list-reset">
-            <li v-bind:key="$index"
-                class="h-32 border-b-1"
-                v-bind:class="msgClass(msg)"
-                v-for="(msg, $index) in chatHistory[$i18n.locale]">
-                  <chat-message :isLast="$index == chatHistory[$i18n.locale].length - 1" :msg="msg" />
-            </li>
-          </ul>
-        </div>
+  <div v-chat-scroll="{always: true, smooth: true, scrollonremoved: true}">
+    <div v-if="account && account.pub" class="container-md">
+      <div class="text-black overflow-x-hidden overflow-y-auto bg-white h-full w-full py-16">
+        <ul class="list-reset">
+          <li v-bind:key="$index"
+              class="min-h-32 border-b-1"
+              v-bind:class="msgClass(msg)"
+              v-for="(msg, $index) in chatHistory[$i18n.locale]">
+                <chat-message :isLast="$index == chatHistory[$i18n.locale].length - 1" :msg="msg" />
+          </li>
+        </ul>
       </div>
     </div>
     <div v-else>

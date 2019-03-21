@@ -195,7 +195,7 @@ module.exports = {
 
   fonts: {
     'sans': [
-      'system-ui',
+      'NeufileGrotesk-MediumExtended',
       'BlinkMacSystemFont',
       '-apple-system',
       'Segoe UI',
@@ -206,7 +206,21 @@ module.exports = {
       'Fira Sans',
       'Droid Sans',
       'Helvetica Neue',
-      'sans-serif',
+      'sans-serif'
+    ],
+    'sans-bold': [
+      'NeufileGrotesk-SemiboldExtended',
+      'BlinkMacSystemFont',
+      '-apple-system',
+      'Segoe UI',
+      'Roboto',
+      'Oxygen',
+      'Ubuntu',
+      'Cantarell',
+      'Fira Sans',
+      'Droid Sans',
+      'Helvetica Neue',
+      'sans-serif'
     ],
     'serif': [
       'Constantia',
@@ -221,6 +235,7 @@ module.exports = {
       'serif',
     ],
     'mono': [
+      'IBMPlexMono-Medium',
       'Menlo',
       'Monaco',
       'Consolas',
@@ -589,6 +604,7 @@ module.exports = {
 
   minHeight: {
     '0': '0',
+    '32': '8rem',
     'full': '100%',
     'screen': '100vh',
   },
@@ -956,8 +972,8 @@ module.exports = {
 
   plugins: [
     require('tailwindcss/plugins/container')({
-      // center: true,
-      // padding: '1rem',
+      center: true,
+      padding: '1rem'
     }),
   ],
 

@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="h-screen">
     <Header></Header>
-    <router-view class="h-full overflow-x-hidden py-16"></router-view>
+    <router-view class="h-full overflow-x-hidden"></router-view>
   </div>
 </template>
 

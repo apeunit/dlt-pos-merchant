@@ -7,9 +7,9 @@
         </router-link>
       </div>
       <div class="w-1/2 flex justify-around align-middle">
-        <h4 class="text-right self-center">
+        <div class="text-right self-center">
           {{balance}} Ape Coins
-        </h4>
+        </div>
         <ae-identity-avatar :address="account.pub"></ae-identity-avatar>
       </div>
     </div>
@@ -41,6 +41,3 @@ export default {
   }
 }
 </script>
-<style lang="css">
-
-</style>

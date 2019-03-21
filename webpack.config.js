@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const distFolder = path.resolve(__dirname, 'dist')
@@ -49,9 +49,9 @@ module.exports = {
         ignore: ['.*']
       }
     ]),
-    new VueLoaderPlugin(),
+    new VueLoaderPlugin()
     // debug bundle (for optimisation)
-    new BundleAnalyzerPlugin()
+    // new BundleAnalyzerPlugin()
   ],
   module: {
     rules: [
@@ -66,13 +66,16 @@ module.exports = {
         loader: jsLoader
       },
       {
-        test: /\.(s?[ac]ss)$/,
+        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+        loader: 'url-loader?limit=100000'
+      },
+      {
+        test: /\.css$/,
         use: ExtractTextPlugin.extract({
           fallback: 'vue-style-loader',
           use: [
             'css-loader',
-            'postcss-loader',
-            'sass-loader'
+            'postcss-loader'
           ]
           // publicPath: '/dist'
         })

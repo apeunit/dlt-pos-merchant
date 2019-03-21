@@ -1,81 +1,40 @@
 import Router from 'vue-router'
 import ChatArea from './components/ChatArea.vue'
-import AddressDisplay from './components/AddressDisplay.vue'
-import Send from './components/Send.vue'
-import BeerHash from './components/BeerHash.vue'
 import Impressum from './components/Impressum.vue'
 import About from './components/About.vue'
 import Orders from './components/Orders.vue'
 import Transactions from './components/Transactions.vue'
 
 export default (store) => {
-  const routes = [{
-    path: '/',
-    name: 'ChatArea',
-    props: route => ({
-      query: route.query
-    }),
-    component: ChatArea
-  },
-  {
-    path: '/address',
-    name: 'address',
-    component: AddressDisplay,
-    beforeEnter (to, from, next) {
-      if (!store.state.account || !store.state.account.priv) {
-        return next({
-          name: 'ChatArea'
-        })
-      }
-      next()
+  const routes = [
+    {
+      path: '/',
+      name: 'ChatArea',
+      props: route => ({
+        query: route.query
+      }),
+      component: ChatArea
+    },
+    {
+      path: '/impressum',
+      name: 'impressum',
+      component: Impressum
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: About
+    },
+    {
+      path: '/orders',
+      name: 'orders',
+      component: Orders
+    },
+    {
+      path: '/transactions',
+      name: 'transactions',
+      component: Transactions
     }
-  },
-  {
-    path: '/send',
-    name: 'send',
-    component: Send,
-    beforeEnter (to, from, next) {
-      if (!store.state.account || !store.state.account.priv) {
-        return next({
-          name: 'ChatArea'
-        })
-      }
-      next()
-    }
-  },
-  {
-    path: '/beer/:beerHash',
-    name: 'beer',
-    component: BeerHash,
-    beforeEnter (to, from, next) {
-      if (!store.state.account || !store.state.account.priv) {
-        return next({
-          name: 'ChatArea'
-        })
-      }
-      next()
-    }
-  },
-  {
-    path: '/impressum',
-    name: 'impressum',
-    component: Impressum
-  },
-  {
-    path: '/about',
-    name: 'about',
-    component: About
-  },
-  {
-    path: '/orders',
-    name: 'orders',
-    component: Orders
-  },
-  {
-    path: '/transactions',
-    name: 'transactions',
-    component: Transactions
-  }
   ]
 
   const router = new Router({
