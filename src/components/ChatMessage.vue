@@ -1,14 +1,17 @@
 <template>
   <div>
-    <p v-html="msg.content"></p>
-    <div v-if="isLast">
-      <button v-bind:key="`${key}`"
-              v-for="(button, key) in msg.buttons"
-              @click="executeBtnAction(button.action, button.type, button.params, $event)"
-              class="rounded-full px-4 py-2"
-              v-bind:class="msgClass(button.type)">
-        {{ button.title }}
-      </button>
+    <div class="min-h-32">
+      <p class="font-sans-medium text-28" v-html="msg.content"></p>
+      <p class="text-xs font-sans mt-2">13:44</p>
+      <div v-if="isLast" class="float-right pt-16 overflow-visible">
+        <div v-bind:key="`${key}`" v-for="(button, key) in msg.buttons">
+          <span @click="executeBtnAction(button.action, button.type, button.params, $event)"
+                class="rounded-full px-10 py-3 font-sans w-auto text-base tracking-wide mt-2 text-right cursor-pointer float-right"
+                v-bind:class="msgClass(button.type)">
+            {{ button.title }}
+          </span><br/><br/><br/>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -32,7 +35,7 @@
         console.log(type)
         return {
           'bg-black text-white': type == 'message' || type == 'function',
-          'bg-white text-black border-2-black': type == 'message-white'
+          'bg-white text-black border-2 border-black': type == 'message-white'
         }
       },
       executeBtnAction (action, type, params, evt) {
@@ -65,7 +68,7 @@
       wait (fn, par) {
         return new Promise((resolve) => {
           // wait 3s before calling fn(par)
-          setTimeout(() => resolve(fn(par)), 30)
+          setTimeout(() => resolve(fn(par)), 3000)
         })
       },
       sendNextMessage (msg) {

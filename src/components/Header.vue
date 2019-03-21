@@ -1,28 +1,29 @@
 <template>
   <div class="header">
-    <div class="w-full pin-t fixed bg-black text-white shell flex border-b-1 justify-end">
-      <div class="w-1/2 flex">
-        <router-link to="/" class="self-center">
-          <Logo></Logo>
-        </router-link>
-      </div>
-      <div class="w-1/2 flex justify-around align-middle">
-        <div class="text-right self-center">
-          {{balance}} Ape Coins
+    <div class="w-full pin-t fixed bg-black text-white shell flex flex-wrap border-b-1 justify-end">
+      <div class="container flex px-4">
+        <div class="w-1/2 flex">
+          <router-link to="/" class="self-center text-white no-underline font-sans-medium">
+            Ape Unit
+          </router-link>
         </div>
-        <ae-identity-avatar :address="account.pub"></ae-identity-avatar>
+        <div class="w-1/2 flex justify-end align-middle">
+          <div class="text-right self-center font-sans text-sm mr-4">
+            4 Ape Coins
+          </div>
+          <ae-identity-avatar :address="account.pub"></ae-identity-avatar>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
 import { AeIdentityAvatar } from '@aeternity/aepp-components'
-import Logo from './Logo.vue'
+
 export default {
   name: 'Header',
   components: {
-    AeIdentityAvatar,
-    Logo
+    AeIdentityAvatar
   },
   data () {
     return {

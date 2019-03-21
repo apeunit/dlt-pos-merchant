@@ -9,7 +9,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     chatStarted: false,
-    currentLang: 'de',
+    currentLang: 'en',
     account: {
       pub: null,
       priv: null,

@@ -195,6 +195,20 @@ module.exports = {
 
   fonts: {
     'sans': [
+      'NeufileGrotesk-RegularExtended',
+      'BlinkMacSystemFont',
+      '-apple-system',
+      'Segoe UI',
+      'Roboto',
+      'Oxygen',
+      'Ubuntu',
+      'Cantarell',
+      'Fira Sans',
+      'Droid Sans',
+      'Helvetica Neue',
+      'sans-serif'
+    ],
+    'sans-medium': [
       'NeufileGrotesk-MediumExtended',
       'BlinkMacSystemFont',
       '-apple-system',
@@ -273,6 +287,7 @@ module.exports = {
     'lg': '1.125rem',   // 18px
     'xl': '1.25rem',    // 20px
     '2xl': '1.5rem',    // 24px
+    '28': '1.75rem',    // 28px
     '3xl': '1.875rem',  // 30px
     '4xl': '2.25rem',   // 36px
     '5xl': '3rem',      // 48px
@@ -973,7 +988,7 @@ module.exports = {
   plugins: [
     require('tailwindcss/plugins/container')({
       center: true,
-      padding: '1rem'
+      padding: '.5rem'
     }),
   ],
 

@@ -20,7 +20,7 @@ Vue.use(VueI18n)
 
 // Create VueI18n instance with options
 const i18n = new VueI18n({
-  locale: 'de', // set locale
+  locale: 'en', // set locale
   messages: store.state.i18nTexts // set locale messages
 })
 

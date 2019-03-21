@@ -1,60 +1,101 @@
 {
-	"en": [],
-	"de": [
+	"en": [
 		{
 			"id": "intro",
-			"content": "<strong>Wilkommen!</strong> Choose sprache",
+			"content": "Hey there! Welcome to the Hannover Messe 👋",
+			"from": "computer",
+			"next": "intro-2"
+		},
+		{
+			"id": "intro-2",
+			"content": "Is English okay oder werden wir auf Deutsch reden?",
 			"from": "computer",
 			"buttons": [
 				{
-					"title": "🇩🇪",
+					"title": "English Works!",
 					"action": "chooseLang",
-					"params": "de",
+					"params": "en",
 					"type": "function"
 				},
 				{
-					"title": "🇬🇧",
+					"title": "Deutsch Bitte",
 					"action": "chooseLang",
-					"params": "en",
+					"params": "de",
 					"type": "function"
 				}
 			]
 		},
 		{
 			"id": "welcome-1",
-			"content": "<strong>Wilkommen!</strong> Dingen, vielleicht auch <strong>HTML code<strong>",
+			"content": "Great! So good to have like-minded people here at the Hannover Messe.",
 			"from": "computer",
 			"next": "welcome-2"
 		},
 		{
 			"id": "welcome-2",
-			"content": "<strong>Wilkommen 2!</strong> Dingen, vielleicht auch <strong>HTML code<strong>",
+			"content": "We are Ape Unit 🦍 — a multidisciplinary, inclusive hub of creators, strategists, developers and designers in Berlin.",
 			"from": "computer",
 			"next": "welcome-3"
 		},
 		{
 			"id": "welcome-3",
-			"content": "<strong>Wilkommen 3!</strong> Dingen, vielleicht auch <strong>HTML code<strong>",
+			"content": "Let us give you something.",
+			"from": "computer",
+			"next": "welcome-4"
+		},
+		{
+			"id": "welcome-4",
+			"content": "See the 2,5 Ape Coins on the top right of your screen?",
+			"from": "computer",
+			"next": "welcome-5"
+		},
+		{
+			"id": "welcome-5",
+			"content": "You can transfer them to someone at the Messe, ask others to send coins to you and...",
+			"from": "computer",
+			"next": "welcome-6"
+		},
+		{
+			"id": "welcome-6",
+			"content": "use them to get ice cream at our bar in Halle 6! 🍦🍦🍦",
+			"from": "computer",
+			"next": "welcome-7"
+		},
+		{
+			"id": "welcome-7",
+			"content": "All using blockchain technology.",
+			"from": "computer",
+			"next": "welcome-8"
+		},
+		{
+			"id": "welcome-8",
+			"content": "Ever tried blockchain ice cream? It’s so….",
+			"from": "computer",
+			"next": "welcome-9"
+		},
+		{
+			"id": "welcome-9",
+			"content": "no we’ll let you find out for yourself.",
 			"from": "computer",
 			"next": "question-main"
 		},
 		{
 			"id": "question-main",
-			"content": "Was möchten Sie tun?",
+			"content": "What are we going to do?",
 			"from": "computer",
 			"buttons": [
 				{
-					"title": "Bestellen",
+					"title": "Get ice cream",
 					"action": "order",
 					"type": "message"
 				},
 				{
-					"title": "Transfer",
+					"title": "Send coins",
 					"action": "transfer",
 					"type": "message"
 				},
 				{
-					"title": "Bekommen",
+					"title": "Receive coins",
 					"action": "receive",
 					"type": "message"
 				}
@@ -62,22 +103,40 @@
 		},
 		{
 			"id": "receive",
-			"content": "Ich mochte transfer",
+			"content": "I would like to receive coins 💵🙏",
 			"from": "user",
-			"next": "question-receive"
+			"next": "question-receive-1"
 		},
 		{
-			"id": "question-receive",
-			"content": "OK, DE: bitte show your QR or receive one free",
+			"id": "question-receive-1",
+			"content": "So let’s find someone kind enough to transfer you some! 😇",
+			"from": "computer",
+			"next": "question-receive-2"
+		},
+		{
+			"id": "question-receive-2",
+			"content": "There are two ways to do this.",
+			"from": "computer",
+			"next": "question-receive-3"
+		},
+		{
+			"id": "question-receive-3",
+			"content": "You can ask someone directly and let them scan your QR code.",
+			"from": "computer",
+			"next": "question-receive-4"
+		},
+		{
+			"id": "question-receive-4",
+			"content": "Or tweet your address and we will give you some for free.",
 			"from": "computer",
 			"buttons": [
 				{
-					"title": "Show QR to receive",
+					"title": "Show QR",
 					"action": "showQR",
 					"type": "function"
 				},
 				{
-					"title": "🐦 1 free Ape Coin for a Tweet",
+					"title": "Post A Tweet",
 					"action": "getFreeCoin",
 					"type": "function"
 				},
@@ -90,40 +149,40 @@
 		},
 		{
 			"id": "order",
-			"content": "Ich möchte bitte eis bestellen",
+			"content": "I would like to get some ice cream! 🍦😎☀️",
 			"from": "user",
 			"next": "question-order"
 		},
 		{
 			"id": "question-order",
-			"content": "Gut! Vie fiel?",
+			"content": "How many?",
 			"from": "computer",
 			"buttons": [
 				{
-					"title": "🍦",
+					"title": "1",
 					"action": "orderItem",
 					"params": 1,
 					"type": "function"
 				},
 				{
-					"title": "🍦🍦",
+					"title": "2",
 					"action": "orderItem",
 					"params": 2,
 					"type": "function"
 				},
 				{
-					"title": "🍦🍦🍦",
+					"title": "3",
 					"params": 3,
 					"action": "orderItem",
 					"type": "function"
 				},
 				{
-					"title": "Explain",
+					"title": "Explain to me",
 					"action": "explain-transfer",
 					"type": "message-white"
 				},
 				{
-					"title": "Nevermind",
+					"title": "Wait, go back",
 					"action": "cancel-message",
 					"type": "message-white"
 				}
@@ -248,5 +307,6 @@
 				}
 			]
 		}
-	]
+	],
+	"de": []
 }

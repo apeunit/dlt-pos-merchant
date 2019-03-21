@@ -1,10 +1,15 @@
 @font-face {
   font-family: 'IBMPlexMono-Medium';
   src: url('../fonts/IBMPlexMono-Medium.woff') format('woff');
+  font-weight: 200;
 }
 @font-face {
   font-family: 'NeufileGrotesk-SemiboldExtended';
   src: url('../fonts/NeufileGrotesk-SemiboldExtended.woff') format('woff');
+}
+@font-face {
+  font-family: 'NeufileGrotesk-RegularExtended';
+  src: url('../fonts/NeufileGrotesk-RegularExtended.woff') format('woff');
 }
 @font-face {
   font-family: 'NeufileGrotesk-MediumExtended';
@@ -41,5 +46,6 @@
   @tailwind screens;
 
   html {
-    @apply .font-sans
+    @apply .font-sans;
+    text-rendering: optimizeLegibility;
   }
