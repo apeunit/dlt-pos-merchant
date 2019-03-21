@@ -1,18 +1,22 @@
 <template>
   <div>
-    <p v-html="msg.content"></p>
+    <p v-html="msg.content">
+    </p>
     <div v-if="isLast">
-      <button v-bind:key="`${key}`"
-              v-for="(button, key) in msg.buttons"
-              @click="executeBtnAction(button.action, button.type, button.params, $event)"
-              class="rounded-full px-4 py-2"
-              v-bind:class="msgClass(button.type)">
-        {{ button.title }}
-      </button>
+      <button
+        v-bind:key="`${key}`"
+        v-for="(button, key) in msg.buttons"
+        @click="executeBtnAction(button.action, button.type, button.params, $event)"
+        class="rounded-full px-4 py-2"
+        v-bind:class="msgClass(button.type)"
+      >{{ button.title }}</button>
     </div>
   </div>
 </template>
 <script>
+import { sign, verify, decodeBase58Check } from '@aeternity/aepp-sdk/es/utils/crypto.js'
+import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
+
   export default {
     name: 'ChatMessage',
     props: [
@@ -114,9 +118,17 @@
       transferName (arg) {
         alert(`you triggered the "Transfer Name Function! wit arg ${arg}"`)
       },
-      orderItem (arg){
+      async orderItem (arg){
         const price =  Number(arg) * Number(this.$store.state.itemPrice)
-        this.$store.dispatch('transfer', {amount: price, receiver: this.$store.state.barPubKey})
+        const txHash = await this.$store.dispatch('transfer', {amount: price, receiver: this.$store.state.barPubKey})
+        const dataURI = await this.$store.dispatch('generateQRURI', {data: (txHash.hash + ' '+ this.signHash(txHash.hash, this.$store.state.account.priv))})
+        const img = `<img src="${dataURI}" alt="order" height="300" width="300">`
+        const txMessage = {
+		          "id":"show-order-qr",
+		          "content": img,
+		          "from": "computer"
+		        }
+        this.$store.commit('addMessage', { message: txMessage, lang: this.$i18n.locale })
       },
       getFreeCoin (arg){
         alert(`you triggered the "Get Free coin Function! wit arg ${arg}"`)
@@ -136,6 +148,12 @@
           this.$store.commit('addMessage', { message: firstMsg, lang: this.$i18n.locale })
           this.$store.commit('setChatStarted', true)
         }
+      },
+      signHash (txHash, privateKey) {
+        const sig = sign(Buffer.from(txHash), Buffer.from(privateKey, 'hex'))
+        const encodedSig = encode(sig, 'sg')
+        console.log("signHash encoded", encodedSig)
+        return encodedSig
       }
     },
     mounted () {
