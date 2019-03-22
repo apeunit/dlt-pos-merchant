@@ -2,7 +2,7 @@
   <div>
     <div class="min-h-32">
       <p class="font-sans-medium text-28" v-html="msg.content"></p>
-      <p class="text-xs font-sans mt-2">13:44</p>
+      <p class="text-xs font-sans mt-2">{{ msg.time }}</p>
       <div v-if="isLast" class="float-right pt-16 overflow-visible">
         <div v-bind:key="`${key}`" v-for="(button, key) in msg.buttons">
           <span @click="executeBtnAction(button.action, button.type, button.params, $event)"
@@ -71,7 +71,7 @@ import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
       wait (fn, par) {
         return new Promise((resolve) => {
           // wait 3s before calling fn(par)
-          setTimeout(() => resolve(fn(par)), 3000)
+          setTimeout(() => resolve(fn(par)), 30)
         })
       },
       sendNextMessage (msg) {
