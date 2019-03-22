@@ -1,5 +1,11 @@
 {
 	"en": [
+    {
+      "id": "yes",
+			"content": "Yes! 👍",
+			"from": "user",
+			"time": null
+    },
 		{
 			"id": "intro",
 			"content": "Hey there! Welcome to the Hannover Messe 👋",
@@ -178,20 +184,20 @@
 			"buttons": [
 				{
 					"title": "1",
-					"action": "orderItem",
+					"action": "saveOrder",
 					"params": 1,
 					"type": "function"
 				},
 				{
 					"title": "2",
-					"action": "orderItem",
+					"action": "saveOrder",
 					"params": 2,
 					"type": "function"
 				},
 				{
 					"title": "3",
 					"params": 3,
-					"action": "orderItem",
+					"action": "saveOrder",
 					"type": "function"
 				},
 				{
@@ -252,8 +258,61 @@
 		  "id":"show-order-details",
 		  "content": "I want to buy xxx ice cream",
 		  "from": "user",
-		  "time": null
-		},
+      "time": null
+    },
+    {
+		  "id":"show-order-details-2",
+		  "content": "You’re about to make a transaction of xxx Ape Coins, plus some transaction fee",
+		  "from": "computer",
+      "time": null,
+      "next": "show-order-details-3"
+    },
+    {
+		  "id":"show-order-details-3",
+		  "content": "Is this ok?",
+		  "from": "computer",
+      "time": null,
+      "buttons": [
+        {
+					"title": "Yes",
+					"action": "orderItem",
+					"type": "function"
+				},
+				{
+					"title": "No",
+					"action": "cancel-message",
+					"type": "message"
+				},
+				{
+					"title": "Nevermind",
+					"action": "cancel",
+					"type": "message-white"
+				},
+				{
+					"title": "Explain",
+					"action": "explain-fee",
+					"type": "message-white"
+				}
+      ]
+    },
+    {
+		  "id":"explain-fee",
+		  "content": "The transaction fee is for the block miners, who keep the blockchain running with their computing power.<br><br> Would you like to get the Ice Cream now?",
+		  "from": "computer",
+      "time": null,
+      "buttons": [
+        {
+					"title": "Yes",
+					"action": "orderItem",
+					"type": "function"
+				},
+				{
+					"title": "No",
+					"action": "cancel-message",
+					"type": "message"
+				}
+      ]
+    },
 		{
 			"id": "transfer-user-message",
 			"content": "I would like to transfer xxx ape coin",

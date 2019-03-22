@@ -9,6 +9,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
+    costToCharge: 0,
     chatStarted: false,
     currentLang: 'en',
     account: {
@@ -32,6 +33,9 @@ const store = new Vuex.Store({
     }
   },
   getters: {
+    costToCharge (state) {
+      return state.costToCharge
+    },
     chatStarted (state) {
       return state.chatStarted
     },
@@ -58,6 +62,9 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
+    setCostToCharge (state, amount) {
+      state.costToCharge = amount
+    },
     cleanNextMessages (state) {
       state.chatHistory.en.forEach(function (o) {
         console.log(o)
@@ -196,6 +203,7 @@ const store = new Vuex.Store({
        */
       console.log(amount, receiver)
       const spendTx = await getters.client.spend(amount, receiver)
+      console.log(spendTx)
       dispatch('updateBalance')
       commit('addBeerHash', spendTx)
       console.log(spendTx)

@@ -31,7 +31,10 @@ import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
       },
       chatHistory () {
         return this.$store.getters.chatHistory
-      }
+      },
+      costToCharge () {
+        return this.$store.getters.costToCharge
+      },
     },
     methods: {
       msgClass (type) {
@@ -42,8 +45,6 @@ import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
         }
       },
       executeBtnAction (action, type, params, evt) {
-        alert(`get message ID: ${action}, ${type}`)
-
         switch (type) {
           case 'message':
           case 'message-white':
@@ -71,7 +72,7 @@ import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
       wait (fn, par) {
         return new Promise((resolve) => {
           // wait 3s before calling fn(par)
-          setTimeout(() => resolve(fn(par)), 1000)
+          setTimeout(() => resolve(fn(par)), 30)
         })
       },
       sendNextMessage (msg) {
@@ -127,25 +128,34 @@ import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
         }
 
       },
-      transferScan (arg) {
-        alert(`you triggered the "Transfer Scan Function! wit arg ${arg}"`)
-      },
-      transferName (arg) {
-        alert(`you triggered the "Transfer Name Function! wit arg ${arg}"`)
-      },
-      async orderItem (arg){
+      saveOrder (amount) {
+        this.$store.commit('setCostToCharge', amount)
         const order = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'show-order-details')
-        order.content = order.content.replace('xxx', arg)
-        order.content = arg > 1 ? order.content+'s' : order.content
+        order.content = order.content.replace('xxx', amount)
+        order.content = amount > 1 ? order.content+'s' : order.content
         this.$store.commit('addMessage', { message: order, lang: this.$i18n.locale })
+
+        const order2 = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'show-order-details-2')
+        order2.content = order2.content.replace('xxx', amount)
+        this.$store.commit('addMessage', { message: order2, lang: this.$i18n.locale })
+      },
+      async orderItem (){
+        const arg = this.costToCharge;
         const price =  Number(arg) * Number(this.$store.state.itemPrice)
         const txHash = await this.$store.dispatch('transfer', {amount: price, receiver: this.$store.state.barPubKey})
+        console.log(txHash)
         const dataURI = await this.$store.dispatch('generateQRURI', {data: (txHash.hash + ' '+ this.signHash(txHash.hash, this.$store.state.account.priv))})
+        console.log(dataURI)
         const img = `<img src="${dataURI}" alt="order" height="300" width="300">`
+        // user response
+        const yesMessage = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'yes')
+        this.$store.commit('addMessage', { message: yesMessage, lang: this.$i18n.locale })
+        // computer QR
         const txMessage = {
 		          "id":"show-order-qr",
 		          "content": img,
-		          "from": "computer"
+              "from": "computer",
+              "time": null
 		        }
         this.$store.commit('addMessage', { message: txMessage, lang: this.$i18n.locale })
       },
