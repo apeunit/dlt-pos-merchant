@@ -13,12 +13,6 @@
       </p>
 
       <div class="list-reset w-full mt-8">
-        <router-link to="/orders" class="text-28 font-sans flex justify-between no-underline text-black">
-          <span>
-            My Orders
-          </span>
-          <ArrowRight class=""/>
-        </router-link>
         <router-link to="/transactions" class="text-28 font-sans flex justify-between no-underline text-black">
           <span>
             My Transactions
