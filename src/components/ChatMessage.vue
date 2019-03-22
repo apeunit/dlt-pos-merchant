@@ -71,7 +71,7 @@ import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
       wait (fn, par) {
         return new Promise((resolve) => {
           // wait 3s before calling fn(par)
-          setTimeout(() => resolve(fn(par)), 3000)
+          setTimeout(() => resolve(fn(par)), 30)
         })
       },
       sendNextMessage (msg) {
@@ -161,9 +161,10 @@ import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
         this.$store.commit('addMessage', { message: txMessage, lang: this.$i18n.locale })
       },
       chooseLang (lang){
-        this.$i18n.locale = lang
-        this.$store.commit('setCurrentLang', lang)
-        this.startConvo()
+        this.$router.push({ name: 'about', params: { userId: '123' } })
+        // this.$i18n.locale = lang
+        // this.$store.commit('setCurrentLang', lang)
+        // this.startConvo()
       },
       startConvo () {
         // start chat, by picking first message.

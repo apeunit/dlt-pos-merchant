@@ -1,78 +1,69 @@
 <template>
   <div class="about">
-    <div class="about-top shell">
-      <h1 class="screen-title">
-        About æternity
-      </h1>
-      <p class="screen-subtitle">
-        æternity is not just a blockchain, it’s a vision for the future. It is a way of thinking. It’s a cause realized through technology.
-      </p>
-      <p class="screen-subtitle">
-        We want to start a decentralized digital revolution. But first we want to give you beer.
-      </p>
+    <div class="bg-black text-white pb-8 pt-32">
+      <div class="container flex px-4 text-28 font-sans leading-normal">
+        We are Ape Unit — an interdisciplinary tech hub in Berlin 🦍
+      </div>
     </div>
-    <div class="more-bottom">
-      <div class="list">
-        <div class="list-item">
-          <div class="shell">
-            <div class="list-item-el">
-              <a href='https://www.aeternity.com/' target="_blank">
-                <h5>Official Website</h5>
-              </a>
-            </div>
-            <div class="list-item-el">
-              <div class="arrow">
-                <a href='https://www.aeternity.com/' target="_blank">
-                  <ae-icon name="arrow" />
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="list-item">
-          <div class="shell">
-            <div class="list-item-el">
-              <a href='https://www.aepps.com/' target="_blank">
-                <h5>æpps Showcase</h5>
-              </a>
-            </div>
-            <div class="list-item-el">
-              <div class="arrow">
-                <a href='https://www.aepps.com/' target="_blank">
-                  <ae-icon name="arrow" />
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="list-item">
-          <div class="shell">
-            <div class="list-item-el">
-              <h5>Social Links</h5>
-            </div>
-            <div class="list-item-el" style="width:100%;text-align:right;">
-              <a href="https://twitter.com/aeternity" target="_blank">
-                <i class="fab fa-twitter"></i>
-              </a>
-              <a href="https://www.facebook.com/aeternityproject/" target="_blank">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-              <a href="https://telegram.me/aeternity" target="_blank">
-                <i class="fab fa-telegram-plane"></i>
-              </a>
-            </div>
-          </div>
-        </div>
+    <div class="container flex flex-wrap px-4 leading-normal pt-8 pb-8">
+
+      <p class="text-28 font-sans leading-normal">
+      {{title}} We are giving away free ice cream🍦through blockchain technology ⛓. Visit us in Halle 6
+      </p>
+
+      <div class="list-reset w-full mt-8">
+        <router-link to="/venue" class="text-28 font-sans flex justify-between no-underline text-black">
+          <span>
+            Find our bar
+          </span>
+          <ArrowRight class=""/>
+        </router-link>
+        <a href="https://apeunit.com" target="_blank" rel="noopener" class="text-28 font-sans flex justify-between no-underline text-black">
+          <span>apeunit.com</span>
+          <ArrowRight class=""/>
+        </a>
+      </div>
+
+      <div class="font-sans mt-4">
+        <p class="py-4">
+          Our work is filled with curiosity. We like to identify opportunities, to excite and to embrace that feeling of wonder which sparks action.
+        </p>
+        <p class="py-4">
+          Our mission is to create and accelerate — to improve services and businesses with ground-breaking technology and new forms of engagement. We thrive when we can cultivate long-term relationships.
+        </p>
+        <p class="py-4">
+          Get in touch »<br/>
+          <a href="mailto:office@apeunit.com" target="_blank" rel="noopener" class="no-underline text-black">
+            office@apeunit.com
+          </a><br/>
+          +49 30 306 490 10
+        </p>
+        <p class="py-4">
+          Ape Unit GmbH<br/>
+          Waldemarstr. 38<br/>
+          Aufgang 2, 4. OG<br/>
+          10999 Berlin<br/>
+          Deutschland<br/>
+        </p>
+        <p class="py-4">
+          🦍
+        </p>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { AeIcon } from '@aeternity/aepp-components'
+import ArrowRight from './ArrowRight.vue'
+
 export default {
   name: 'About',
+  props: [
+    'back',
+    'title',
+    'where'
+  ],
   components: {
-    AeIcon
+    ArrowRight
   },
   data () {
     return {

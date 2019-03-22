@@ -13,7 +13,7 @@
   "author": "Enrico Icardi <enrico@welance.com>, Shubhendu Shekhar <shubhendu.in@gmail.com>, ",
   "license": "ISC",
   "dependencies": {
-    "@aeternity/aepp-components": "2.0.15",
+    "@aeternity/aepp-components": "^2.0.15",
     "@aeternity/aepp-sdk": "^2.3.2",
     "@chenfengyuan/vue-qrcode": "^1.0.0",
     "isomorphic-fetch": "^2.2.1",

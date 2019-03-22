@@ -2,7 +2,9 @@ import Router from 'vue-router'
 import ChatArea from './components/ChatArea.vue'
 import Impressum from './components/Impressum.vue'
 import About from './components/About.vue'
+import Venue from './components/Venue.vue'
 import Orders from './components/Orders.vue'
+import Profile from './components/Profile.vue'
 import Transactions from './components/Transactions.vue'
 
 export default (store) => {
@@ -21,9 +23,19 @@ export default (store) => {
       component: Impressum
     },
     {
+      path: '/profile',
+      name: 'profile',
+      component: Profile
+    },
+    {
       path: '/about',
       name: 'about',
       component: About
+    },
+    {
+      path: '/venue',
+      name: 'venue',
+      component: Venue
     },
     {
       path: '/orders',
