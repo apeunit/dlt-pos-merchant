@@ -103,16 +103,27 @@ import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
         this.$store.commit('removeMessage', { messageId: 'wait', lang: locale })
       },
       transferCoins (arg) {
-        // here show screen to tranfer by scan or by name
-        var scanOrName = prompt(`you triggered the "Transfer! with arg ${arg}" "scan" or "name"?`);
-        switch(scanOrName) {
-          case "scan":
-            this.transferScan (arg)
-            break;
-          case "name":
-            this.transferName (arg)
-            break;
-        }
+        const message = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-user-message')
+        message.content = message.content.replace('xxx', arg)
+        message.content = arg > 1 ? message.content+'s' : message.content
+        this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
+      },
+      scanQR () {
+        alert('TODO: technically should check for camera, if present then open and scan else alert user that there is no camera on device')
+      },
+      async openAddressOverlay () {
+        alert('open addr overlay/modal')
+        const receiver =  prompt('enter address?')
+        let message = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-input-user')
+        message.content = message.content.replace('xxx', receiver)
+        this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
+
+        const tx = await this.$store.dispatch('transfer', {amount: this.$store.state.itemPrice, receiver})
+
+        message = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-done')
+        message.content = message.content.replace('tx_hash', tx.hash)
+        this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
+
       },
       transferScan (arg) {
         alert(`you triggered the "Transfer Scan Function! wit arg ${arg}"`)
@@ -121,6 +132,10 @@ import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
         alert(`you triggered the "Transfer Name Function! wit arg ${arg}"`)
       },
       async orderItem (arg){
+        const order = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'show-order-details')
+        order.content = order.content.replace('xxx', arg)
+        order.content = arg > 1 ? order.content+'s' : order.content
+        this.$store.commit('addMessage', { message: order, lang: this.$i18n.locale })
         const price =  Number(arg) * Number(this.$store.state.itemPrice)
         const txHash = await this.$store.dispatch('transfer', {amount: price, receiver: this.$store.state.barPubKey})
         const dataURI = await this.$store.dispatch('generateQRURI', {data: (txHash.hash + ' '+ this.signHash(txHash.hash, this.$store.state.account.priv))})
@@ -135,8 +150,15 @@ import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
       getFreeCoin (arg){
         alert(`you triggered the "Get Free coin Function! wit arg ${arg}"`)
       },
-      showQR (arg){
-        alert(`you triggered the "Show QR! with arg ${arg}"`)
+      async showQR (arg){
+        const dataURI = await this.$store.dispatch('generateQRURI', {data: this.$store.state.account.pub})
+        const img = `<img src="${dataURI}" alt="order" height="300" width="300">`
+        const txMessage = {
+		          "id":"show-userpub-qr",
+		          "content": img,
+		          "from": "user"
+		        }
+        this.$store.commit('addMessage', { message: txMessage, lang: this.$i18n.locale })
       },
       chooseLang (lang){
         this.$i18n.locale = lang

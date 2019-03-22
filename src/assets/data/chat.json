@@ -228,6 +228,48 @@
 			]
 		},
 		{
+		  "id":"show-order-details",
+		  "content": "I want to buy xxx ice cream",
+		  "from": "user"
+		},
+		{
+			"id": "transfer-user-message",
+			"content": "I would like to transfer xxx ape coin",
+			"from": "user",
+			"next": "transfer-type-choice"
+		},
+		{
+		  "id": "transfer-message-1",
+		  "content": "I would like to transfer xxx ape coin",
+		  "from": "computer"
+		},
+		{
+		  "id": "transfer-type-choice",
+		  "content": "Do you want to scan their QR code or enter their address?",
+		  "from": "computer",
+		  "buttons": [{
+		      "title": "Scan QR",
+		      "action": "scanQR",
+		      "type": "function"
+		    },
+		    {
+		      "title": "Manually Enter Address",
+		      "action": "openAddressOverlay",
+		      "type": "function"
+		    }
+		  ]
+		},
+		{
+		  "id": "transfer-input-user",
+		  "content": "transfer my coins to xxx",
+		  "from": "user"
+		},
+		{
+		  "id": "transfer-done",
+		  "content": "Transfer complete. you can find the transaction at <a href='https://testnet.explorer.aepps.com/#/tx/tx_hash'>here</a>",
+		  "from": "computer"
+		},
+		{
 			"id": "cancel-message",
 			"content": "Ich möchte bitte beenden",
 			"from": "user",
