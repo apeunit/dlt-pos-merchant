@@ -2,7 +2,7 @@
   <div>
     <div class="min-h-32">
       <p class="font-sans-medium text-28" v-html="msg.content"></p>
-      <p class="text-xs font-sans mt-2">13:44</p>
+      <p class="text-xs font-sans mt-2">{{ msg.time }}</p>
       <div v-if="isLast" class="float-right pt-16 overflow-visible">
         <div v-bind:key="`${key}`" v-for="(button, key) in msg.buttons">
           <span @click="executeBtnAction(button.action, button.type, button.params, $event)"
@@ -112,17 +112,19 @@ import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
         alert('TODO: technically should check for camera, if present then open and scan else alert user that there is no camera on device')
       },
       async openAddressOverlay () {
-        alert('open addr overlay/modal')
-        const receiver =  prompt('enter address?')
-        let message = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-input-user')
-        message.content = message.content.replace('xxx', receiver)
-        this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
+        const name =  prompt('enter user name?')
+        if(name) {
+          const receiver =  await this.$store.dispatch('getPubkeyByName', { name })
+          let message = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-input-user')
+          message.content = message.content.replace('xxx', receiver)
+          this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
 
-        const tx = await this.$store.dispatch('transfer', {amount: this.$store.state.itemPrice, receiver})
+          const tx = await this.$store.dispatch('transfer', {amount: this.$store.state.itemPrice, receiver})
 
-        message = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-done')
-        message.content = message.content.replace('tx_hash', tx.hash)
-        this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
+          message = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-done')
+          message.content = message.content.replace('tx_hash', tx.hash)
+          this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
+        }
 
       },
       transferScan (arg) {

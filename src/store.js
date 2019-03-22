@@ -104,6 +104,13 @@ const store = new Vuex.Store({
       message,
       lang
     }) {
+      if (!message.time) {
+        message.time = new Date().toLocaleTimeString('en-US', {
+          hour: 'numeric',
+          hour12: true,
+          minute: 'numeric'
+        })
+      }
       let clonedMsg = Object.assign({}, message)
       state.chatHistory[lang].push(clonedMsg)
       // eslint-disable-next-line no-undef
