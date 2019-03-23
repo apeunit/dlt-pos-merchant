@@ -147,8 +147,7 @@ import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
         order.content = arg > 1 ? order.content+'s' : order.content
         this.$store.commit('addMessage', { message: order, lang: this.$i18n.locale })
 
-        let amount = isNaN(arg)? (this.costToCharge - this.$store.state.fee): arg * this.costToCharge
-        amount =  amount < 0 ? 0 : amount
+        const amount = arg * this.$store.state.itemPrice
         if(this.userBalance >= (amount + this.$store.state.fee)) {
           this.$store.commit('setCostToCharge', amount)
           const order2 = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'show-order-details-2'))
@@ -163,17 +162,15 @@ import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
         // user response
         const yesMessage = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'yes')
         this.$store.commit('addMessage', { message: yesMessage, lang: this.$i18n.locale })
-
+        
+        // computer messages
         const order1 = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'post-order-message-1')
         this.$store.commit('addMessage', { message: order1, lang: this.$i18n.locale })
 
-        const arg = this.costToCharge;
-        const price =  Number(arg) * Number(this.$store.state.itemPrice)
-        const txHash = await this.$store.dispatch('transfer', {amount: price, receiver: this.$store.state.barPubKey})
-
+        const txHash = await this.$store.dispatch('transfer', {amount: this.costToCharge, receiver: this.$store.state.barPubKey})
         const dataURI = await this.$store.dispatch('generateQRURI', {data: (txHash.hash + ' '+ this.signHash(txHash.hash, this.$store.state.account.priv))})
-
         const img = `<img src="${dataURI}" alt="order" height="300" width="300">`
+        
         // computer QR
         const txMessage = {
 		          "id":"show-order-qr",
