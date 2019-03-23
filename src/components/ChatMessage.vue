@@ -35,6 +35,9 @@ import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
       costToCharge () {
         return this.$store.getters.costToCharge
       },
+      userBalance () {
+        return this.$store.getters.userBalance
+      }
     },
     methods: {
       msgClass (type) {
@@ -104,10 +107,21 @@ import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
         this.$store.commit('removeMessage', { messageId: 'wait', lang: locale })
       },
       transferCoins (arg) {
-        const message = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-user-message')
+        const message = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-user-message'))
         message.content = message.content.replace('xxx', arg)
-        message.content = arg > 1 ? message.content+'s' : message.content
+        message.content = arg > 1 || isNaN(arg)? message.content+'s' : message.content
         this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
+
+        let amount = isNaN(arg)? (this.userBalance - this.$store.state.fee):  arg * this.costToCharge
+        amount =  amount < 0 ? 0 : amount
+        if(this.userBalance >= (amount + this.$store.state.fee) ) {
+          this.$store.commit('setCostToCharge', amount)
+          const msg =  this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-type-choice')
+          this.$store.commit('addMessage', { message: msg, lang: this.$i18n.locale })
+        } else {
+          const msg =  this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'not-enough-balance')
+          this.$store.commit('addMessage', { message: msg, lang: this.$i18n.locale })
+        }
       },
       scanQR () {
         alert('TODO: technically should check for camera, if present then open and scan else alert user that there is no camera on device')
@@ -116,51 +130,69 @@ import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
         const name =  prompt('enter user name?')
         if(name) {
           const receiver =  await this.$store.dispatch('getPubkeyByName', { name })
-          let message = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-input-user')
-          message.content = message.content.replace('xxx', receiver)
+          let message = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-input-user'))
+          message.content = message.content.replace('xxx', name)
           this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
 
-          const tx = await this.$store.dispatch('transfer', {amount: this.$store.state.itemPrice, receiver})
-
-          message = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-done')
+          const tx = await this.$store.dispatch('transfer', {amount: this.costToCharge, receiver})
+          message = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-done'))
           message.content = message.content.replace('tx_hash', tx.hash)
           this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
         }
 
       },
-      saveOrder (amount) {
-        this.$store.commit('setCostToCharge', amount)
-        const order = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'show-order-details')
-        order.content = order.content.replace('xxx', amount)
-        order.content = amount > 1 ? order.content+'s' : order.content
+      saveOrder (arg) {
+        const order = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'show-order-details'))
+        order.content = order.content.replace('xxx', arg)
+        order.content = arg > 1 ? order.content+'s' : order.content
         this.$store.commit('addMessage', { message: order, lang: this.$i18n.locale })
 
-        const order2 = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'show-order-details-2')
-        order2.content = order2.content.replace('xxx', amount)
-        this.$store.commit('addMessage', { message: order2, lang: this.$i18n.locale })
+        let amount = isNaN(arg)? (this.costToCharge - this.$store.state.fee): arg * this.costToCharge
+        amount =  amount < 0 ? 0 : amount
+        if(this.userBalance >= (amount + this.$store.state.fee)) {
+          this.$store.commit('setCostToCharge', amount)
+          const order2 = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'show-order-details-2'))
+          order2.content = order2.content.replace('xxx', amount)
+          this.$store.commit('addMessage', { message: order2, lang: this.$i18n.locale })
+        } else if (this.userBalance < (amount + this.$store.state.fee)) {
+          const msg =  this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'not-enough-balance')
+          this.$store.commit('addMessage', { message: msg, lang: this.$i18n.locale })
+        }
       },
       async orderItem (){
-        const arg = this.costToCharge;
-        const price =  Number(arg) * Number(this.$store.state.itemPrice)
-        const txHash = await this.$store.dispatch('transfer', {amount: price, receiver: this.$store.state.barPubKey})
-        console.log(txHash)
-        const dataURI = await this.$store.dispatch('generateQRURI', {data: (txHash.hash + ' '+ this.signHash(txHash.hash, this.$store.state.account.priv))})
-        console.log(dataURI)
-        const img = `<img src="${dataURI}" alt="order" height="300" width="300">`
         // user response
         const yesMessage = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'yes')
         this.$store.commit('addMessage', { message: yesMessage, lang: this.$i18n.locale })
+
+        const order1 = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'post-order-message-1')
+        this.$store.commit('addMessage', { message: order1, lang: this.$i18n.locale })
+
+        const arg = this.costToCharge;
+        const price =  Number(arg) * Number(this.$store.state.itemPrice)
+        const txHash = await this.$store.dispatch('transfer', {amount: price, receiver: this.$store.state.barPubKey})
+
+        const dataURI = await this.$store.dispatch('generateQRURI', {data: (txHash.hash + ' '+ this.signHash(txHash.hash, this.$store.state.account.priv))})
+
+        const img = `<img src="${dataURI}" alt="order" height="300" width="300">`
         // computer QR
         const txMessage = {
 		          "id":"show-order-qr",
 		          "content": img,
               "from": "computer",
               "time": null
-		        }
+            }
+        const order3 = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'post-order-message-3')
+        this.$store.commit('addMessage', { message: order3, lang: this.$i18n.locale })
         this.$store.commit('addMessage', { message: txMessage, lang: this.$i18n.locale })
+
+        const afterOrder = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'question-main-2')
+        this.$store.commit('addMessage', { message: afterOrder, lang: this.$i18n.locale })
       },
-      getFreeCoin (arg){
-        alert(`you triggered the "Get Free coin Function! wit arg ${arg}"`)
+      getFreeCoin (){
+        const message = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'tweet'))
+        const url = this.$store.state.twitterBase + encodeURIComponent(message.content.replace('xxx', this.$store.state.account.pub))
+        const win = window.open(url, '_blank');
+        win.focus();
       },
       async showQR (arg){
         const dataURI = await this.$store.dispatch('generateQRURI', {data: this.$store.state.account.pub})

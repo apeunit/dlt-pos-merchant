@@ -20,6 +20,7 @@ const store = new Vuex.Store({
     balance: 0,
     beerHashes: [],
     itemPrice: 1000000000000000000,
+    fee: 18000000000000,
     barPubKey: 'ak_BARmHG4mjUeUKY522wxyv7Q8hMEVpC5Qm9GSpuSiSLv17B1sg',
     websocketUrl: 'https://api.pos.apeunit.com', // 'http://localhost:5000',
     twitterBase: 'https://twitter.com/intent/tweet?text=',
@@ -50,6 +51,9 @@ const store = new Vuex.Store({
         return null
       }
       return state.beerHashes[0]
+    },
+    userBalance (state) {
+      return state.balance
     },
     ae (state) {
       return state.ae
@@ -203,10 +207,8 @@ const store = new Vuex.Store({
        */
       console.log(amount, receiver)
       const spendTx = await getters.client.spend(amount, receiver)
-      console.log(spendTx)
       dispatch('updateBalance')
       commit('addBeerHash', spendTx)
-      console.log(spendTx)
       return spendTx
     },
     async generateQRURI ({ commit, state }, { data }) {
@@ -214,6 +216,12 @@ const store = new Vuex.Store({
         errorCorrectionLevel: 'H'
       })
       return uri
+    },
+    async getPubkeyByName ({ commit, state }, { name }) {
+      // eslint-disable-next-line no-undef
+      const req = await fetch(`${state.websocketUrl}/rest/address/${name}`)
+      const address = (await req.json()).address
+      return address
     }
   }
 })
