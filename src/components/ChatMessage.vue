@@ -106,6 +106,12 @@ import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
       removeWaitMessage ({ locale }) {
         this.$store.commit('removeMessage', { messageId: 'wait', lang: locale })
       },
+      handleQRClicks(event) {
+        if (event.target.tagName.toUpperCase() == 'IMG') {
+          this.$store.commit('setQRData', event.target.src)
+          // trigger modal to show here
+        }
+      },
       transferCoins (arg) {
         const message = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-user-message'))
         message.content = message.content.replace('xxx', arg)
@@ -124,7 +130,7 @@ import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
         }
       },
       scanQR () {
-        alert('TODO: technically should check for camera, if present then open and scan else alert user that there is no camera on device')
+        this.$router.push({ path: `/scan` })
       },
       async openAddressOverlay () {
         const name =  prompt('enter user name?')
@@ -169,8 +175,7 @@ import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
 
         const txHash = await this.$store.dispatch('transfer', {amount: this.costToCharge, receiver: this.$store.state.barPubKey})
         const dataURI = await this.$store.dispatch('generateQRURI', {data: (txHash.hash + ' '+ this.signHash(txHash.hash, this.$store.state.account.priv))})
-        const img = `<img src="${dataURI}" alt="order" height="300" width="300">`
-        
+        const img = `<img class="order-qr" src="${dataURI}" alt="order" height="300" width="300">`
         // computer QR
         const txMessage = {
 		          "id":"show-order-qr",
@@ -225,6 +230,11 @@ import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
       // send next message, if first message has a "next"
       this.sendNextMessage(this.msg)
       console.log('Mounted: message component', this.msg)
+      Array.from(document.getElementsByClassName("order-qr")).forEach((el) => {
+        const elClone = el.cloneNode(true);
+        elClone.addEventListener('click', this.handleQRClicks);
+        el.parentNode.replaceChild(elClone, el);
+      });
     }
   }
 </script>

@@ -31,7 +31,8 @@ const store = new Vuex.Store({
     chatHistory: {
       en: [],
       de: []
-    }
+    },
+    qrData: null
   },
   getters: {
     costToCharge (state) {
@@ -42,6 +43,9 @@ const store = new Vuex.Store({
     },
     currentLang (state) {
       return state.currentLang
+    },
+    getQRData (state) {
+      return state.qrData
     },
     chatMessagesList (state) {
       return state.chatMessagesList
@@ -68,6 +72,9 @@ const store = new Vuex.Store({
   mutations: {
     setCostToCharge (state, amount) {
       state.costToCharge = amount
+    },
+    setQRData (state, data) {
+      state.qrData = data
     },
     cleanNextMessages (state) {
       state.chatHistory.en.forEach(function (o) {

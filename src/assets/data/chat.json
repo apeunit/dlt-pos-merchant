@@ -412,11 +412,11 @@
       "time": null
     },
     {
-      "id": "transfer-done",
-      "content": "Transfer complete.",
+    "id": "transfer-done",
+    "content": "Transfer complete.",
 	  "from": "computer",
 	  "next": "question-main-2",
-      "time": null
+    "time": null
     },
     {
       "id": "cancel-message",
