@@ -6,6 +6,7 @@ import Venue from './components/Venue.vue'
 import Orders from './components/Orders.vue'
 import Profile from './components/Profile.vue'
 import Transactions from './components/Transactions.vue'
+import Send from './components/Send.vue'
 
 export default (store) => {
   const routes = [
@@ -26,6 +27,11 @@ export default (store) => {
       path: '/profile',
       name: 'profile',
       component: Profile
+    },
+    {
+      path: '/scan',
+      name: 'scan',
+      component: Send
     },
     {
       path: '/about',
