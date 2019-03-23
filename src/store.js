@@ -32,7 +32,8 @@ const store = new Vuex.Store({
       en: [],
       de: []
     },
-    qrData: null
+    qrData: null,
+    scannedQR: null
   },
   getters: {
     costToCharge (state) {
@@ -46,6 +47,9 @@ const store = new Vuex.Store({
     },
     getQRData (state) {
       return state.qrData
+    },
+    getScannedQR (state) {
+      return state.scannedQR
     },
     chatMessagesList (state) {
       return state.chatMessagesList
@@ -75,6 +79,9 @@ const store = new Vuex.Store({
     },
     setQRData (state, data) {
       state.qrData = data
+    },
+    setScanQR (state, data) {
+      state.scannedQR = data
     },
     cleanNextMessages (state) {
       state.chatHistory.en.forEach(function (o) {
