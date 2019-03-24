@@ -204,7 +204,9 @@ import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
         const txMessage = {
 		          "id":"show-userpub-qr",
 		          "content": img,
-		          "from": "user"
+              "from": "user",
+              "next": "question-main-2",
+              "time": null
 		        }
         this.$store.commit('addMessage', { message: txMessage, lang: this.$i18n.locale })
       },
@@ -248,9 +250,6 @@ import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
         this.$store.commit('setScanQR', null)
         await this.triggerTransfer(receiver)
       }
-    },
-    beforeRouteEnter (to, from, next) {
-      console.log('Router: ',this.$store.getters.getScannedQR)
     }
   }
 </script>
