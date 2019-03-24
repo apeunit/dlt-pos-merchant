@@ -118,7 +118,7 @@ import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
         message.content = arg > 1 || isNaN(arg)? message.content+'s' : message.content
         this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
 
-        let amount = isNaN(arg)? (this.userBalance - this.$store.state.fee):  arg * this.costToCharge
+        let amount = isNaN(arg)? (this.userBalance - this.$store.state.fee):  arg * this.$store.state.itemPrice
         amount =  amount < 0 ? 0 : amount
         if(this.userBalance >= (amount + this.$store.state.fee) ) {
           this.$store.commit('setCostToCharge', amount)
@@ -130,6 +130,8 @@ import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
         }
       },
       scanQR () {
+        const message = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'select-qr-scan'))
+        this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
         this.$router.push({ path: `/scan` })
       },
       async openAddressOverlay () {
@@ -224,9 +226,15 @@ import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
         const encodedSig = encode(sig, 'sg')
         console.log("signHash encoded", encodedSig)
         return encodedSig
-      }
+      },
+      async triggerTransfer (receiver) {
+        const tx = await this.$store.dispatch('transfer', {amount: this.costToCharge, receiver})
+        let message = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-done'))
+        message.content = message.content.replace('tx_hash', tx.hash)
+        this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
     },
-    mounted () {
+    },
+    async mounted () {
       // send next message, if first message has a "next"
       this.sendNextMessage(this.msg)
       console.log('Mounted: message component', this.msg)
@@ -235,6 +243,14 @@ import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
         elClone.addEventListener('click', this.handleQRClicks);
         el.parentNode.replaceChild(elClone, el);
       });
+      const receiver = this.$store.getters.getScannedQR
+      if(receiver) {
+        this.$store.commit('setScanQR', null)
+        await this.triggerTransfer(receiver)
+      }
+    },
+    beforeRouteEnter (to, from, next) {
+      console.log('Router: ',this.$store.getters.getScannedQR)
     }
   }
 </script>

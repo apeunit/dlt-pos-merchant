@@ -27,15 +27,6 @@ export default {
   },
   data () {
     return {
-      domainInput: null,
-      receiver: null,
-      amount: {
-        amount: 0,
-        symbol: 'TOKENS'
-      },
-      units: [
-        { symbol: 'TOKENS', name: 'Beer Token' }
-      ],
       state: 'input',
       loading: true,
       hasCamera: true,
@@ -44,56 +35,7 @@ export default {
       modalVisible: false
     }
   },
-  computed: {
-    account () {
-      return this.$store.state.account
-    },
-    wallet () {
-      return {
-        priv: this.account.priv,
-        pub: this.account.pub
-      }
-    },
-    balance () {
-      return this.$store.state.balance
-    },
-    maxAmount () {
-      if (this.balance > 0) {
-        return this.balance - 1
-      }
-      return 0
-    },
-    amountInt () {
-      if (!this.amount && !this.amount.amount) {
-        return 0
-      }
-      return parseInt(this.amount.amount)
-    },
-    client () {
-      return this.$store.getters.client
-    },
-    isSameAddress () {
-      return this.receiver === this.account.pub
-    },
-    beerCount () {
-      return parseInt(this.amount.amount / 1000)
-    },
-    validInput () {
-      return this.receiver && this.amountInt > 0 && this.amountInt < this.balance
-    }
-  },
   methods: {
-    async sendTokens () {
-      if (!await this.$validator.validateAll() || !this.validInput) return
-      try {
-        const spendTx = await this.client.spend(this.receiver, this.amountInt)
-        console.log('spendTx -> ', spendTx)
-        this.state = 'done'
-      } catch (err) {
-        console.log(err)
-        this.state = 'input'
-      }
-    },
     onDecode (content) {
       console.log(content)
       this.$store.commit('setScanQR', content)
@@ -150,17 +92,10 @@ export default {
         console.log(err)
         this.domainError = 'Domain lookup error. ' + err.message
       }
-    },
-    showSignScreen () {
-      if (this.validInput) {
-        this.modalVisible = true
-      }
     }
   },
   async mounted () {
-    // refresh balance once
     await this.$store.dispatch('updateBalance')
-    this.amount.amount = this.maxAmount
     this.startQrCode()
   }
 }

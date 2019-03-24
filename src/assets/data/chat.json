@@ -332,6 +332,12 @@
       "time": null
     },
     {
+      "id": "select-qr-scan",
+      "content": "I would like to do a scan",
+      "from": "user",
+      "time": null
+    },
+    {
       "id": "show-order-details-2",
       "content": "You’re about to make a transaction of xxx Ape Coins, plus some transaction fee",
       "from": "computer",
