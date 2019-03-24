@@ -54,7 +54,7 @@
     },
     {
       "id": "welcome-4",
-      "content": "See the 2,5 Ape Coins on the top right of your screen?",
+      "content": "See the 1.50 Ape Coins on the top right of your screen?",
       "from": "computer",
       "next": "welcome-5",
       "time": null
@@ -270,7 +270,6 @@
 		"id": "post-order-message-1",
 		"content": "We're generating a tranaction to the bar...",
 		"from": "computer",
-		"next": "post-order-message-2",
 		"time": null
 	},
 	{

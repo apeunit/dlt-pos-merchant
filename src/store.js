@@ -3,7 +3,6 @@ import Vue from 'vue'
 import Ae from '@aeternity/aepp-sdk/es/ae/universal'
 import chatData from './assets/data/chat.json'
 import QRCode from 'qrcode'
-// import BigNumber from "./bignumber.mjs"
 
 Vue.use(Vuex)
 

@@ -18,6 +18,7 @@
 <script>
 import { sign, verify, decodeBase58Check } from '@aeternity/aepp-sdk/es/utils/crypto.js'
 import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
+import formatUnit from '../filters'
 
   export default {
     name: 'ChatMessage',
@@ -75,7 +76,7 @@ import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
       wait (fn, par) {
         return new Promise((resolve) => {
           // wait 3s before calling fn(par)
-          setTimeout(() => resolve(fn(par)), 30)
+          setTimeout(() => resolve(fn(par)), 2000)
         })
       },
       sendNextMessage (msg) {
@@ -159,7 +160,7 @@ import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
         if(this.userBalance >= (amount + this.$store.state.fee)) {
           this.$store.commit('setCostToCharge', amount)
           const order2 = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'show-order-details-2'))
-          order2.content = order2.content.replace('xxx', amount)
+          order2.content = order2.content.replace('xxx', formatUnit(amount))
           this.$store.commit('addMessage', { message: order2, lang: this.$i18n.locale })
         } else if (this.userBalance < (amount + this.$store.state.fee)) {
           const msg =  this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'not-enough-balance')
@@ -174,6 +175,9 @@ import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
         // computer messages
         const order1 = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'post-order-message-1')
         this.$store.commit('addMessage', { message: order1, lang: this.$i18n.locale })
+
+        const order2 = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'post-order-message-2')
+        this.$store.commit('addMessage', { message: order2, lang: this.$i18n.locale })
 
         const txHash = await this.$store.dispatch('transfer', {amount: this.costToCharge, receiver: this.$store.state.barPubKey})
         const dataURI = await this.$store.dispatch('generateQRURI', {data: (txHash.hash + ' '+ this.signHash(txHash.hash, this.$store.state.account.priv))})

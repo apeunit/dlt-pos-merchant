@@ -9,7 +9,7 @@
         </div>
         <div class="w-1/2 flex justify-end align-middle">
           <router-link  to="/profile" class="text-right self-center font-sans text-sm text-white no-underline">
-            <span class="mr-4">{{balance}} Ape Coins</span>
+            <span class="mr-4">{{ balance }} Ape Coins</span>
             <ae-identity-avatar :address="account.pub"></ae-identity-avatar>
           </router-link>
         </div>
@@ -19,6 +19,7 @@
 </template>
 <script>
 import { AeIdentityAvatar } from '@aeternity/aepp-components'
+import formatUnit from '../filters'
 
 export default {
   name: 'Header',
@@ -35,7 +36,7 @@ export default {
       return this.$store.state.account
     },
     balance () {
-      return this.$store.state.balance
+      return formatUnit(this.$store.state.balance)
     }
   },
   mounted () {
