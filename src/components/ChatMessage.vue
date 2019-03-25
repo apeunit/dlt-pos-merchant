@@ -201,6 +201,9 @@ import formatUnit from '../filters'
         const url = this.$store.state.twitterBase + encodeURIComponent(message.content.replace('xxx', this.$store.state.account.pub))
         const win = window.open(url, '_blank');
         win.focus();
+
+        const postTweet = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'post-tweet'))
+        this.$store.commit('addMessage', { message: postTweet, lang: this.$i18n.locale })
       },
       async showQR (arg){
         const dataURI = await this.$store.dispatch('generateQRURI', {data: this.$store.state.account.pub})
