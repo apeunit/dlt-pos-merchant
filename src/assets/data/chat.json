@@ -192,11 +192,11 @@
 		"id": "pre-tweet",
 		"content": "Yes! Let's do it.",
 		"from": "user",
-		"next": "post-tweet",
+		"next": "generate-tweet",
 		"time": null
 	},
 	{
-	  "id": "post-tweet",
+	  "id": "generate-tweet",
 	  "content": "Awesome! We've created a pre-set tweet for you with your public key mentioning us",
 	  "from": "computer",
 	  "buttons": [
@@ -216,7 +216,14 @@
 	{
 	  "id": "tweet",
 	  "content": "ApeUnit Rocks! My Awesome pub key xxx #ApeUnit"
-	},
+  },
+  {
+    "id": "post-tweet",
+    "content": "Thanks! for tweeting we'll credit few Ape Coins to your wallet once our Apes 🐒 receive your tweet",
+    "from": "computer",
+    "next": "question-main-2",
+    "time": null
+  },
 	{
 		"id": "not-enough-balance",
 		"content": "You currently do not have enough balance for this action",
