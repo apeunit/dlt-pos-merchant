@@ -99,6 +99,9 @@ const store = new Vuex.Store({
     setChatStarted (state, started) {
       state.chatStarted = started
     },
+    setChatHistory (state, history) {
+      state.chatHistory = history
+    },
     setAccount (state, {
       pub,
       priv,
