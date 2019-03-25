@@ -1,10 +1,9 @@
 <template>
   <div id="app" class="h-screen">
-    <Header></Header>
-    <router-view class="h-full overflow-x-hidden"></router-view>
+    <Header />
+    <router-view class="h-full overflow-x-hidden" />
   </div>
 </template>
-
 <script>
 import Header from './components/Header.vue'
 
@@ -32,6 +31,4 @@ export default {
   }
 }
 </script>
-
-<style lang="css">
-</style>
+<style lang="css"></style>

@@ -22,7 +22,7 @@
         </router-link>
       </div>
     </div>
-    <div v-else>
+    <div class="h-full flex items-center content-center justify-center" v-else>
       <span>Getting account...</span>
     </div>
   </div>

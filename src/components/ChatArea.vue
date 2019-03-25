@@ -1,22 +1,25 @@
 <template>
-  <div v-chat-scroll="{always: true, smooth: true, scrollonremoved: true}">
+  <div class="pt-20 pl-6 pr-6" v-chat-scroll="{ always: true, smooth: true, scrollonremoved: true }">
     <div v-if="account && account.pub">
-      <div class="text-black overflow-x-hidden overflow-y-auto bg-white h-full w-full py-16">
-        <ul class="list-reset container px-4">
-          <li v-bind:key="$index"
-              v-bind:class="msgClass(msg)"
-              v-for="(msg, $index) in chatHistory[$i18n.locale]">
-                <chat-message :isLast="$index == chatHistory[$i18n.locale].length - 1" :msg="msg" />
+      <div class="text-black overflow-x-hidden overflow-y-auto bg-white h-full w-full">
+        <ul class="list-reset container">
+          <li :key="$index"
+              :class="msgClass(msg)"
+              v-for="(msg, $index) in chatHistory[$i18n.locale]"
+          >
+            <chat-message
+              :isLast="$index == chatHistory[$i18n.locale].length - 1"
+              :msg="msg"
+            />
           </li>
         </ul>
       </div>
     </div>
-    <div v-else>
+    <div class="h-full flex items-center content-center justify-center" v-else>
       <span>Getting account...</span>
     </div>
   </div>
 </template>
-
 <script>
 import ChatMessage from './ChatMessage.vue'
 

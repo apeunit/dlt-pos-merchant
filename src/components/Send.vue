@@ -14,7 +14,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import { AeLoader} from '@aeternity/aepp-components'
 import { QrcodeStream } from 'vue-qrcode-reader'
