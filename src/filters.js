@@ -10,7 +10,9 @@ export default function formatUnit (base) {
       }
       const extra = exp > 6 ? exp % 3 : exp - 6
       base = new BigNumber(base).shiftedBy(extra).toNumber()
-      exp = exp - 18 - extra
+      if (base < 10 ** 16) {
+        return 0.00
+      }
       return parseFloat(base).toFixed(2)
     } else {
       const data = new BigNumber(base).shiftedBy(-18).toString()
