@@ -1,5 +1,6 @@
 {
-  "en": [{
+  "en": [
+    {
       "id": "yes",
       "content": "Yes! 👍",
       "from": "user",
@@ -7,23 +8,24 @@
     },
     {
       "id": "intro",
-      "content": "Hey there! Welcome to the Hannover Messe 👋",
+      "content": "Hey there! \uD83D\uDC4B",
       "from": "computer",
       "next": "intro-2",
       "time": null
     },
     {
       "id": "intro-2",
-      "content": "Is English okay oder werden wir auf Deutsch reden?",
+      "content": "Is English okay — oder lieber Deutsch?",
       "from": "computer",
-      "buttons": [{
-          "title": "English Works!",
+      "buttons": [
+        {
+          "title": "English",
           "action": "chooseLang",
           "params": "en",
           "type": "function"
         },
         {
-          "title": "Deutsch Bitte",
+          "title": "Deutsch",
           "action": "chooseLang",
           "params": "de",
           "type": "function"
@@ -33,111 +35,85 @@
     },
     {
       "id": "welcome-1",
-      "content": "Great! So good to have like-minded people here at the Hannover Messe.",
+      "content": "Great!",
       "from": "computer",
       "next": "welcome-2",
       "time": null
     },
     {
       "id": "welcome-2",
-      "content": "We are Ape Unit 🦍 — a multidisciplinary, inclusive hub of creators, strategists, developers and designers in Berlin.",
+      "content": "We are Ape Unit \uD83E\uDD8D — a tech hub of strategists, developers and designers in Berlin.",
       "from": "computer",
       "next": "welcome-3",
       "time": null
     },
     {
       "id": "welcome-3",
-      "content": "Let us give you something.",
+      "content": "We have a gift for you! See the Ape Coins up there?",
       "from": "computer",
       "next": "welcome-4",
       "time": null
     },
     {
       "id": "welcome-4",
-      "content": "See the 1.50 Ape Coins on the top right of your screen?",
+      "content": "Trade them or use them to buy ice cream in Halle 6. \uD83C\uDF66\uD83C\uDF66",
       "from": "computer",
       "next": "welcome-5",
       "time": null
     },
     {
       "id": "welcome-5",
-      "content": "You can transfer them to someone at the Messe, ask others to send coins to you and...",
-      "from": "computer",
-      "next": "welcome-6",
-      "time": null
-    },
-    {
-      "id": "welcome-6",
-      "content": "use them to get ice cream at our bar in Halle 6! 🍦🍦🍦",
-      "from": "computer",
-      "next": "welcome-7",
-      "time": null
-    },
-    {
-      "id": "welcome-7",
-      "content": "All using blockchain technology.",
-      "from": "computer",
-      "next": "welcome-8",
-      "time": null
-    },
-    {
-      "id": "welcome-8",
-      "content": "Ever tried blockchain ice cream? It’s so….",
-      "from": "computer",
-      "next": "welcome-9",
-      "time": null
-    },
-    {
-      "id": "welcome-9",
-      "content": "no we’ll let you find out for yourself.",
+      "content": "All using blockchain tech!",
       "from": "computer",
       "next": "question-main",
       "time": null
     },
     {
       "id": "question-main",
-      "content": "What are we going to do?",
+      "content": "So, what are we going to do?",
       "from": "computer",
-      "buttons": [{
-          "title": "Get ice cream",
+      "buttons": [
+        {
+          "title": "Get Ice Cream",
           "action": "order",
           "type": "message"
         },
         {
-          "title": "Send coins",
+          "title": "Send Coins",
           "action": "transfer",
           "type": "message"
         },
         {
-          "title": "Receive coins",
+          "title": "Receive Coins",
           "action": "receive",
           "type": "message"
         }
       ],
       "time": null
-	},
-	{
-	  "id": "question-main-2",
-	  "content": "What's next you want to do?",
-	  "from": "computer",
-	  "buttons": [{
-	      "title": "Get ice cream",
-	      "action": "order",
-	      "type": "message"
-	    },
-	    {
-	      "title": "Send coins",
-	      "action": "transfer",
-	      "type": "message"
-	    },
-	    {
-	      "title": "Receive coins",
-	      "action": "receive",
-	      "type": "message"
-	    }
-	  ],
-	  "time": null
-	},
+    },
+    {
+      "id": "question-main-2",
+      "content": "What's next you want to do?",
+      "from": "computer",
+      "buttons": [
+        {
+          "title": "Get Ice Cream",
+          "action": "order",
+          "type": "message"
+        },
+        {
+          "title": "Send Coins",
+          "action": "transfer",
+          "type": "message"
+        },
+        {
+          "title": "Receive Coins",
+          "action": "receive",
+          "type": "message"
+        }
+      ],
+      "time": null
+    },
     {
       "id": "receive",
       "content": "I would like to receive coins 💵🙏",
@@ -170,7 +146,8 @@
       "id": "question-receive-4",
       "content": "Or tweet your address and we will give you some for free.",
       "from": "computer",
-      "buttons": [{
+      "buttons": [
+        {
           "title": "Show QR",
           "action": "showQR",
           "type": "function"
@@ -187,66 +164,73 @@
         }
       ],
       "time": null
-	},
-	{
-		"id": "pre-tweet",
-		"content": "Yes! Let's do it.",
-		"from": "user",
-		"next": "generate-tweet",
-		"time": null
-  },
-  {
-    "id": "burned",
-    "content": "Burned!!!",
-    "from": "computer",
-    "time": null
-  },
-  {
-    "id": "bye-bye",
-    "content": "Bye Bye",
-    "from": "computer",
-    "time": null
-  },
-	{
-	  "id": "generate-tweet",
-	  "content": "Awesome! We've created a pre-set tweet for you with your public key mentioning us",
-	  "from": "computer",
-	  "buttons": [
-	    {
-	      "title": "Post the Tweet",
-	      "action": "getFreeCoin",
-	      "type": "function"
-	    },
-	    {
-	      "title": "Nevermind",
-	      "action": "cancel-message",
-	      "type": "message-white"
-	    }
-	  ],
-	  "time": null
-	},
-	{
-	  "id": "tweet",
-	  "content": "ApeUnit Rocks! My Awesome pub key xxx #ApeUnit"
-  },
-  {
-    "id": "post-tweet",
-    "content": "Thanks! for tweeting we'll credit few Ape Coins to your wallet once our Apes 🐒 receive your tweet",
-    "from": "computer",
-    "next": "question-main-2",
-    "time": null
-  },
-	{
-		"id": "not-enough-balance",
-		"content": "You currently do not have enough balance for this action",
-		"from": "computer",
-		"next": "question-receive-1",
-		"time": null
-	},
+    },
+    {
+      "id": "pre-tweet",
+      "content": "Yes! Let's do it.",
+      "from": "user",
+      "next": "generate-tweet",
+      "time": null
+    },
+    {
+      "id": "burned",
+      "content": "Burned!!!",
+      "from": "computer",
+      "time": null
+    },
+    {
+      "id": "bye-bye",
+      "content": "Bye Bye",
+      "from": "computer",
+      "time": null
+    },
+    {
+      "id": "generate-tweet",
+      "content": "Awesome! We've created a pre-set tweet for you with your public key mentioning us",
+      "from": "computer",
+      "buttons": [
+        {
+          "title": "Post the Tweet",
+          "action": "getFreeCoin",
+          "type": "function"
+        },
+        {
+          "title": "Nevermind",
+          "action": "cancel-message",
+          "type": "message-white"
+        }
+      ],
+      "time": null
+    },
+    {
+      "id": "tweet",
+      "content": "ApeUnit Rocks! My Awesome pub key xxx #ApeUnit"
+    },
+    {
+      "id": "post-tweet",
+      "content": "Thanks! for tweeting we'll credit few Ape Coins to your wallet once our Apes 🐒 receive your tweet",
+      "from": "computer",
+      "next": "question-main-2",
+      "time": null
+    },
+    {
+      "id": "not-enough-balance",
+      "content": "You currently do not have enough balance for this action",
+      "from": "computer",
+      "next": "question-receive-1",
+      "time": null
+    },
     {
       "id": "order",
-      "content": "I would like to get some ice cream! 🍦😎☀️",
+      "content": "I would like to get some ice cream! \uD83C\uDF66\uD83D\uDE0E☀️️",
       "from": "user",
+      "next": "question-order-answer",
+      "time": null
+    },
+    {
+      "id": "question-order-answer",
+      "content": "Excellent choice my friend.",
+      "from": "computer",
       "next": "question-order",
       "time": null
     },
@@ -254,7 +238,8 @@
       "id": "question-order",
       "content": "How many?",
       "from": "computer",
-      "buttons": [{
+      "buttons": [
+        {
           "title": "1",
           "action": "saveOrder",
           "params": 1,
@@ -284,25 +269,25 @@
         }
       ],
       "time": null
-	},
-	{
-		"id": "post-order-message-1",
-		"content": "We're generating a tranaction to the bar...",
-		"from": "computer",
-		"time": null
-	},
-	{
-	  "id": "post-order-message-2",
-	  "content": "Signing the transaction with your private key...",
-	  "from": "computer",
-	  "time": null
-	},
-	{
-	  "id": "post-order-message-3",
-	  "content": "Your order is written on the blockchain, <br> you can now pickup your ice cream from the bar by showing the below QR code",
-	  "from": "computer",
-	  "time": null
-	},
+    },
+    {
+      "id": "post-order-message-1",
+      "content": "We're generating and signing a transaction with your private key...",
+      "from": "computer",
+      "time": null
+    },
+    {
+      "id": "post-order-message-2",
+      "content": "and broadcasting the transaction to the Blockchain.",
+      "from": "computer",
+      "time": null
+    },
+    {
+      "id": "post-order-message-3",
+      "content": "Your order is now written on the blockchain, <br> you can now pickup your ice cream from the bar by showing the below QR code",
+      "from": "computer",
+      "time": null
+    },
     {
       "id": "explain-order",
       "content": "Bitte explain stuff about ice cream",
@@ -315,7 +300,8 @@
       "content": "German explanation about ordering",
       "from": "computer",
       "next": "undefined",
-      "buttons": [{
+      "buttons": [
+        {
           "title": "🍦",
           "action": "transferScan",
           "type": "function"
@@ -367,7 +353,8 @@
       "content": "Is this ok?",
       "from": "computer",
       "time": null,
-      "buttons": [{
+      "buttons": [
+        {
           "title": "Yes",
           "action": "orderItem",
           "type": "function"
@@ -394,7 +381,8 @@
       "content": "The transaction fee is for the block miners, who keep the blockchain running with their computing power.<br><br> Would you like to get the Ice Cream now?",
       "from": "computer",
       "time": null,
-      "buttons": [{
+      "buttons": [
+        {
           "title": "Yes",
           "action": "orderItem",
           "type": "function"
@@ -416,7 +404,8 @@
       "id": "transfer-type-choice",
       "content": "Do you want to scan their QR code or enter their name?",
       "from": "computer",
-      "buttons": [{
+      "buttons": [
+        {
           "title": "Scan QR",
           "action": "scanQR",
           "type": "function"
@@ -436,11 +425,11 @@
       "time": null
     },
     {
-    "id": "transfer-done",
-    "content": "Transfer complete.",
-	  "from": "computer",
-	  "next": "question-main-2",
-    "time": null
+      "id": "transfer-done",
+      "content": "Transfer complete.",
+      "from": "computer",
+      "next": "question-main-2",
+      "time": null
     },
     {
       "id": "cancel-message",
@@ -459,7 +448,8 @@
       "id": "question-transfer",
       "content": "Bereit zu transfer?!?!?!",
       "from": "computer",
-      "buttons": [{
+      "buttons": [
+        {
           "title": "1 Ape Coin",
           "action": "transferCoins",
           "params": 1,
@@ -501,7 +491,8 @@
       "id": "explain-question-transfer",
       "content": "Dies ist die Transfererklärung: blabla blabla blabla blabla blabla",
       "from": "computer",
-      "buttons": [{
+      "buttons": [
+        {
           "title": "Scan",
           "action": "transferScan",
           "type": "function"
