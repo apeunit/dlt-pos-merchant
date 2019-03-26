@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="h-screen">
+  <div id="app" class="relative h-screen">
     <Header />
     <router-view class="h-full overflow-x-hidden" />
   </div>
