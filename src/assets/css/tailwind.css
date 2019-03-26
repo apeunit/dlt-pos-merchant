@@ -48,12 +48,18 @@
  */
 @tailwind screens;
 
+/**
+ * Global Rules
+ */
 html {
   @apply font-sans;
   text-rendering: optimizeLegibility;
 }
 
-@keyframes slide-in {
+/**
+ * Animations
+ */
+@keyframes slide-in-up {
   from {
     transform: translate3d(0, 100%, 0);
     visibility: visible;
@@ -64,22 +70,33 @@ html {
   }
 }
 
-@-webkit-keyframes sk-bouncedelay {
-  0%, 80%, 100% {
-    -webkit-transform: scale(0)
+@keyframes slide-in-right {
+  from {
+    transform: translate3d(100%, 0, 0);
+    visibility: visible;
   }
-  40% {
-    -webkit-transform: scale(1.0)
+
+  to {
+    transform: translate3d(0, 0, 0);
   }
 }
 
-@keyframes sk-bouncedelay {
+@keyframes zoom-in {
+  from {
+    opacity: 0;
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
   0%, 80%, 100% {
-    -webkit-transform: scale(0);
     transform: scale(0);
   }
   40% {
-    -webkit-transform: scale(1.0);
     transform: scale(1.0);
   }
 }

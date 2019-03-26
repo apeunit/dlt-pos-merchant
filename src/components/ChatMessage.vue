@@ -15,16 +15,16 @@
     </div>
 
     <!-- Button Menu Layout -->
-    <div v-if="isLast" class="app-action-button">
-      <div :key="key" v-for="(button, key) in msg.buttons">
+    <ul v-if="isLast" class="app-action-button">
+      <li :key="key" v-for="(button, key) in msg.buttons">
         <span class="rounded-full px-10 py-3 font-sans w-auto text-base tracking-wide mt-2 text-right cursor-pointer float-right"
               :class="msgClass(button.type)"
               @click="executeBtnAction(button.action, button.type, button.params, $event)"
         >
           {{ button.title }}
         </span>
-      </div>
-    </div>
+      </li>
+    </ul>
   </div>
 </template>
 <script>
@@ -278,15 +278,20 @@ export default {
 </script>
 <style lang="css">
 .app-message-enter {
-  animation: slide-in 0.3s ease-out;
+  animation: slide-in-up 0.3s ease-out;
   transition: all 0.2s;
 }
 
 .app-action-button {
   @apply flex flex-col items-end justify-end;
+  @apply list-reset;
   @apply pt-8;
   @apply mb-12;
   @apply overflow-visible;
+}
+
+.app-action-button > li {
+  animation: zoom-in 0.3s;
 }
 
 .app-spinner {
@@ -297,11 +302,11 @@ export default {
 }
 
 .app-spinner > div {
-  @apply w-4 h-4 bg-black;
+  @apply w-3 h-3 bg-black;
 
   display: inline-block;
   border-radius: 100%;
-  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  animation: bounce 1.4s infinite ease-in-out both;
 }
 
 .app-spinner > .first {
