@@ -3,6 +3,7 @@ import Vue from 'vue'
 import Ae from '@aeternity/aepp-sdk/es/ae/universal'
 import chatData from './assets/data/chat.json'
 import QRCode from 'qrcode'
+import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 
@@ -97,18 +98,16 @@ const store = new Vuex.Store({
       state.burned = data
     },
     cleanNextMessages (state) {
-      state.chatHistory.en.forEach(function (o) {
-        console.log(o)
-        if (o.hasOwnProperty('next')) {
+      state.chatHistory.en.forEach(function (o, i, cH) {
+        if (o.hasOwnProperty('next') && i <= cH.length - 2) {
           delete o.next
         }
       })
-      state.chatHistory.de.forEach(function (o) {
-        if (o.hasOwnProperty('next')) {
+      state.chatHistory.de.forEach(function (o, i, cH) {
+        if (o.hasOwnProperty('next') && i <= cH.length - 2) {
           delete o.next
         }
       })
-      console.log(state.chatHistory)
     },
     setChatStarted (state, started) {
       state.chatStarted = started
@@ -156,8 +155,6 @@ const store = new Vuex.Store({
       }
       let clonedMsg = Object.assign({}, message)
       state.chatHistory[lang].push(clonedMsg)
-      // eslint-disable-next-line no-undef
-      localStorage.setItem('chatHistory', JSON.stringify(state.chatHistory))
     },
     removeMessage (state, {
       messageId,
@@ -169,8 +166,6 @@ const store = new Vuex.Store({
       })
       console.log('newMessages', newMessages)
       state.chatHistory[lang] = newMessages
-      // eslint-disable-next-line no-undef
-      localStorage.setItem('chatHistory', JSON.stringify(state.chatHistory))
     },
     addBeerHash (state, beerHash) {
       state.beerHashes.unshift(beerHash)
@@ -255,7 +250,10 @@ const store = new Vuex.Store({
       const address = (await req.json()).address
       return address
     }
-  }
+  },
+  plugins: [
+    createPersistedState()
+  ]
 })
 
 export default store

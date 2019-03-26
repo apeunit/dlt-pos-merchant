@@ -82,9 +82,6 @@ export default {
       this.$store.commit('addMessage', { message: msg, lang: this.$i18n.locale })
       // hide buttons
       evt.target.parentNode.classList.toggle('invisible')
-      // send next message, if defined
-      // this.sendNextMessage (msg)
-
     },
     wait (fn, par) {
       return new Promise((resolve) => {
@@ -101,11 +98,12 @@ export default {
         // remove wait message and play next
         this.wait(this.removeWaitMessage, { locale: app.$i18n.locale }).then(function () {
           // play next message (from computer)
-          console.log(`pick and play ID: ${msg.next}`)
-          console.log(`from`, app.chatMessagesList[app.$i18n.locale])
+          // console.log(`pick and play ID: ${msg.next}`)
+          // console.log(`from`, app.chatMessagesList[app.$i18n.locale])
           const nextMsg = app.chatMessagesList[app.$i18n.locale].find(o => o.id === msg.next)
-          console.log(`NEXT:`, nextMsg)
+          // console.log(`NEXT:`, nextMsg)
           app.$store.commit('addMessage', { message: nextMsg, lang: app.$i18n.locale })
+          app.$store.commit('cleanNextMessages')
         })
       }
     },
