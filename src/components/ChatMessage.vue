@@ -1,16 +1,21 @@
 <template>
   <div class="mb-6">
 
-    <!-- Content -->
-    <transition name="slide">
-      <div class="slide-enter" v-show="msg.content">
+    <!-- Message Content -->
+    <div class="app-message-enter" v-show="msg.content">
+      <div class="app-spinner" v-if="msg.content === '...'">
+        <div class="first"></div>
+        <div class="second"></div>
+        <div class="third"></div>
+      </div>
+      <template v-else>
         <p class="font-sans-medium text-28" v-html="msg.content"></p>
         <p class="text-xs font-sans mt-2">{{ msg.time }}</p>
-      </div>
-    </transition>
+      </template>
+    </div>
 
     <!-- Button Menu Layout -->
-    <div v-if="isLast" class="float-right pt-8 overflow-visible">
+    <div v-if="isLast" class="app-action-button">
       <div :key="key" v-for="(button, key) in msg.buttons">
         <span class="rounded-full px-10 py-3 font-sans w-auto text-base tracking-wide mt-2 text-right cursor-pointer float-right"
               :class="msgClass(button.type)"
@@ -107,7 +112,7 @@ export default {
     playWaitMessage () {
       const waitMsg = {
         id: 'wait',
-        content: '...typing',
+        content: '...',
         from: 'computer-action' // or 'user'
       }
       this.$store.commit('addMessage', { message: waitMsg, lang: this.$i18n.locale })
@@ -272,10 +277,38 @@ export default {
 }
 </script>
 <style lang="css">
-.slide-enter,
-.slide-enter-active,
-.slide-leave,
-.slide-leave-active {
-  animation: slide-in 0.5s;
+.app-message-enter {
+  animation: slide-in 0.3s ease-out;
+  transition: all 0.2s;
+}
+
+.app-action-button {
+  @apply flex flex-col items-end justify-end;
+  @apply pt-8;
+  @apply mb-12;
+  @apply overflow-visible;
+}
+
+.app-spinner {
+  @apply flex items-center justify-start;
+  @apply bg-white;
+  @apply w-full h-8;
+  @apply z-50;
+}
+
+.app-spinner > div {
+  @apply w-4 h-4 bg-black;
+
+  display: inline-block;
+  border-radius: 100%;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.app-spinner > .first {
+  animation-delay: -0.32s;
+}
+
+.app-spinner > .second {
+  animation-delay: -0.16s;
 }
 </style>

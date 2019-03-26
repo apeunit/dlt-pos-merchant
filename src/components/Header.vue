@@ -4,8 +4,11 @@
       Ape Unit
     </router-link>
     <router-link class="header-account" to="/profile">
-      <span>{{ balance }} Ape Coins</span>
-      <ae-identity-avatar class="w-4" :address="account.pub" />
+      <span>{{ balance | formatUnit }} Ape Coins</span>
+      <ae-identity-avatar
+        class="w-4"
+        :address="account.pub"
+      />
     </router-link>
   </div>
 </template>
@@ -19,6 +22,9 @@ export default {
   components: {
     AeIdentityAvatar
   },
+  filters: {
+    formatUnit
+  },
   data () {
     return {
       address: this.$store.state.account.pub
@@ -29,7 +35,7 @@ export default {
       return this.$store.state.account
     },
     balance () {
-      return formatUnit(this.$store.state.balance)
+      return this.$store.state.balance
     }
   }
 }
@@ -51,6 +57,7 @@ export default {
 
 .header-account {
   @apply text-right font-sans text-sm text-white no-underline;
+  @apply cursor-pointer;
 }
 
 .header-account > span {
