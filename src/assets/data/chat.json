@@ -391,22 +391,22 @@
     },
     {
       "id": "transfer-user-message",
-      "content": "I would like to transfer xxx ape coin",
+      "content": "I would like to transfer xxx Ape Coin",
       "from": "user",
       "time": null
     },
     {
       "id": "transfer-type-choice",
-      "content": "Do you want to scan their QR code or enter their name?",
+      "content": "Are you scanning the receiver’s QR code 🤳 or entering the address manually ✍️?",
       "from": "computer",
       "buttons": [
         {
-          "title": "Scan QR",
+          "title": "Scan QR code",
           "action": "scanQR",
           "type": "function"
         },
         {
-          "title": "Enter Name",
+          "title": "Enter Address",
           "action": "openAddressOverlay",
           "type": "function"
         }
@@ -434,7 +434,7 @@
     },
     {
       "id": "transfer",
-      "content": "Ich möchte gerne umziehen",
+      "content": "I would like to transfer coins to a friend 💸",
       "from": "user",
       "next": "question-transfer",
       "time": null
