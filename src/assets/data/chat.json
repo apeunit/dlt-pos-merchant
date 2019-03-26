@@ -258,11 +258,6 @@
           "type": "function"
         },
         {
-          "title": "Explain to me",
-          "action": "explain-transfer",
-          "type": "message-white"
-        },
-        {
           "title": "Wait, go back",
           "action": "cancel-message",
           "type": "message-white"
@@ -331,7 +326,7 @@
     },
     {
       "id": "show-order-details",
-      "content": "I want to buy xxx ice cream",
+      "content": "I want to order xxx \uD83C\uDF66",
       "from": "user",
       "time": null
     },
@@ -343,14 +338,14 @@
     },
     {
       "id": "show-order-details-2",
-      "content": "You’re about to make a transaction of xxx Ape Coins, plus some transaction fee",
+      "content": "You're about to transfer xxx Ape Coin plus transaction fee to our bar.",
       "from": "computer",
       "time": null,
       "next": "show-order-details-3"
     },
     {
       "id": "show-order-details-3",
-      "content": "Is this ok?",
+      "content": "Go?",
       "from": "computer",
       "time": null,
       "buttons": [
@@ -365,13 +360,13 @@
           "type": "message"
         },
         {
-          "title": "Nevermind",
-          "action": "cancel",
+          "title": "Explain",
+          "action": "explain-fee",
           "type": "message-white"
         },
         {
-          "title": "Explain",
-          "action": "explain-fee",
+          "title": "I changed my mind",
+          "action": "cancel",
           "type": "message-white"
         }
       ]
