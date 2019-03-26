@@ -1,39 +1,33 @@
 <template>
-  <div class="header" v-bind:class="{fixedPos: isOrdersActive}">
-    <div class="header-container shell">
-      <div class="back-arrow"
-      v-if="$route.path =='/about' || $route.path =='/orders' || $route.path =='/impressum'">
-        <router-link to='/more'>
-          <ae-icon name="chevron" rotate="180" />
-        </router-link>
-      </div>
-      <div class="item address-icon" style="display:flex; align-items:center;">
-        <!-- <ae-identity-avatar :address='account.pub'></ae-identity-avatar> -->
-        <ae-identity-avatar :address="account.pub"></ae-identity-avatar>
-        <span>
-          {{account.name}}
-        </span>
-      </div>
-      <div class="item account-ballance">
-        <h4>
-          {{balance}}
-        </h4>
-      </div>
-    </div>
+  <div class="header">
+    <router-link class="header-logo" to="/about">
+      Ape Unit
+    </router-link>
+    <router-link class="header-account" to="/profile">
+      <span>{{ balance | formatUnit }} Ape Coins</span>
+      <ae-identity-avatar
+        class="w-4"
+        :address="account.pub"
+      />
+    </router-link>
   </div>
 </template>
 <script>
-import { AeIdentityAvatar, AeIcon } from '@aeternity/aepp-components'
+import formatUnit from '../filters'
+
+import { AeIdentityAvatar } from '@aeternity/aepp-components'
+
 export default {
   name: 'Header',
   components: {
-    AeIdentityAvatar,
-    AeIcon
+    AeIdentityAvatar
+  },
+  filters: {
+    formatUnit
   },
   data () {
     return {
       address: this.$store.state.account.pub
-      // isOrdersActive: false
     }
   },
   computed: {
@@ -42,61 +36,35 @@ export default {
     },
     balance () {
       return this.$store.state.balance
-    },
-    isOrdersActive () {
-      // let morePath = $route.path
-      if (this.$route.path === '/orders') {
-        return true
-      } else {
-        return false
-      }
     }
-  },
-  mounted () {
   }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="css" scoped>
 .header {
-  box-shadow: 0 3px #f0f0f0;
-  position:relative;
-  background: #fff;
+  @apply fixed pin-t;
+  @apply flex items-center content-center justify-between;
+  @apply pl-6 pr-6;
+  @apply w-full;
+  @apply bg-black;
+
+  height: 58px;
 }
-.header-container {
-  display: flex;
-  align-items: center;
+
+.header-logo {
+  @apply text-white no-underline font-sans-medium;
 }
-.header-container .item {
-  display: flex;
-  flex: 1;
+
+.header-account {
+  @apply text-right font-sans text-sm text-white no-underline;
+  @apply cursor-pointer;
 }
-.account-ballance h4{
-  width: 100%;
-  text-align: right;
+
+.header-account > span {
+  @apply mr-2;
 }
-.address-icon {
-  text-transform:capitalize;
-  font-weight:400;
-  color: #1e1e1e;
-  span {
-    text-indent:10px;
-    text-overflow: ellipsis;
-    overflow:hidden;
-  }
-}
-.avatar {
-  width:30px !important;
-  height:30px !important;
-}
-.fixedPos {
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  background: #fff;
-  z-index:3;
-}
-.back-arrow {
-  margin-right: 2%;
+
+.header-account > canvas {
+  @apply w-8 h-8 !important;
 }
 </style>

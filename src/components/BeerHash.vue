@@ -11,7 +11,6 @@
 
 <script>
 import VueQrcode from '@chenfengyuan/vue-qrcode'
-// const { AeternityClient, Crypto } = require('@aeternity/aepp-sdk')
 import { sign, verify, decodeBase58Check } from '@aeternity/aepp-sdk/es/utils/crypto.js'
 import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
 

@@ -1,67 +1,22 @@
 import Router from 'vue-router'
-import BeerButton from './components/BeerButton.vue'
-import AddressDisplay from './components/AddressDisplay.vue'
-import Home from './components/Home.vue'
-import Send from './components/Send.vue'
-import BeerHash from './components/BeerHash.vue'
-import More from './components/More.vue'
+import ChatArea from './components/ChatArea.vue'
 import Impressum from './components/Impressum.vue'
 import About from './components/About.vue'
+import Venue from './components/Venue.vue'
 import Orders from './components/Orders.vue'
+import Profile from './components/Profile.vue'
 import Transactions from './components/Transactions.vue'
+import Send from './components/Send.vue'
 
 export default (store) => {
   const routes = [
     {
       path: '/',
-      name: 'home',
-      component: Home,
-      props: route => ({ query: route.query })
-    },
-    {
-      path: '/buy',
-      name: 'buy-beer',
-      component: BeerButton,
-      beforeEnter (to, from, next) {
-        if (!store.state.account || !store.state.account.priv) return next({ name: 'home' })
-        next()
-      }
-    },
-    {
-      path: '/address',
-      name: 'address',
-      component: AddressDisplay,
-      beforeEnter (to, from, next) {
-        if (!store.state.account || !store.state.account.priv) return next({ name: 'home' })
-        next()
-      }
-    },
-    {
-      path: '/send',
-      name: 'send',
-      component: Send,
-      beforeEnter (to, from, next) {
-        if (!store.state.account || !store.state.account.priv) return next({ name: 'home' })
-        next()
-      }
-    },
-    {
-      path: '/beer/:beerHash',
-      name: 'beer',
-      component: BeerHash,
-      beforeEnter (to, from, next) {
-        if (!store.state.account || !store.state.account.priv) return next({ name: 'home' })
-        next()
-      }
-    },
-    {
-      path: '/more',
-      name: 'more',
-      component: More,
-      beforeEnter (to, from, next) {
-        if (!store.state.account || !store.state.account.priv) return next({ name: 'home' })
-        next()
-      }
+      name: 'ChatArea',
+      props: route => ({
+        query: route.query
+      }),
+      component: ChatArea
     },
     {
       path: '/impressum',
@@ -69,9 +24,24 @@ export default (store) => {
       component: Impressum
     },
     {
+      path: '/profile',
+      name: 'profile',
+      component: Profile
+    },
+    {
+      path: '/scan',
+      name: 'scan',
+      component: Send
+    },
+    {
       path: '/about',
       name: 'about',
       component: About
+    },
+    {
+      path: '/venue',
+      name: 'venue',
+      component: Venue
     },
     {
       path: '/orders',
@@ -91,13 +61,37 @@ export default (store) => {
   })
 
   router.beforeEach(async (to, from, next) => {
-    // when account credentials are passed as query
+    if (to.query.k === 'burned') {
+      store.commit('setBurned', true)
+      const account = {
+        pub: to.query.k,
+        priv: to.query.k,
+        name: to.query.k
+      }
+      store.commit('setAccount', account)
+      next({
+        name: to.name,
+        query: null
+      })
+    } else if (to.query.k === 'seeyou') {
+      store.commit('setEventStatus', true)
+      const account = {
+        pub: to.query.k,
+        priv: to.query.k,
+        name: to.query.k
+      }
+      store.commit('setAccount', account)
+      next({
+        name: to.name,
+        query: null
+      })
+    }
     const { p: pub, k: priv, n: name } = to.query
     if (pub && priv && name) {
       const account = { pub, priv, name }
       if (!store.state.account.pub || store.state.account.pub !== account.pub) {
         // set account in store
-        if(!store.state.ae){
+        if (!store.state.ae) {
           await store.dispatch('initAe')
         }
         store.commit('setAccount', account)
@@ -105,7 +99,10 @@ export default (store) => {
         store.commit('setBeerHashes', [])
       }
       // remove query params and keep on routing
-      next({ name: to.name, query: null })
+      next({
+        name: to.name,
+        query: null
+      })
     } else {
       next()
     }

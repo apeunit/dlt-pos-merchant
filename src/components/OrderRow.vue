@@ -40,7 +40,7 @@ export default {
     },
     noOfBeer () {
       if (this.beerTx && this.beerTx.tx && this.beerTx.tx.amount) {
-        return Math.ceil(this.beerTx.tx.amount / this.$store.state.beerPrice)
+        return Math.ceil(this.beerTx.tx.amount / this.$store.state.itemPrice)
       }
       return ''
     }
@@ -82,24 +82,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="scss">
-  .orderRow {
-    display: flex;
-    // flex-wrap: wrap;
-    border: 1px solid black;
-    margin-bottom: 5px;
-    padding: 15px;
-  }
-
-  .cell {
-    width: 33.33%;
-    box-sizing: border-box;
-    flex-grow: 1;
-    overflow: hidden;
-    list-style: none;
-  }
-  .order-row div {
-    flex:1;
-  }
-</style>
