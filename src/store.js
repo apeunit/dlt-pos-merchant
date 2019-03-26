@@ -32,7 +32,9 @@ const store = new Vuex.Store({
       de: []
     },
     qrData: null,
-    scannedQR: null
+    scannedQR: null,
+    burned: false,
+    eventEnded: false
   },
   getters: {
     costToCharge (state) {
@@ -70,6 +72,12 @@ const store = new Vuex.Store({
     },
     client (state) {
       return state.ae
+    },
+    burned (state) {
+      return state.burned
+    },
+    eventEnded (state) {
+      return state.eventEnded
     }
   },
   mutations: {
@@ -81,6 +89,12 @@ const store = new Vuex.Store({
     },
     setScanQR (state, data) {
       state.scannedQR = data
+    },
+    setEventStatus (state, data) {
+      state.eventEnded = data
+    },
+    setBurned (state, data) {
+      state.burned = data
     },
     cleanNextMessages (state) {
       state.chatHistory.en.forEach(function (o) {
@@ -112,10 +126,12 @@ const store = new Vuex.Store({
       state.account.name = name
       // eslint-disable-next-line no-undef
       localStorage.setItem('account', JSON.stringify(state.account))
-      state.ae.setKeypair({
-        secretKey: state.account.priv,
-        publicKey: state.account.pub
-      })
+      if (pub !== 'burned' && pub !== 'seeyou') {
+        state.ae.setKeypair({
+          secretKey: state.account.priv,
+          publicKey: state.account.pub
+        })
+      }
     },
     setCurrentLang (state, lang) {
       console.log(`setting ${lang}!`)
@@ -188,7 +204,7 @@ const store = new Vuex.Store({
   actions: {
     async updateBalance ({ commit, state }) {
       const pubKey = state.account.pub
-      if (pubKey) {
+      if (pubKey && pubKey !== 'burned' && pubKey !== 'seeyou') {
         state.ae
           .balance(pubKey, {
             format: false

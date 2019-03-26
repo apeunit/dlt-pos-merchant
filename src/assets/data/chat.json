@@ -194,7 +194,19 @@
 		"from": "user",
 		"next": "generate-tweet",
 		"time": null
-	},
+  },
+  {
+    "id": "burned",
+    "content": "Burned!!!",
+    "from": "computer",
+    "time": null
+  },
+  {
+    "id": "bye-bye",
+    "content": "Bye Bye",
+    "from": "computer",
+    "time": null
+  },
 	{
 	  "id": "generate-tweet",
 	  "content": "Awesome! We've created a pre-set tweet for you with your public key mentioning us",

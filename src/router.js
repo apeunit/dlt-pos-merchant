@@ -61,18 +61,34 @@ export default (store) => {
   })
 
   router.beforeEach(async (to, from, next) => {
-    // when account credentials are passed as query
-    const {
-      p: pub,
-      k: priv,
-      n: name
-    } = to.query
-    if (pub && priv && name) {
+    if (to.query.k === 'burned') {
+      store.commit('setBurned', true)
       const account = {
-        pub,
-        priv,
-        name
+        pub: to.query.k,
+        priv: to.query.k,
+        name: to.query.k
       }
+      store.commit('setAccount', account)
+      next({
+        name: to.name,
+        query: null
+      })
+    } else if (to.query.k === 'seeyou') {
+      store.commit('setEventStatus', true)
+      const account = {
+        pub: to.query.k,
+        priv: to.query.k,
+        name: to.query.k
+      }
+      store.commit('setAccount', account)
+      next({
+        name: to.name,
+        query: null
+      })
+    }
+    const { p: pub, k: priv, n: name } = to.query
+    if (pub && priv && name) {
+      const account = { pub, priv, name }
       if (!store.state.account.pub || store.state.account.pub !== account.pub) {
         // set account in store
         if (!store.state.ae) {

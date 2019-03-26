@@ -40,6 +40,12 @@ export default {
     },
     chatStarted () {
       return this.$store.getters.chatStarted
+    },
+    burned () {
+      return this.$store.getters.burned
+    },
+    eventEnded () {
+      return this.$store.getters.eventEnded
     }
   },
   methods: {
@@ -52,8 +58,20 @@ export default {
     }
   },
   mounted () {
-    // start chat, by picking first message.
-    if (!this.chatStarted) {
+    const acc = localStorage.getItem('account')
+    let account = {}
+    if(acc) {
+      account = JSON.parse(acc)
+    }
+    if(this.eventEnded || account.pub === 'seeyou') {
+      const firstMsg = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'bye-bye')
+      this.$store.commit('addMessage', { message: firstMsg, lang: this.$i18n.locale })
+      this.$store.commit('setChatStarted', true)
+    } else if(this.burned || account.pub === 'burned') {
+      const firstMsg = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'burned')
+      this.$store.commit('addMessage', { message: firstMsg, lang: this.$i18n.locale })
+      this.$store.commit('setChatStarted', true)
+    } else if (!this.chatStarted) {
       const firstMsg = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'intro')
       this.$store.commit('addMessage', { message: firstMsg, lang: this.$i18n.locale })
       this.$store.commit('setChatStarted', true)
