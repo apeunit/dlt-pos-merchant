@@ -35,7 +35,8 @@ const store = new Vuex.Store({
     qrData: null,
     scannedQR: null,
     burned: false,
-    eventEnded: false
+    eventEnded: false,
+    receiver: null
   },
   getters: {
     costToCharge (state) {
@@ -85,6 +86,9 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
+    setReceiver (state, val) {
+      state.receiver = val
+    },
     setCostToCharge (state, amount) {
       state.costToCharge = amount
     },

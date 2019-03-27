@@ -36,14 +36,11 @@ export default {
   },
   methods: {
     onDecode (content) {
-      console.log(content)
-      this.$store.commit('setScanQR', content)
-      this.$router.push({ path: `/` })
-      if (this.isValidAddress(content)) {
-        this.receiver = content
-        this.state = 'input'
-      } else if (/^https?:\/\/aet\.li/.test(content)) {
-        this.qrWarning = 'Somebody let you scan their private key. This is terrible. Please tell them to navigate to the receive tab in the beer app.'
+      if(this.isValidAddress(content)) {
+        this.$store.commit('setScanQR', content)
+        this.$router.push({ path: `/` })
+      } else {
+        alert('invalid address')
       }
     },
     async onInit (promise) {
@@ -65,32 +62,8 @@ export default {
       this.loading = true
     },
     isValidAddress (value) {
-      const regex = /^(\w+.(aet|test)|ak_[123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ]{94})$/i
+      const regex = /(ak_[1-9A-HJ-NP-Za-km-z]{48,51})/
       return regex.test(value)
-    },
-    async lookupDomain () {
-      this.domainError = null
-      let domain = this.domainInput.toLowerCase().trim()
-      if (!domain.endsWith('.test')) {
-        domain += '.test'
-      }
-      try {
-        const domainData = await this.client.aensQuery(domain)
-        if (!domainData) {
-          this.domainError = 'Domain not found. Check for typos'
-        }
-        if (domainData && domainData.pointers && typeof domainData.pointers === 'string') {
-          domainData.pointers = JSON.parse(domainData.pointers)
-        }
-        console.log('domainData', domainData)
-        if (domainData.pointers && domainData.pointers.account_pubkey) {
-          this.receiver = domainData.pointers.account_pubkey
-          this.state = 'input'
-        }
-      } catch (err) {
-        console.log(err)
-        this.domainError = 'Domain lookup error. ' + err.message
-      }
     }
   },
   async mounted () {

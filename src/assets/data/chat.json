@@ -369,7 +369,14 @@
       "id": "select-qr-scan",
       "content": "I would like to do a scan",
       "from": "user",
-      "time": null
+      "time": null,
+      "buttons": [
+        {
+          "title": "I changed my mind",
+          "action": "cancel-message",
+          "type": "message-white"
+        }
+      ]
     },
 
     {
@@ -384,6 +391,29 @@
       "from": "computer",
       "time": null,
       "next": "show-order-details-3"
+    },
+    {
+      "id": "transfer-confirmation-1",
+      "content": "You're about to transfer xxx Ape Coin plus transaction fee to your friend.",
+      "from": "computer",
+      "next": "transfer-confirmation-2",
+      "time": null
+    }, {
+      "id": "transfer-confirmation-2",
+      "content": "Are we doing this?",
+      "from": "computer",
+      "buttons": [{
+          "title": "Yes",
+          "action": "triggerTransfer",
+          "type": "function"
+        },
+        {
+          "title": "I changed my mind",
+          "action": "cancel-message",
+          "type": "message"
+        }
+      ],
+      "time": null
     },
     {
       "id": "show-order-details-3",
@@ -447,24 +477,6 @@
       "time": null
     },
     {
-      "id": "transfer-type-choice",
-      "content": "Are you scanning the receiver’s QR code 🤳 or entering the address manually ✍️?",
-      "from": "computer",
-      "buttons": [
-        {
-          "title": "Scan QR code",
-          "action": "scanQR",
-          "type": "function"
-        },
-        {
-          "title": "Enter Address",
-          "action": "openAddressOverlay",
-          "type": "function"
-        }
-      ],
-      "time": null
-    },
-    {
       "id": "transfer-input-user",
       "content": "I would like to initiate the transfer towards user xxx",
       "from": "user",
@@ -497,27 +509,33 @@
       "from": "computer",
       "next": "question-main"
     },
-
     {
       "id": "transfer",
-      "content": "I would like to transfer coins to a someone \uD83D\uDCB8",
+      "content": "I would like to transfer coins to someone \uD83D\uDCB8",
       "from": "user",
-      "next": "explain-question-transfer",
+      "next": "transfer-response",
       "time": null
     },
     {
-      "id": "explain-question-transfer",
-      "content": "Do you want to scan a QR Code \uD83E\uDD33 or enter an address ✍️?",
+      "id": "transfer-response",
+      "content": "You are such a generous person 😍👏",
+      "from": "computer",
+      "next": "question-transfer",
+      "time": null
+    },
+    {
+      "id": "transfer-type-choice",
+      "content": "Do you want to scan a QR Code \uD83E\uDD33 or enter user name ✍️?",
       "from": "computer",
       "buttons": [
         {
           "title": "Scan QR Code",
-          "action": "transferScan",
+          "action": "scanQR",
           "type": "function"
         },
         {
-          "title": "Enter Address",
-          "action": "transferName",
+          "title": "Enter Username",
+          "action": "searchAddrByName",
           "type": "function"
         },
         {

@@ -149,18 +149,17 @@ export default {
       this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
       this.$router.push({ path: `/scan` })
     },
-    async openAddressOverlay () {
+    async searchAddrByName () {
       const name = prompt('enter user name?')
       if (name) {
-        const receiver  = await this.$store.dispatch('getPubkeyByName', { name })
-        let message     = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-input-user'))
+        const receiver = await this.$store.dispatch('getPubkeyByName', { name })
+        this.$store.commit('setScanQR', receiver)
+        let message = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-input-user'))
         message.content = message.content.replace('xxx', name)
         this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
 
-        const tx        = await this.$store.dispatch('transfer', { amount: this.costToCharge, receiver })
-        message         = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-done'))
-        message.content = message.content.replace('tx_hash', tx.hash)
-        this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
+        // message  = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-confirmation-1'))
+        // this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
       }
 
     },
@@ -270,13 +269,18 @@ export default {
       console.log('signHash encoded', encodedSig)
       return encodedSig
     },
-    async triggerTransfer (receiver) {
+    async triggerTransfer () {
+
+      const yes = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'yes')
+      this.$store.commit('addMessage', { message: yes, lang: this.$i18n.locale })
+
       let txId = 'transfer-done'
-      const tx        = await this.$store.dispatch('transfer', { amount: this.costToCharge, receiver })
+      const tx = await this.$store.dispatch('transfer', { amount: this.costToCharge, receiver: this.$store.state.receiver })
       if(!tx) {
         txId = 'transfer-failed'
       }
-      const message     = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === txId))
+      const message  = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === txId))
+      this.$store.commit('setReceiver', null)
       this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
     }
   },
@@ -291,9 +295,12 @@ export default {
     })
     const receiver = this.$store.getters.getScannedQR
     if (receiver) {
-      console.log(receiver)
+      const amount = formatUnit(this.costToCharge)
+      this.$store.commit('setReceiver', receiver)
+      const message  = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-confirmation-1'))
+      message.content = message.content.replace('xxx', amount)
+      this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
       this.$store.commit('setScanQR', null)
-      await this.triggerTransfer(receiver)
     }
   }
 }

@@ -37,9 +37,8 @@
             My Public Key
           </span>
           <div class="flex">
-            <div class="item font-mono" :class="(key+1) % 5 === 0 ? '' : 'float-left'"
-              :key="key" v-for="(part, key) in splitAddress">
-              {{part}}
+            <div class="item font-mono" >
+              {{address}}
             </div>
           </div>
         </div>
