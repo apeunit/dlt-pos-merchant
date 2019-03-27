@@ -1,22 +1,24 @@
 <template>
-  <div class="pt-20 pl-6 pr-6" v-chat-scroll="{ always: true, smooth: true, scrollonremoved: true }">
-    <div v-if="account && account.pub">
-      <div class="text-black overflow-x-hidden overflow-y-auto bg-white h-full w-full">
-        <ul class="list-reset container">
-          <li :key="$index"
-              :class="msgClass(msg)"
-              v-for="(msg, $index) in chatHistory[$i18n.locale]"
-          >
-            <chat-message
-              :isLast="$index == chatHistory[$i18n.locale].length - 1"
-              :msg="msg"
-            />
-          </li>
-        </ul>
-      </div>
-    </div>
+  <div class="app-chat-area" v-chat-scroll="{
+    always: true,
+    smooth: true,
+    scrollonremoved: true
+  }">
+    <template v-if="account && account.pub">
+      <transition-group name="list" tag="ul" class="list-reset container">
+        <li :key="$index"
+            :class="msgClass(msg)"
+            v-for="(msg, $index) in chatHistory[$i18n.locale]"
+        >
+          <chat-message
+            :isLast="$index == chatHistory[$i18n.locale].length - 1"
+            :msg="msg"
+          />
+        </li>
+      </transition-group>
+    </template>
     <div class="h-full flex items-center content-center justify-center" v-else>
-      <span>Getting account...</span>
+      <span>Loading...</span>
     </div>
   </div>
 </template>
@@ -87,3 +89,19 @@ export default {
   }
 }
 </script>
+<style lang="css">
+.app-chat-area {
+  @apply h-full w-full pt-20 pl-6 pr-6;
+  @apply bg-white text-black;
+  @apply overflow-x-hidden overflow-y-auto;
+}
+
+.list-enter-active, .list-leave-active {
+  transition: all 0.5s;
+}
+
+.list-enter, .list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+</style>
