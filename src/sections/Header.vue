@@ -47,6 +47,7 @@ export default {
   @apply pl-6 pr-6;
   @apply w-full;
   @apply bg-black;
+  @apply z-30;
 
   height: 58px;
 }

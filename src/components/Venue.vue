@@ -1,5 +1,6 @@
 <template>
   <div class="about">
+    <go-back>Ape Unit</go-back>
     <div class="bg-black text-white pb-8 pt-32">
       <div class="container flex px-4 text-28 font-sans leading-normal">
         IMAGE
@@ -35,11 +36,13 @@
 </template>
 <script>
 import ArrowRight from './ArrowRight.vue'
+import GoBack from './GoBack.vue'
 
 export default {
   name: 'About',
   components: {
-    ArrowRight
+    ArrowRight,
+    GoBack
   },
   data () {
     return {

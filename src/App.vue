@@ -1,24 +1,19 @@
 <template>
   <div id="app" class="relative h-screen">
     <Header />
+    <router-view name="header" />
     <router-view class="h-full overflow-x-hidden" />
   </div>
 </template>
 <script>
-import Header from './components/Header.vue'
-
 export default {
   name: 'app',
-  components: {
-    Header
-  },
   computed: {
     account () {
       return this.$store.state.account
     }
   },
-  methods: {
-  },
+  methods: {},
   mounted () {
     // update balance after 5sec (wait for 'initAe' in store)
     setTimeout(() => {

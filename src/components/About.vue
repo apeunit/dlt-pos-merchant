@@ -1,14 +1,14 @@
 <template>
-  <div class="about">
-    <div class="bg-black text-white pb-8 pt-32">
-      <div class="container flex px-4 text-28 font-sans leading-normal">
+  <div class="app-about">
+    <go-back>Conversations</go-back>
+    <div class="app-about-apeunit">
+      <div class="container pl-6 pr-6 flex px-4 text-28 font-sans leading-normal font-semibold">
         We are Ape Unit — an interdisciplinary tech hub in Berlin 🦍
       </div>
     </div>
-    <div class="container flex flex-wrap px-4 leading-normal pt-8 pb-8">
-
+    <div class="app-about-container">
       <p class="text-28 font-sans leading-normal">
-      {{title}} We are giving away free ice cream🍦through blockchain technology ⛓. Visit us in Halle 6
+      {{title}} We are giving away free ice cream🍦through blockchain technology ⛓. Visit us in Halle 6.
       </p>
 
       <div class="list-reset w-full mt-8">
@@ -54,6 +54,7 @@
 </template>
 <script>
 import ArrowRight from './ArrowRight.vue'
+import GoBack from './GoBack.vue'
 
 export default {
   name: 'About',
@@ -63,7 +64,8 @@ export default {
     'where'
   ],
   components: {
-    ArrowRight
+    ArrowRight,
+    GoBack
   },
   data () {
     return {
@@ -75,3 +77,16 @@ export default {
   }
 }
 </script>
+<style lang="css">
+.app-about {
+  @apply bg-white text-black;
+}
+
+.app-about-apeunit {
+  @apply bg-black text-white pb-8 pt-32;
+}
+
+.app-about-container {
+  @apply flex flex-wrap px-4 leading-normal pt-8 pb-8 pl-6 pr-6;
+}
+</style>

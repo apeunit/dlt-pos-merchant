@@ -1,5 +1,6 @@
 <template>
   <div class="about">
+    <go-back>Conversations</go-back>
     <div class="bg-black text-white pb-8 pt-32">
       <div class="container flex px-4 text-28 font-sans leading-normal">
         IMAGE
@@ -60,12 +61,14 @@
 </template>
 <script>
 import ArrowRight from './ArrowRight.vue'
+import GoBack from './GoBack.vue'
 import { AeIdentityAvatar } from '@aeternity/aepp-components'
 
 export default {
   name: 'About',
   components: {
     ArrowRight,
+    GoBack,
     AeIdentityAvatar
   },
   data () {

@@ -1,4 +1,16 @@
+/**
+ * Libraries
+ */
 import Router from 'vue-router'
+
+/**
+ * Sections
+ */
+import Header from './sections/Header.vue'
+
+/**
+ * Views
+ */
 import ChatArea from './components/ChatArea.vue'
 import Impressum from './components/Impressum.vue'
 import About from './components/About.vue'
@@ -16,12 +28,18 @@ export default (store) => {
       props: route => ({
         query: route.query
       }),
-      component: ChatArea
+      components: {
+        header: Header,
+        default: ChatArea
+      }
     },
     {
       path: '/impressum',
       name: 'impressum',
-      component: Impressum
+      components: {
+        header: Header,
+        default: Impressum
+      }
     },
     {
       path: '/profile',
@@ -31,7 +49,10 @@ export default (store) => {
     {
       path: '/scan',
       name: 'scan',
-      component: Send
+      components: {
+        header: Header,
+        default: Send
+      }
     },
     {
       path: '/about',
@@ -46,12 +67,18 @@ export default (store) => {
     {
       path: '/orders',
       name: 'orders',
-      component: Orders
+      components: {
+        header: Header,
+        default: Orders
+      }
     },
     {
       path: '/transactions',
       name: 'transactions',
-      component: Transactions
+      components: {
+        header: Header,
+        default: Transactions
+      }
     }
   ]
 
