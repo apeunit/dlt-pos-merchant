@@ -75,8 +75,8 @@
       "buttons": [
         {
           "title": "Get Ice Cream",
-          "action": "order",
-          "type": "message"
+          "action": "orderIceCream",
+          "type": "function"
         },
         {
           "title": "Send Coins",
@@ -98,8 +98,8 @@
       "buttons": [
         {
           "title": "Get Ice Cream",
-          "action": "order",
-          "type": "message"
+          "action": "orderIceCream",
+          "type": "function"
         },
         {
           "title": "Send Coins",
@@ -224,7 +224,41 @@
       "id": "order",
       "content": "I would like to get some ice cream! \uD83C\uDF66\uD83D\uDE0E☀️️",
       "from": "user",
-      "next": "question-order-answer",
+      "time": null
+    },
+    {
+      "id": "out-of-goods",
+      "content": "Sorry, we're out of ice cream right now. But still come visit us at Halle 6",
+      "from": "computer",
+      "buttons": [
+        {
+          "title": "Send Coins",
+          "action": "transfer",
+          "type": "message"
+        },
+        {
+          "title": "Receive Coins",
+          "action": "receive",
+          "type": "message"
+        }
+      ],
+      "time": null
+    },
+    {
+      "id": "closed",
+      "content": "Sorry the bar is closed right now",
+      "from": "computer",
+      "buttons": [{
+          "title": "Send Coins",
+          "action": "transfer",
+          "type": "message"
+        },
+        {
+          "title": "Receive Coins",
+          "action": "receive",
+          "type": "message"
+        }
+      ],
       "time": null
     },
     {

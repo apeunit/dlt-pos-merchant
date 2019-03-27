@@ -79,6 +79,9 @@ const store = new Vuex.Store({
     },
     eventEnded (state) {
       return state.eventEnded
+    },
+    getBarStatus (state) {
+      return state.barState
     }
   },
   mutations: {

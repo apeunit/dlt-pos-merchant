@@ -51,6 +51,9 @@ export default {
     },
     userBalance () {
       return this.$store.getters.userBalance
+    },
+    barStatus () {
+      return this.$store.getters.getBarStatus
     }
   },
   methods: {
@@ -160,6 +163,18 @@ export default {
         this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
       }
 
+    },
+    orderIceCream () {
+      const message = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'order')
+      alert('message1')
+      let messageId = 'question-order-answer'
+      if(this.barStatus === 'out_of_goods') {
+        messageId = 'out-of-goods'
+      } else if(this.barStatus === 'closed') {
+        messageId = 'closed'
+      }
+      message.next = messageId
+      this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
     },
     saveOrder (arg) {
       const order   = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'show-order-details'))
