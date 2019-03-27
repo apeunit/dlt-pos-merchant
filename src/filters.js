@@ -4,7 +4,7 @@ export default function formatUnit (base) {
   try {
     return new BigNumber(base)
       .shiftedBy(-18)
-      .precision(2, BigNumber.ROUND_FLOOR)
+      .toFixed(2)
       .toString()
   } catch (error) {
     return 'N/A'

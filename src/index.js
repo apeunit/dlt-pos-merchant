@@ -54,7 +54,12 @@ new Vue({
   router: getRouter(store),
   store,
   render: h => h(App),
-  mounted () {},
+  mounted () {
+    this.sockets.subscribe('bar_state', (status) => {
+      console.log(`bar is now ${status.state}`)
+      this.$store.commit('setBarState', status.state)
+    })
+  },
   async beforeMount () {
     await store.dispatch('initAe')
     try {

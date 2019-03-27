@@ -79,6 +79,9 @@ const store = new Vuex.Store({
     },
     eventEnded (state) {
       return state.eventEnded
+    },
+    getBarStatus (state) {
+      return state.barState
     }
   },
   mutations: {
@@ -146,14 +149,14 @@ const store = new Vuex.Store({
       message,
       lang
     }) {
-      if (!message.time) {
-        message.time = new Date().toLocaleTimeString('en-US', {
+      let clonedMsg = Object.assign({}, message)
+      if (!clonedMsg.time) {
+        clonedMsg.time = new Date().toLocaleTimeString('en-US', {
           hour: 'numeric',
           hour12: true,
           minute: 'numeric'
         })
       }
-      let clonedMsg = Object.assign({}, message)
       state.chatHistory[lang].push(clonedMsg)
     },
     removeMessage (state, {
@@ -232,8 +235,12 @@ const store = new Vuex.Store({
       /**
        *  TODO: check for same account. user balance etc
        */
-      console.log(amount, receiver)
-      const spendTx = await getters.client.spend(amount, receiver)
+      let spendTx = null
+      try {
+        spendTx = await getters.client.spend(amount, receiver)
+      } catch (e) {
+        console.log(e)
+      }
       dispatch('updateBalance')
       commit('addBeerHash', spendTx)
       return spendTx
