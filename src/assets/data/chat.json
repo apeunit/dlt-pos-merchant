@@ -428,7 +428,7 @@
     },
     {
       "id": "cancel-message",
-      "content": "Ich möchte bitte beenden",
+      "content": "Nevermind",
       "from": "user",
       "next": "question-main"
     },

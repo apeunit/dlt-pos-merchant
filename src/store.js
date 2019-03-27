@@ -146,14 +146,14 @@ const store = new Vuex.Store({
       message,
       lang
     }) {
-      if (!message.time) {
-        message.time = new Date().toLocaleTimeString('en-US', {
+      let clonedMsg = Object.assign({}, message)
+      if (!clonedMsg.time) {
+        clonedMsg.time = new Date().toLocaleTimeString('en-US', {
           hour: 'numeric',
           hour12: true,
           minute: 'numeric'
         })
       }
-      let clonedMsg = Object.assign({}, message)
       state.chatHistory[lang].push(clonedMsg)
     },
     removeMessage (state, {
