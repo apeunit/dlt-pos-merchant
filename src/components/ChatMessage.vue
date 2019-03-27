@@ -194,6 +194,12 @@ export default {
         amount: this.costToCharge,
         receiver: this.$store.state.barPubKey
       })
+
+      if(!txHash) {
+        const message = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-failed'))
+        this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
+        return
+      }
       const dataURI   = await this.$store.dispatch('generateQRURI', { data: (txHash.hash + ' ' + this.signHash(txHash.hash, this.$store.state.account.priv)) })
       const img       = `<img class="order-qr" src="${dataURI}" alt="order" height="300" width="300">`
       // computer QR
@@ -251,9 +257,12 @@ export default {
       return encodedSig
     },
     async triggerTransfer (receiver) {
+      let txId = 'transfer-done'
       const tx        = await this.$store.dispatch('transfer', { amount: this.costToCharge, receiver })
-      let message     = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-done'))
-      message.content = message.content.replace('tx_hash', tx.hash)
+      if(!tx) {
+        txId = 'transfer-failed'
+      }
+      const message     = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === txId))
       this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
     }
   },
@@ -268,6 +277,7 @@ export default {
     })
     const receiver = this.$store.getters.getScannedQR
     if (receiver) {
+      console.log(receiver)
       this.$store.commit('setScanQR', null)
       await this.triggerTransfer(receiver)
     }

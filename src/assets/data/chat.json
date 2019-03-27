@@ -427,6 +427,13 @@
       "time": null
     },
     {
+      "id": "transfer-failed",
+      "content": "Transaction failed. Please try again in a few minutes",
+      "from": "computer",
+      "next": "question-main-2",
+      "time": null
+    },
+    {
       "id": "cancel-message",
       "content": "Nevermind",
       "from": "user",

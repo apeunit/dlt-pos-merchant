@@ -232,8 +232,12 @@ const store = new Vuex.Store({
       /**
        *  TODO: check for same account. user balance etc
        */
-      console.log(amount, receiver)
-      const spendTx = await getters.client.spend(amount, receiver)
+      let spendTx = null
+      try {
+        spendTx = await getters.client.spend(amount, receiver)
+      } catch (e) {
+        console.log(e)
+      }
       dispatch('updateBalance')
       commit('addBeerHash', spendTx)
       return spendTx
