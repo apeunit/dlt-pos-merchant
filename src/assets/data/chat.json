@@ -416,7 +416,14 @@
 
     {
       "id": "explain-fee",
-      "content": "The transaction fee is for the block miners, who keep the blockchain running with their computing power.<br><br> Would you like to get the Ice Cream now?",
+      "content": "The transaction fee is for the block miners, who keep the blockchain running with their computing power.",
+      "from": "computer",
+      "time": null,
+      "next": "explain-fee-2"
+    },
+    {
+      "id": "explain-fee-2",
+      "content": "Would you like to get the Ice Cream now?",
       "from": "computer",
       "time": null,
       "buttons": [
