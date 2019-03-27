@@ -166,7 +166,6 @@ export default {
     },
     orderIceCream () {
       const message = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'order')
-      alert('message1')
       let messageId = 'question-order-answer'
       if(this.barStatus === 'out_of_goods') {
         messageId = 'out-of-goods'

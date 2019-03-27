@@ -240,6 +240,11 @@
           "title": "Receive Coins",
           "action": "receive",
           "type": "message"
+        },
+        {
+          "title": "Nevermind",
+          "action": "cancel-message",
+          "type": "message-white"
         }
       ],
       "time": null
@@ -257,6 +262,11 @@
           "title": "Receive Coins",
           "action": "receive",
           "type": "message"
+        },
+        {
+          "title": "Nevermind",
+          "action": "cancel-message",
+          "type": "message-white"
         }
       ],
       "time": null
