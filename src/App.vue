@@ -1,6 +1,5 @@
 <template>
   <div id="app" class="relative h-screen">
-    <Header />
     <router-view name="header" />
     <router-view class="h-full overflow-x-hidden" />
   </div>
