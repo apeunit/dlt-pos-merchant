@@ -43,7 +43,7 @@ const store = new Vuex.Store({
     /**
      * Modal state
      */
-    modalOpened: true
+    modalOpened: false
   },
   getters: {
     costToCharge (state) {

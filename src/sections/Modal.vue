@@ -14,13 +14,13 @@
           </svg>
         </button>
       </header>
-      <input class="app-modal-input" type="text" placeholder="Unique Name or address">
+      <input class="app-modal-input" v-model="accountName" type="text" placeholder="Unique Name or address">
       <footer>
         <ae-identity-avatar
           class="app-modal-identicon"
           :address="account.pub"
         />
-        <button class="app-modal-button">
+        <button class="app-modal-button" @click="checkAddress">
           Go
         </button>
       </footer>
@@ -35,17 +35,45 @@ export default {
   components: {
     AeIdentityAvatar
   },
+  data () {
+    return {
+      accountName: '',
+      error: 'Invalid Name',
+      showError: true
+    }
+  },
   computed: {
     open () {
+      this.accountName = ''
       return this.$store.state.modalOpened
     },
     account () {
       return '';
+    },
+    chatMessagesList () {
+      return this.$store.getters.chatMessagesList
     }
   },
   methods: {
     close () {
+      this.accountName = ''
       this.$store.commit('setModalOpened', false)
+    },
+    async checkAddress () {
+      if(this.accountName && this.accountName != '') {
+        const receiver = await this.$store.dispatch('getPubkeyByName', { name: this.accountName })
+        if(receiver){
+          this.showError = false
+          this.$store.commit('setScanQR', receiver)
+          let message = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-input-user'))
+          message.content = message.content.replace('xxx', this.accountName)
+          this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
+          this.close()
+        } else {
+          alert('wrong name')
+          this.showError = true
+        }
+      }
     }
   }
 }

@@ -150,7 +150,8 @@ export default {
       this.$router.push({ path: `/scan` })
     },
     async searchAddrByName () {
-      const name = prompt('enter user name?')
+      this.$store.commit('setModalOpened', true)
+      /* const name = prompt('enter user name?')
       if (name) {
         const receiver = await this.$store.dispatch('getPubkeyByName', { name })
         if(receiver){
@@ -161,7 +162,7 @@ export default {
         } else {
           // show error that name is wrong
         }
-      }
+      } */
 
     },
     orderIceCream () {
