@@ -38,7 +38,12 @@ const store = new Vuex.Store({
     scannedQR: null,
     burned: false,
     eventEnded: false,
-    receiver: null
+    receiver: null,
+
+    /**
+     * Modal state
+     */
+    modalOpened: true
   },
   getters: {
     costToCharge (state) {
@@ -88,6 +93,9 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
+    setModalOpened (state, val) {
+      state.modalOpened = val
+    },
     setReceiver (state, val) {
       state.receiver = val
     },

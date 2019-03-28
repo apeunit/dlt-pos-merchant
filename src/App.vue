@@ -2,11 +2,19 @@
   <div id="app" class="relative h-screen">
     <router-view name="header" />
     <router-view class="h-full overflow-x-hidden" />
+    <Modal>
+
+    </Modal>
   </div>
 </template>
 <script>
+import Modal from './sections/Modal.vue'
+
 export default {
   name: 'app',
+  components: {
+    Modal
+  },
   computed: {
     account () {
       return this.$store.state.account
