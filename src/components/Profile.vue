@@ -14,7 +14,7 @@
       </p>
 
       <div class="list-reset w-full mt-8">
-        <a :href='transactionURL' class="text-28 font-sans flex justify-between no-underline text-black">
+        <a :href='getTransactionURL' class="text-28 font-sans flex justify-between no-underline text-black">
           <span>
             My Transactions
           </span>
@@ -73,7 +73,7 @@ export default {
   data () {
     return {
       address: this.$store.state.account.pub,
-      transactionURL: this.$store.state.explorer + '/' + this.$store.state.account.pub
+      transactionURL: this.$store.state.explorer
     }
   },
   computed: {
@@ -85,6 +85,12 @@ export default {
           parts.push( this.address.substr( i, 3 ) );
       }
       return parts
+    },
+    getTransactionURL () {
+       if(!this.$store.state.account.pub || this.$store.state.account.pub === 'burned' || this.$store.state.account.pub === 'seeyou') {
+         return this.transactionURL
+       }
+       return  this.transactionURL + '/' + this.address
     }
   },
   mounted () {
