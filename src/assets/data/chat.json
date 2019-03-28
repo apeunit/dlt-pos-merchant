@@ -674,7 +674,25 @@
       "id": "not-enough-balance-transfer",
       "content": "Oops, not enough coins.",
       "from": "computer",
-      "next": "not-enough-balance-receive",
+      "next": "not-enough-balance-transfer-receive",
+      "time": null
+    },
+    {
+      "id": "not-enough-balance-transfer-receive",
+      "content": "Maybe receiving some coins first?",
+      "from": "computer",
+      "buttons": [
+        {
+          "title": "Receive Coins",
+          "action": "receive",
+          "type": "message"
+        },
+        {
+          "title": "I changed my mind",
+          "action": "cancel-message",
+          "type": "message-white"
+        }
+      ],
       "time": null
     }
   ],
