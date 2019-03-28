@@ -60,6 +60,9 @@ export default {
     costToCharge () {
       return this.$store.getters.costToCharge
     },
+    chatStarted () {
+      return this.$store.getters.chatStarted
+    },
     userBalance () {
       return this.$store.getters.userBalance
     },
@@ -260,7 +263,8 @@ export default {
     },
     startConvo () {
       // start chat, by picking first message.
-      if (!this.chatStarted) {
+      const welcomePrinted = this.chatHistory[this.$i18n.locale].find(o => o.id === 'welcome-1')
+      if (!this.chatStarted || !welcomePrinted) {
         const firstMsg = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'welcome-1')
         this.$store.commit('addMessage', { message: firstMsg, lang: this.$i18n.locale })
         this.$store.commit('setChatStarted', true)

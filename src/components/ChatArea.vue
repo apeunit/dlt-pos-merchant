@@ -71,12 +71,10 @@ export default {
       account = JSON.parse(acc)
     }
     if(this.eventEnded || account.pub === 'seeyou') {
-      this.$store.commit('setChatStarted', true)
       this.$store.commit('setChatHistory', {en:[], de: []})
       const firstMsg = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'bye-bye-1')
       this.$store.commit('addMessage', { message: firstMsg, lang: this.$i18n.locale })
     } else if(this.burned || account.pub === 'burned') {
-      this.$store.commit('setChatStarted', true)
       this.$store.commit('setChatHistory', {en: [], de: []})
       const intro = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'intro'))
       delete intro.next
@@ -86,9 +84,13 @@ export default {
       welcome.next = "ape-coin-usage"
       this.$store.commit('addMessage', { message: welcome, lang: this.$i18n.locale })
     } else if (!this.chatStarted) {
-      const firstMsg = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'intro')
-      this.$store.commit('addMessage', { message: firstMsg, lang: this.$i18n.locale })
-      this.$store.commit('setChatStarted', true)
+      const firstMsgEn = this.chatMessagesList.en.find(o => o.id === 'intro')
+      this.$store.commit('addMessage', { message: firstMsgEn, lang: "en" })
+
+      const firstMsgDe = this.chatMessagesList.de.find(o => o.id === 'intro')
+      this.$store.commit('addMessage', { message: firstMsgDe, lang: "de" })
+      const secondMessageDe = this.chatMessagesList.de.find(o => o.id === 'intro-2')
+      this.$store.commit('addMessage', { message: secondMessageDe, lang: "de" })
     }
   },
   beforeDestroy () {
