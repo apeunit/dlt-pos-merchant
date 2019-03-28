@@ -140,7 +140,7 @@ export default {
         const msg = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-type-choice')
         this.$store.commit('addMessage', { message: msg, lang: this.$i18n.locale })
       } else {
-        const msg = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'not-enough-balance')
+        const msg = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'not-enough-balance-transfer')
         this.$store.commit('addMessage', { message: msg, lang: this.$i18n.locale })
       }
     },
