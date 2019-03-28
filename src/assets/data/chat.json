@@ -234,7 +234,7 @@
     },
     {
       "id": "tweet",
-      "content": "Hey @apeunit ✌️🌴 Please send some Ape Coins to xxx 🍦 #berlinproduziert #ApeUnit #HM19"
+      "content": "Hey @apeunit ✌️🌴 Please send some Ape Coins to xxx (AKA yyy)🍦 #berlinproduziert #ApeUnit #HM19"
     },
     {
       "id": "post-tweet",
@@ -360,48 +360,6 @@
       "id": "post-order-message-4",
       "content": "Pick up your \uD83C\uDF66 by showing this QR code.",
       "from": "computer",
-      "time": null
-    },
-
-    {
-      "id": "explain-order",
-      "content": "Bitte explain stuff about ice cream",
-      "from": "user",
-      "next": "explain-question-order",
-      "time": null
-    },
-    {
-      "id": "explain-question-order",
-      "content": "German explanation about ordering",
-      "from": "computer",
-      "next": "undefined",
-      "buttons": [
-        {
-          "title": "🍦",
-          "action": "transferScan",
-          "type": "function"
-        },
-        {
-          "title": "🍦🍦",
-          "action": "transferName",
-          "type": "function"
-        },
-        {
-          "title": "🍦🍦🍦",
-          "action": "explain-transfer",
-          "type": "message-white"
-        },
-        {
-          "title": "Nevermind",
-          "action": "cancel-message",
-          "type": "message-white"
-        },
-        {
-          "title": "Explain",
-          "action": "explain-order",
-          "type": "message-white"
-        }
-      ],
       "time": null
     },
 
@@ -558,7 +516,7 @@
     },
     {
       "id": "cancel-message-response",
-      "content": "How many? Choose wisely now \uD83E\uDDD0",
+      "content": "Ok. Choose wisely now \uD83E\uDDD0",
       "from": "computer",
       "next": "question-main"
     },
@@ -625,11 +583,6 @@
           "type": "function"
         },
         {
-          "title": "Explain",
-          "action": "explain-transfer",
-          "type": "message-white"
-        },
-        {
           "title": "I changed my mind",
           "action": "cancel-message",
           "type": "message-white"
@@ -640,9 +593,40 @@
 
     {
       "id": "explain-transfer",
-      "content": "Bitte give me Transfererklärung! Was ist <strong>Name</strong> und was ist <strong>Scan</strong>?!?",
+      "content": "Can you please explain me more about this transfer?",
       "from": "user",
       "next": "explain-question-transfer",
+      "time": null
+    },
+    {
+      "id": "explain-question-transfer",
+      "content": "You can trasf",
+      "from": "computer",
+      "buttons": [
+        {
+          "title": "1",
+          "action": "transferCoins",
+          "params": 1,
+          "type": "function"
+        },
+        {
+          "title": "2",
+          "action": "transferCoins",
+          "params": 2,
+          "type": "function"
+        },
+        {
+          "title": "Everything I own",
+          "action": "transferCoins",
+          "params": "all my",
+          "type": "function"
+        },
+        {
+          "title": "I changed my mind",
+          "action": "cancel-message",
+          "type": "message-white"
+        }
+      ],
       "time": null
     },
 
@@ -803,12 +787,12 @@
       "from": "computer",
       "buttons": [
         {
-          "title": "Get Ice Cream",
+          "title": "Eis abholen",
           "action": "orderIceCream",
           "type": "function"
         },
         {
-          "title": "Send Coins",
+          "title": "Coins versenden",
           "action": "transfer",
           "type": "message"
         },
@@ -884,28 +868,28 @@
 
     {
       "id": "bye-bye-1",
-      "content": "Oh no, the Hannover Messe 2019 is history now. ",
+      "content": "Oh nein, die Hannover Messe 2019 ist zu Ende!",
       "from": "computer",
       "next": "bye-bye-2",
       "time": null
     },
     {
       "id": "bye-bye-2",
-      "content": "We were giving away Ape Coins so you could buy ice cream through blockchain tech.",
+      "content": "Wir haben Ape Coins verschenkt, die Du gegen Eis 🍦eintauschen konntest, alles per Blockchain.",
       "from": "computer",
       "next": "bye-bye-3",
       "time": null
     },
     {
       "id": "bye-bye-3",
-      "content": "But we're always open for people like you!",
+      "content": "Wir freuen uns, von Dir zu hören!",
       "from": "computer",
       "next": "bye-bye-4",
       "time": null
     },
     {
       "id": "bye-bye-4",
-      "content": "Go to apeunit.com or get in touch via office@apeunit.com",
+      "content": "Besuche uns auf <a href='apeunit.com' target='_blank' rel='noopener'>apeunit.com</a> oder schreib uns: <a href='mailto:office@apeunit.com' target='_blank'>office@apeunit.com</a>",
       "from": "computer",
       "time": null
     },
@@ -937,7 +921,7 @@
     },
     {
       "id": "tweet",
-      "content": "Hey @apeunit ✌️🌴 Please send some Ape Coins to xxx 🍦 #berlinproduziert #ApeUnit #HM19"
+      "content": "Hey @apeunit ✌️🌴 Please send some Ape Coins to xxx (AKA yyy)🍦 #berlinproduziert #ApeUnit #HM19"
     },
     {
       "id": "post-tweet",
@@ -960,7 +944,7 @@
       "from": "computer",
       "buttons": [
         {
-          "title": "Send Coins",
+          "title": "Coins versenden",
           "action": "transfer",
           "type": "message"
         },
@@ -1057,48 +1041,6 @@
       "id": "post-order-message-3",
       "content": "…und ist jetzt auf der Blockchain gespeichert ⛓",
       "from": "computer",
-      "time": null
-    },
-
-    {
-      "id": "explain-order",
-      "content": "Bitte explain stuff about ice cream",
-      "from": "user",
-      "next": "explain-question-order",
-      "time": null
-    },
-    {
-      "id": "explain-question-order",
-      "content": "German explanation about ordering",
-      "from": "computer",
-      "next": "undefined",
-      "buttons": [
-        {
-          "title": "🍦",
-          "action": "transferScan",
-          "type": "function"
-        },
-        {
-          "title": "🍦🍦",
-          "action": "transferName",
-          "type": "function"
-        },
-        {
-          "title": "🍦🍦🍦",
-          "action": "explain-transfer",
-          "type": "message-white"
-        },
-        {
-          "title": "Ich hab es mir anders überlegt",
-          "action": "cancel-message",
-          "type": "message-white"
-        },
-        {
-          "title": "Wie geht das?",
-          "action": "explain-order",
-          "type": "message-white"
-        }
-      ],
       "time": null
     },
 
@@ -1255,7 +1197,7 @@
     },
     {
       "id": "cancel-message-response",
-      "content": "How many? Choose wisely now \uD83E\uDDD0",
+      "content": "Ok. Choose wisely now \uD83E\uDDD0",
       "from": "computer",
       "next": "question-main"
     },
@@ -1337,7 +1279,7 @@
 
     {
       "id": "explain-transfer",
-      "content": "Bitte give me Transfererklärung! Was ist <strong>Name</strong> und was ist <strong>Scan</strong>?!?",
+      "content": "Können Sie mir bitte mehr über diese Übertragung erklären?",
       "from": "user",
       "next": "explain-question-transfer",
       "time": null
