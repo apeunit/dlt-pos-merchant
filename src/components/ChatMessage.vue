@@ -149,21 +149,8 @@ export default {
       this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
       this.$router.push({ path: `/scan` })
     },
-    async searchAddrByName () {
+    searchAddrByName () {
       this.$store.commit('setModalOpened', true)
-      /* const name = prompt('enter user name?')
-      if (name) {
-        const receiver = await this.$store.dispatch('getPubkeyByName', { name })
-        if(receiver){
-          this.$store.commit('setScanQR', receiver)
-          let message = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-input-user'))
-          message.content = message.content.replace('xxx', name)
-          this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
-        } else {
-          // show error that name is wrong
-        }
-      } */
-
     },
     orderIceCream () {
       const message = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'order')
@@ -235,7 +222,7 @@ export default {
     },
     getFreeCoin () {
       const message = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'tweet'))
-      const url     = this.$store.state.twitterBase + encodeURIComponent(message.content.replace('xxx', this.$store.state.account.pub))
+      const url     = this.$store.state.twitterBase + encodeURIComponent(message.content.replace('xxx', this.$store.state.account.pub).replace('yyy', this.$store.state.account.name))
       const win     = window.open(url, '_blank')
       win.focus()
 

@@ -16,10 +16,11 @@
       </header>
       <input class="app-modal-input" v-model="accountName" type="text" placeholder="Unique Name or address">
       <footer>
-        <ae-identity-avatar
-          class="app-modal-identicon"
-          :address="account.pub"
-        />
+        <div>
+          <span v-if="showError" style="color:red">
+          {{ error }}
+        </span>
+        </div>
         <button class="app-modal-button" @click="checkAddress">
           Go
         </button>
@@ -38,8 +39,8 @@ export default {
   data () {
     return {
       accountName: '',
-      error: 'Invalid Name',
-      showError: true
+      error: 'Name not found Or Invalid address',
+      showError: false
     }
   },
   computed: {
@@ -57,23 +58,42 @@ export default {
   methods: {
     close () {
       this.accountName = ''
+      this.showError = false
       this.$store.commit('setModalOpened', false)
     },
     async checkAddress () {
+      let isAddr = false;
       if(this.accountName && this.accountName != '') {
-        const receiver = await this.$store.dispatch('getPubkeyByName', { name: this.accountName })
+        let receiver = null
+        if(this.isValidAddress(this.accountName)) {
+          receiver = this.accountName
+          const chunked = this.chunked(receiver)
+          this.accountName = `${chunked[0]}${chunked[1]}${chunked[2]}...${chunked[chunked.length-1]}`
+          isAddr = true
+        } else {
+          receiver = await this.$store.dispatch('getPubkeyByName', { name: this.accountName })
+        }
         if(receiver){
           this.showError = false
           this.$store.commit('setScanQR', receiver)
           let message = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-input-user'))
           message.content = message.content.replace('xxx', this.accountName)
+          if(isAddr) {
+            message.content = message.content.replace('user', 'address')
+          }
           this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
           this.close()
         } else {
-          alert('wrong name')
           this.showError = true
         }
       }
+    },
+    isValidAddress (value) {
+      const regex = /(ak_[1-9A-HJ-NP-Za-km-z]{48,51})/
+      return regex.test(value)
+    },
+    chunked (address) {
+      return address.match(/^\w{2}_|.{2}(?=.{47,48}$)|.{2,3}/g)
     }
   }
 }
