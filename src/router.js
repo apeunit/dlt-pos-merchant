@@ -49,10 +49,7 @@ export default (store) => {
     {
       path: '/scan',
       name: 'scan',
-      components: {
-        header: Header,
-        default: Send
-      }
+      component: Send
     },
     {
       path: '/about',
