@@ -308,7 +308,6 @@ export default {
 <style lang="css">
 .app-message-enter {
   animation: slide-in-up 0.5s ease-out;
-  transition: all 0.3s;
 }
 
 .app-action-button {
