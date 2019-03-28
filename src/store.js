@@ -6,12 +6,12 @@ import QRCode from 'qrcode'
 import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
-
+const initLang = navigator.language.split('-')[0] || navigator.userLanguage.split('-')[0]
 const store = new Vuex.Store({
   state: {
     costToCharge: 0,
     chatStarted: false,
-    currentLang: 'en',
+    currentLang: initLang,
     account: {
       pub: null,
       priv: null,
@@ -131,6 +131,13 @@ const store = new Vuex.Store({
     },
     setChatHistory (state, history) {
       state.chatHistory = history
+    },
+    resetChatHistory (state, history) {
+      const cleanHistory = {
+        en: [],
+        de: []
+      }
+      state.chatHistory = cleanHistory
     },
     setAccount (state, {
       pub,
