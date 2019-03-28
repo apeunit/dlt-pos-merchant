@@ -9,6 +9,7 @@
         <li
           :class="msgClass(msg)"
           v-for="(msg, $index) in chatHistory[$i18n.locale]"
+          :data-message-id="msg.id"
           :key="$index"
         >
           <chat-message
