@@ -222,7 +222,6 @@ const store = new Vuex.Store({
             return balance
           })
           .catch(e => {
-            commit('setBalanceLoading', false)
             console.log(e)
           })
       }
