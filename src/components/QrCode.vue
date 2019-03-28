@@ -8,7 +8,7 @@
           class="app-qr-code-identicon"
           :address="address"
         />
-        Prenzlauer Allee 157
+        {{ getUserName }}
       </h3>
       <ul class="app-address list-reset">
         <li class="font-mono font-base leading-loose" v-for="(chunk, index) in splitAddress" :key="index">
@@ -44,6 +44,9 @@ export default {
         parts.push( this.address.substr( i, 3 ) );
       }
       return parts
+    },
+    getUserName () {
+      return this.$store.state.account.name
     }
   },
   methods: {
