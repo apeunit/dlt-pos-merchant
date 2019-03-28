@@ -1,4 +1,4 @@
-# Beer Æpp
+# Ice Æpp (same as Beer Æpp)
 
 ## Overview
 
@@ -47,14 +47,14 @@ To send tokens from one account to another the sending device can either enter t
 ```
 git clone https://github.com/aeternity/beer-aepp
 cd beer-aepp
-yarn install
+npm install
 ```
 
 
 ## Start the application
 
 ```
-yarn run start:dev
+npm run start:dev
 ```
 
 The current form should be self explainatory.
@@ -63,13 +63,13 @@ The current form should be self explainatory.
 
 ``` bash
 # install dependencies
-yarn install
+npm install
 
 # serve with hot reload at localhost:8080
-yarn run start:dev
+npm run start:dev
 
 # build for production with minification
-yarn run build
+npm build
 ```
 
 ## License

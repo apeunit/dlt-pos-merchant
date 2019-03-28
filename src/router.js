@@ -1,52 +1,83 @@
+/**
+ * Libraries
+ */
 import Router from 'vue-router'
-import BeerButton from './components/BeerButton.vue'
-import AddressDisplay from './components/AddressDisplay.vue'
-import Home from './components/Home.vue'
+
+/**
+ * Sections
+ */
+import Header from './sections/Header.vue'
+
+/**
+ * Views
+ */
+import ChatArea from './components/ChatArea.vue'
+import Impressum from './components/Impressum.vue'
+import About from './components/About.vue'
+import Venue from './components/Venue.vue'
+import Orders from './components/Orders.vue'
+import Profile from './components/Profile.vue'
+import Transactions from './components/Transactions.vue'
 import Send from './components/Send.vue'
-import BeerHash from './components/BeerHash.vue'
 
 export default (store) => {
   const routes = [
     {
       path: '/',
-      name: 'home',
-      component: Home,
-      props: route => ({ query: route.query })
-    },
-    {
-      path: '/buy',
-      name: 'buy-beer',
-      component: BeerButton,
-      beforeEnter (to, from, next) {
-        if (!store.state.account || !store.state.account.priv) return next({ name: 'home' })
-        next()
+      name: 'ChatArea',
+      props: route => ({
+        query: route.query
+      }),
+      components: {
+        header: Header,
+        default: ChatArea
       }
     },
     {
-      path: '/address',
-      name: 'address',
-      component: AddressDisplay,
-      beforeEnter (to, from, next) {
-        if (!store.state.account || !store.state.account.priv) return next({ name: 'home' })
-        next()
+      path: '/impressum',
+      name: 'impressum',
+      components: {
+        header: Header,
+        default: Impressum
       }
     },
     {
-      path: '/send',
-      name: 'send',
-      component: Send,
-      beforeEnter (to, from, next) {
-        if (!store.state.account || !store.state.account.priv) return next({ name: 'home' })
-        next()
+      path: '/profile',
+      name: 'profile',
+      component: Profile
+    },
+    {
+      path: '/scan',
+      name: 'scan',
+      components: {
+        header: Header,
+        default: Send
       }
     },
     {
-      path: '/beer/:beerHash',
-      name: 'beer',
-      component: BeerHash,
-      beforeEnter (to, from, next) {
-        if (!store.state.account || !store.state.account.priv) return next({ name: 'home' })
-        next()
+      path: '/about',
+      name: 'about',
+      component: About
+    },
+    {
+      path: '/venue',
+      name: 'venue',
+      component: Venue
+    },
+    {
+      path: '/orders',
+      name: 'orders',
+      components: {
+        header: Header,
+        default: Orders
+      }
+    },
+    {
+      path: '/transactions',
+      name: 'transactions',
+      components: {
+        header: Header,
+        default: Transactions
       }
     }
   ]
@@ -56,20 +87,49 @@ export default (store) => {
     routes
   })
 
-  router.beforeEach((to, from, next) => {
-    // when account credentials are passed as query
-    const {p: pub, k: priv, n: name} = to.query
+  router.beforeEach(async (to, from, next) => {
+    if (to.query.k === 'burned') {
+      store.commit('setBurned', true)
+      const account = {
+        pub: to.query.k,
+        priv: to.query.k,
+        name: to.query.k
+      }
+      store.commit('setAccount', account)
+      next({
+        name: to.name,
+        query: null
+      })
+    } else if (to.query.k === 'seeyou') {
+      store.commit('setEventStatus', true)
+      const account = {
+        pub: to.query.k,
+        priv: to.query.k,
+        name: to.query.k
+      }
+      store.commit('setAccount', account)
+      next({
+        name: to.name,
+        query: null
+      })
+    }
+    const { p: pub, k: priv, n: name } = to.query
     if (pub && priv && name) {
       const account = { pub, priv, name }
-      // only if not logged in or account changed
       if (!store.state.account.pub || store.state.account.pub !== account.pub) {
         // set account in store
+        if (!store.state.ae) {
+          await store.dispatch('initAe')
+        }
         store.commit('setAccount', account)
         // remove existing beers
         store.commit('setBeerHashes', [])
       }
       // remove query params and keep on routing
-      next({name: to.name, query: null})
+      next({
+        name: to.name,
+        query: null
+      })
     } else {
       next()
     }

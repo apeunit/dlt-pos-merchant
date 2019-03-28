@@ -1,52 +1,28 @@
 <template>
-  <div id="app">
-    <ae-header name="Free Bæer">
-      <ae-button v-if="account && account.pub" type='dramatic' :to="{name: 'buy-beer'}">🍺</ae-button>
-      <ae-button v-if="account && account.pub" type='dramatic' :to="{name: 'address'}">🔍</ae-button>
-      <ae-button v-if="account && account.pub" type='dramatic' :to="{name: 'send'}">✉️</ae-button>
-      <div slot="mobile-left">
-        <ae-button v-if="account && account.pub" type='dramatic' size="small" :to="{name: 'buy-beer'}">🍺</ae-button>
-      </div>
-      <div slot="mobile-right">
-        <ae-button v-if="account && account.pub" type='dramatic' size="small" :to="{name: 'address'}">🔍</ae-button>
-        <ae-button v-if="account && account.pub" type='dramatic' size="small" :to="{name: 'send'}">✉️</ae-button>
-      </div>
-    </ae-header>
-    <div class="content">
-      <router-view></router-view>
-    </div>
+  <div id="app" class="relative h-screen">
+    <router-view name="header" />
+    <router-view class="h-full overflow-x-hidden" />
   </div>
 </template>
-
 <script>
-import { AeHeader, AeButton } from '@aeternity/aepp-components'
-
 export default {
   name: 'app',
-  components: {
-    AeHeader,
-    AeButton
-  },
   computed: {
     account () {
       return this.$store.state.account
     }
   },
-  methods: {
-  },
+  methods: {},
   mounted () {
-    this.$store.dispatch('updateBalance')
+    // update balance after 5sec (wait for 'initAe' in store)
+    setTimeout(() => {
+      this.$store.dispatch('updateBalance')
+    }, 5000);
+    // update balance every 10sec (poll)
     setInterval(() => {
       this.$store.dispatch('updateBalance')
     }, 10000)
   }
 }
 </script>
-
-<style scoped lang="scss">
-  .content {
-    text-align: center;
-    max-width: 800px;
-    margin: auto;
-  }
-</style>
+<style lang="css"></style>

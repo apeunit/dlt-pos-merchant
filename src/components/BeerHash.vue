@@ -1,24 +1,24 @@
 <template>
-  <div class="beerHash">
+  <div class="beerHash shell">
     <div class="noBeerLeft" v-if="!beerAvailable">
       Sorry there currently is no Beer left at the bar
     </div>
     <div>
-      Show this to the bartender to collect your beer!
-    </div>
-    <div>
-      <vue-qrcode :value="fullInfo" :options="{ size: 300 }"></vue-qrcode>
+      <qrcode :value="fullInfo" :options="{ size: 300 }"></qrcode>
     </div>
   </div>
 </template>
 
 <script>
-import VueQrcode from '@xkeshi/vue-qrcode'
-// const { AeternityClient, Crypto } = require('@aeternity/aepp-sdk')
-import { Crypto } from '@aeternity/aepp-sdk'
+import VueQrcode from '@chenfengyuan/vue-qrcode'
+import { sign, verify, decodeBase58Check } from '@aeternity/aepp-sdk/es/utils/crypto.js'
+import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
 
 export default {
   name: 'BeerHash',
+  props: [
+    'bHash'
+  ],
   components: {
     VueQrcode
   },
@@ -28,13 +28,12 @@ export default {
     },
     fullInfo () {
       // sending as string, for the QR scanning with NETUM bar/qr scanner
-      return this.beerHash + ' ' + this.beerHashSignature
+      // return this.beerHash + ' ' + this.beerHashSignature
+      console.log(this.bHash)
+      return this.bHash.hash + ' ' + this.signHash(this.bHash.hash, this.account.priv)
     },
     beerHash () {
       return this.$route.params.beerHash
-    },
-    beerHashSignature () {
-      return this.signHash(this.beerHash, this.account.priv)
     },
     beerAvailable () {
       return this.$store.state.barState === 'open'
@@ -45,18 +44,18 @@ export default {
     }
   },
   methods: {
-    signHash (beerHash, privateKey) {
-      const tx = beerHash
-      const sig = Crypto.sign(tx, Buffer.from(privateKey, 'hex'))
-      const sigBase64 = Buffer.from(sig).toString('base64')
-      return sigBase64
+    signHash (txHash, privateKey) {
+      const sig = sign(Buffer.from(txHash), Buffer.from(privateKey, 'hex'))
+      const encodedSig = encode(sig, 'sg')
+      console.log("signHash encoded", encodedSig)
+      return encodedSig
     },
     verifyHash (beerHash, sigBase64, pubKey) {
       // this isnt needed here, just as a poc on how to use verify
       const sigBuffer = Buffer.from(sigBase64, 'base64')
       const hashBuffer = Buffer.from(beerHash)
-      const pub = Crypto.decodeBase58Check(pubKey.split('$')[1])
-      const verified = Crypto.verify(hashBuffer, sigBuffer, pub)
+      const pub = decodeBase58Check(pubKey.split('_')[1])
+      const verified = verify(hashBuffer, sigBuffer, pub)
       return verified
     }
   },
@@ -64,6 +63,8 @@ export default {
   }
 }
 </script>
+
+
 
 <style scoped lang="scss">
 

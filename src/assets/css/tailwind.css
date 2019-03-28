@@ -1,0 +1,102 @@
+@font-face {
+  font-family: 'IBMPlexMono-Medium';
+  src: url('../fonts/IBMPlexMono-Medium.woff') format('woff');
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: 'NeufileGrotesk-SemiboldExtended';
+  src: url('../fonts/NeufileGrotesk-SemiboldExtended.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'NeufileGrotesk-RegularExtended';
+  src: url('../fonts/NeufileGrotesk-RegularExtended.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'NeufileGrotesk-MediumExtended';
+  src: url('../fonts/NeufileGrotesk-MediumExtended.woff') format('woff');
+}
+
+/**
+ * This injects Tailwind's base styles, which is a combination of
+ * Normalize.css and some additional base styles.
+ *
+ * You can see the styles here:
+ * https://github.com/tailwindcss/tailwindcss/blob/master/css/preflight.css
+ */
+@tailwind preflight;
+
+/**
+ * This injects any component classes registered by plugins.
+ */
+@tailwind components;
+
+/**
+ * This injects all of Tailwind's utility classes, generated based on your
+ * config file. It also injects any utility classes registered by plugins.
+ */
+@tailwind utilities;
+
+/**
+ * Use this directive to control where Tailwind injects the responsive
+ * variations of each utility.
+ *
+ * If omitted, Tailwind will append these classes to the very end of
+ * your stylesheet by default.
+ */
+@tailwind screens;
+
+/**
+ * Global Rules
+ */
+html {
+  @apply font-sans;
+  text-rendering: optimizeLegibility;
+}
+
+/**
+ * Animations
+ */
+@keyframes slide-in-up {
+  from {
+    transform: translate3d(0, 100%, 0);
+    visibility: visible;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translate3d(100%, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes zoom-in {
+  from {
+    opacity: 0;
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(0.8);
+  }
+}

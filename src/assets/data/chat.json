@@ -1,0 +1,675 @@
+{
+  "en": [
+    {
+      "id": "yes",
+      "content": "Yes, let's go!",
+      "from": "user",
+      "time": null
+    },
+
+    {
+      "id": "intro",
+      "content": "Hey there! \uD83D\uDC4B",
+      "from": "computer",
+      "next": "intro-2",
+      "time": null
+    },
+    {
+      "id": "intro-2",
+      "content": "Is English okay — oder lieber Deutsch?",
+      "from": "computer",
+      "buttons": [
+        {
+          "title": "English",
+          "action": "chooseLang",
+          "params": "en",
+          "type": "function"
+        },
+        {
+          "title": "Deutsch",
+          "action": "chooseLang",
+          "params": "de",
+          "type": "function"
+        }
+      ],
+      "time": null
+    },
+
+    {
+      "id": "welcome-1",
+      "content": "Great!",
+      "from": "computer",
+      "next": "welcome-2",
+      "time": null
+    },
+    {
+      "id": "welcome-2",
+      "content": "We are Ape Unit \uD83E\uDD8D — a tech hub of strategists, developers and designers in Berlin.",
+      "from": "computer",
+      "next": "welcome-3",
+      "time": null
+    },
+    {
+      "id": "welcome-3",
+      "content": "We have a gift for you! See the Ape Coins up there?",
+      "from": "computer",
+      "next": "welcome-4",
+      "time": null
+    },
+    {
+      "id": "welcome-4",
+      "content": "Trade them or use them to buy ice cream in Halle 6. \uD83C\uDF66\uD83C\uDF66",
+      "from": "computer",
+      "next": "welcome-5",
+      "time": null
+    },
+    {
+      "id": "welcome-5",
+      "content": "All using blockchain tech!",
+      "from": "computer",
+      "next": "question-main",
+      "time": null
+    },
+
+    {
+      "id": "question-main",
+      "content": "So, what are we going to do?",
+      "from": "computer",
+      "buttons": [
+        {
+          "title": "Get Ice Cream",
+          "action": "orderIceCream",
+          "type": "function"
+        },
+        {
+          "title": "Send Coins",
+          "action": "transfer",
+          "type": "message"
+        },
+        {
+          "title": "Receive Coins",
+          "action": "receive",
+          "type": "message"
+        }
+      ],
+      "time": null
+    },
+    {
+      "id": "question-main-2",
+      "content": "What's next?",
+      "from": "computer",
+      "buttons": [
+        {
+          "title": "Get Ice Cream",
+          "action": "orderIceCream",
+          "type": "function"
+        },
+        {
+          "title": "Send Coins",
+          "action": "transfer",
+          "type": "message"
+        },
+        {
+          "title": "Receive Coins",
+          "action": "receive",
+          "type": "message"
+        }
+      ],
+      "time": null
+    },
+
+    {
+      "id": "receive",
+      "content": "Tell me how to receive coins \uD83D\uDCB5\uD83D\uDE4F",
+      "from": "user",
+      "next": "question-receive-1",
+      "time": null
+    },
+
+    {
+      "id": "question-receive-1",
+      "content": "There are two ways to do this.",
+      "from": "computer",
+      "next": "question-receive-2",
+      "time": null
+    },
+    {
+      "id": "question-receive-2",
+      "content": "You can ask someone directly and let them scan your QR code.",
+      "from": "computer",
+      "next": "question-receive-3",
+      "time": null
+    },
+    {
+      "id": "question-receive-3",
+      "content": "Or tweet your public key and we will top you up for free.",
+      "from": "computer",
+      "buttons": [
+        {
+          "title": "Show QR",
+          "action": "showQR",
+          "type": "function"
+        },
+        {
+          "title": "Post A Tweet",
+          "action": "pre-tweet",
+          "type": "message"
+        },
+        {
+          "title": "Nevermind",
+          "action": "cancel-message",
+          "type": "message-white"
+        }
+      ],
+      "time": null
+    },
+
+    {
+      "id": "ape-coin-usage",
+      "content": "We're giving away Ape Coins for you to buy ice cream🍦 through blockchain tech.",
+      "from": "computer",
+      "next": "burned",
+      "time": null
+    },
+
+    {
+      "id": "burned",
+      "content": "Bummer, the coins from this handout have already been claimed. Ask one of our Apes for a new one 💰",
+      "from": "computer",
+      "time": null
+    },
+
+    {
+      "id": "bye-bye-1",
+      "content": "Oh no, the Hannover Messe 2019 is history now. ",
+      "from": "computer",
+      "next": "bye-bye-2",
+      "time": null
+    },
+    {
+      "id": "bye-bye-2",
+      "content": "We were giving away Ape Coins so you could buy ice cream through blockchain tech.",
+      "from": "computer",
+      "next": "bye-bye-3",
+      "time": null
+    },
+    {
+      "id": "bye-bye-3",
+      "content": "But we're always open for people like you!",
+      "from": "computer",
+      "next": "bye-bye-4",
+      "time": null
+    },
+    {
+      "id": "bye-bye-4",
+      "content": "Go to apeunit.com or get in touch via office@apeunit.com",
+      "from": "computer",
+      "time": null
+    },
+
+    {
+      "id": "pre-tweet",
+      "content": "I would like to tweet for coins",
+      "from": "user",
+      "next": "generate-tweet",
+      "time": null
+    },
+    {
+      "id": "generate-tweet",
+      "content": "Great. We've created your tweet: it contains your public key and @apeunit",
+      "from": "computer",
+      "buttons": [
+        {
+          "title": "Tweet",
+          "action": "getFreeCoin",
+          "type": "function"
+        },
+        {
+          "title": "Wait, take me back",
+          "action": "cancel-message",
+          "type": "message-white"
+        }
+      ],
+      "time": null
+    },
+    {
+      "id": "tweet",
+      "content": "Ape Unit Rocks! My Awesome public key xxx #ApeUnit"
+    },
+    {
+      "id": "post-tweet",
+      "content": "Ok, that worked! You just received 1 extra Ape Coin.",
+      "from": "computer",
+      "next": "question-main-2",
+      "time": null
+    },
+
+    {
+      "id": "order",
+      "content": "I would like to get some ice cream! \uD83C\uDF66\uD83D\uDE0E☀️️",
+      "from": "user",
+      "time": null
+    },
+
+    {
+      "id": "out-of-goods",
+      "content": "Sorry, we're out of ice cream right now. But still come visit us at Halle 6",
+      "from": "computer",
+      "buttons": [
+        {
+          "title": "Send Coins",
+          "action": "transfer",
+          "type": "message"
+        },
+        {
+          "title": "Receive Coins",
+          "action": "receive",
+          "type": "message"
+        },
+        {
+          "title": "Nevermind",
+          "action": "cancel-message",
+          "type": "message-white"
+        }
+      ],
+      "time": null
+    },
+
+    {
+      "id": "closed",
+      "content": "Sorry the bar is closed right now",
+      "from": "computer",
+      "buttons": [
+        {
+          "title": "Send Coins",
+          "action": "transfer",
+          "type": "message"
+        },
+        {
+          "title": "Receive Coins",
+          "action": "receive",
+          "type": "message"
+        },
+        {
+          "title": "Nevermind",
+          "action": "cancel-message",
+          "type": "message-white"
+        }
+      ],
+      "time": null
+    },
+
+    {
+      "id": "question-order",
+      "content": "How many?",
+      "from": "computer",
+      "buttons": [
+        {
+          "title": "1",
+          "action": "saveOrder",
+          "params": 1,
+          "type": "function"
+        },
+        {
+          "title": "2",
+          "action": "saveOrder",
+          "params": 2,
+          "type": "function"
+        },
+        {
+          "title": "3",
+          "params": 3,
+          "action": "saveOrder",
+          "type": "function"
+        },
+        {
+          "title": "I changed my mind",
+          "action": "cancel-message",
+          "type": "message-white"
+        }
+      ],
+      "time": null
+    },
+    {
+      "id": "question-order-answer",
+      "content": "Excellent choice my friend.",
+      "from": "computer",
+      "next": "question-order",
+      "time": null
+    },
+
+    {
+      "id": "post-order-message-1",
+      "content": "The transaction is now being generated and signed with your private key \uD83D\uDD11",
+      "from": "computer",
+      "time": null
+    },
+    {
+      "id": "post-order-message-2",
+      "content": "Broadcasting it as we speak...",
+      "from": "computer",
+      "time": null
+    },
+    {
+      "id": "post-order-message-3",
+      "content": "Done! It's on the blockchain ⛓",
+      "from": "computer",
+      "time": null
+    },
+
+    {
+      "id": "explain-order",
+      "content": "Bitte explain stuff about ice cream",
+      "from": "user",
+      "next": "explain-question-order",
+      "time": null
+    },
+    {
+      "id": "explain-question-order",
+      "content": "German explanation about ordering",
+      "from": "computer",
+      "next": "undefined",
+      "buttons": [
+        {
+          "title": "🍦",
+          "action": "transferScan",
+          "type": "function"
+        },
+        {
+          "title": "🍦🍦",
+          "action": "transferName",
+          "type": "function"
+        },
+        {
+          "title": "🍦🍦🍦",
+          "action": "explain-transfer",
+          "type": "message-white"
+        },
+        {
+          "title": "Nevermind",
+          "action": "cancel-message",
+          "type": "message-white"
+        },
+        {
+          "title": "Explain",
+          "action": "explain-order",
+          "type": "message-white"
+        }
+      ],
+      "time": null
+    },
+
+    {
+      "id": "select-qr-scan",
+      "content": "I would like to do a scan",
+      "from": "user",
+      "time": null,
+      "buttons": [
+        {
+          "title": "Try scanning again?",
+          "action": "scanQR",
+          "type": "function"
+        },
+        {
+          "title": "Enter Username",
+          "action": "searchAddrByName",
+          "type": "function"
+        },
+        {
+          "title": "I changed my mind",
+          "action": "cancel-message",
+          "type": "message-white"
+        }
+      ]
+    },
+
+    {
+      "id": "show-order-details",
+      "content": "I want to order xxx \uD83C\uDF66",
+      "from": "user",
+      "time": null
+    },
+    {
+      "id": "show-order-details-2",
+      "content": "You're about to transfer xxx Ape Coin plus transaction fee to our bar.",
+      "from": "computer",
+      "time": null,
+      "next": "show-order-details-3"
+    },
+    {
+      "id": "show-order-details-3",
+      "content": "Go?",
+      "from": "computer",
+      "time": null,
+      "buttons": [
+        {
+          "title": "Yes",
+          "action": "orderItem",
+          "type": "function"
+        },
+        {
+          "title": "No",
+          "action": "cancel-message",
+          "type": "message"
+        },
+        {
+          "title": "Explain",
+          "action": "explain-fee",
+          "type": "message-white"
+        },
+        {
+          "title": "I changed my mind",
+          "action": "cancel-message",
+          "type": "message-white"
+        }
+      ]
+    },
+
+    {
+      "id": "transfer-confirmation-1",
+      "content": "You're about to transfer xxx Ape Coin plus transaction fee to your friend.",
+      "from": "computer",
+      "next": "transfer-confirmation-2",
+      "time": null
+    },
+    {
+      "id": "transfer-confirmation-2",
+      "content": "Are we doing this?",
+      "from": "computer",
+      "buttons": [
+        {
+          "title": "Yes",
+          "action": "triggerTransfer",
+          "type": "function"
+        },
+        {
+          "title": "I changed my mind",
+          "action": "cancel-message",
+          "type": "message"
+        }
+      ],
+      "time": null
+    },
+
+    {
+      "id": "explain-fee",
+      "content": "The transaction fee is for the block miners, who keep the blockchain running with their computing power.",
+      "from": "computer",
+      "time": null,
+      "next": "explain-fee-2"
+    },
+    {
+      "id": "explain-fee-2",
+      "content": "Would you like to get the Ice Cream now?",
+      "from": "computer",
+      "time": null,
+      "buttons": [
+        {
+          "title": "Yes",
+          "action": "orderItem",
+          "type": "function"
+        },
+        {
+          "title": "No",
+          "action": "cancel-message",
+          "type": "message"
+        }
+      ]
+    },
+
+    {
+      "id": "transfer-user-message",
+      "content": "I would like to transfer xxx Ape Coin",
+      "from": "user",
+      "time": null
+    },
+    {
+      "id": "transfer-input-user",
+      "content": "I would like to initiate the transfer towards user xxx",
+      "from": "user",
+      "time": null
+    },
+    {
+      "id": "transfer-done",
+      "content": "Transfer complete.",
+      "from": "computer",
+      "next": "question-main-2",
+      "time": null
+    },
+    {
+      "id": "transfer-failed",
+      "content": "Transaction failed. Please try again in a few minutes",
+      "from": "computer",
+      "next": "question-main-2",
+      "time": null
+    },
+
+    {
+      "id": "cancel-message",
+      "content": "Let me try again",
+      "from": "user",
+      "next": "cancel-message-response"
+    },
+    {
+      "id": "cancel-message-response",
+      "content": "Choose wisely now \uD83E\uDDD0",
+      "from": "computer",
+      "next": "question-main"
+    },
+
+    {
+      "id": "transfer",
+      "content": "I would like to transfer coins to someone \uD83D\uDCB8",
+      "from": "user",
+      "next": "transfer-response",
+      "time": null
+    },
+    {
+      "id": "transfer-response",
+      "content": "You are such a generous person 😍👏",
+      "from": "computer",
+      "next": "question-transfer",
+      "time": null
+    },
+    {
+      "id": "transfer-type-choice",
+      "content": "Do you want to scan a QR Code \uD83E\uDD33 or enter user name ✍️?",
+      "from": "computer",
+      "buttons": [
+        {
+          "title": "Scan QR Code",
+          "action": "scanQR",
+          "type": "function"
+        },
+        {
+          "title": "Enter Username",
+          "action": "searchAddrByName",
+          "type": "function"
+        },
+        {
+          "title": "Wait, go back",
+          "action": "cancel-message",
+          "type": "message-white"
+        }
+      ],
+      "time": null
+    },
+
+    {
+      "id": "question-transfer",
+      "content": "How many Ape Coins do you want to send?",
+      "from": "computer",
+      "buttons": [
+        {
+          "title": "1",
+          "action": "transferCoins",
+          "params": 1,
+          "type": "function"
+        },
+        {
+          "title": "2",
+          "action": "transferCoins",
+          "params": 2,
+          "type": "function"
+        },
+        {
+          "title": "Everything I own",
+          "action": "transferCoins",
+          "params": "all my",
+          "type": "function"
+        },
+        {
+          "title": "Explain",
+          "action": "explain-transfer",
+          "type": "message-white"
+        },
+        {
+          "title": "I changed my mind",
+          "action": "cancel-message",
+          "type": "message-white"
+        }
+      ],
+      "time": null
+    },
+
+    {
+      "id": "explain-transfer",
+      "content": "Bitte give me Transfererklärung! Was ist <strong>Name</strong> und was ist <strong>Scan</strong>?!?",
+      "from": "user",
+      "next": "explain-question-transfer",
+      "time": null
+    },
+
+    {
+      "id": "not-enough-balance",
+      "content": "Oops, not enough coins: 1\uD83C\uDF66 costs 1 Ape Coin.",
+      "from": "computer",
+      "next": "not-enough-balance-receive",
+      "time": null
+    },
+    {
+      "id": "not-enough-balance-receive",
+      "content": "Maybe receiving some coins first?",
+      "from": "computer",
+      "buttons": [
+        {
+          "title": "Try Again",
+          "action": "order",
+          "type": "message"
+        },
+        {
+          "title": "Receive Coins",
+          "action": "receive",
+          "type": "message"
+        },
+        {
+          "title": "I changed my mind",
+          "action": "cancel-message",
+          "type": "message-white"
+        }
+      ],
+      "time": null
+    }
+  ],
+  "de": []
+}

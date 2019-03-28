@@ -1,29 +1,41 @@
 <template>
-  <div class="home">
-    <div v-if="account && account.pub">
-      <h1>Hello {{account.name}}</h1>
-      <div class="balance">
-        You currently have {{balance}} tokens
-        <span v-if="balance <= beerPrice">You don't have enough funds for a bew beer. <router-link :to="{name: 'send'}">Maybe send your remaining tokens to a friend.</router-link></span>
-      </div>
-      <div class="beerList" v-if="beerHashes.length > 0">
-        <h3>Your Beers</h3>
-        <beer-list-entry v-for="beerHash in beerHashes" :key="beerHash" :beerHash="beerHash"></beer-list-entry>
+  <div class="home shell flex justify-center">
+    <div v-if="account && account.pub" class="flex items-center w-64">
+      <div class="text-center flex flex-col self-center w-64">
+        <div class="logo">
+          <router-link to="/">
+            <Logo></Logo>
+          </router-link>
+        </div>
+        <p class="py-4">
+          +
+        </p>
+        <h1>
+          HANNOVER MESSE 2019
+        </h1>
+        <p class="pb-12">
+          {{ $t("message.hello") }}
+        </p>
+        <locale-switch/>
+        <router-link to="start" class="flex self-center rounded-full bg-black text-white py-2 px-8 no-underline block w-64">
+          Give me tokens for beer!
+        </router-link>
       </div>
     </div>
-    <div v-else>
-      <span>You are not logged in. Please visit this by opening the provided short url</span>
+    <div class="h-full flex items-center content-center justify-center" v-else>
+      <span>Getting account...</span>
     </div>
   </div>
 </template>
 
 <script>
-import BeerListEntry from './BeerListEntry.vue'
-
+import Logo from './Logo.vue'
+import LocaleSwitch from './LocaleSwitch.vue'
 export default {
   name: 'Home',
   components: {
-    BeerListEntry
+    Logo,
+    LocaleSwitch
   },
   computed: {
     account () {
@@ -32,8 +44,8 @@ export default {
     balance () {
       return this.$store.state.balance
     },
-    beerPrice () {
-      return this.$store.state.beerPrice
+    itemPrice () {
+      return this.$store.state.itemPrice
     },
     beerHashes () {
       return this.$store.state.beerHashes
@@ -55,5 +67,5 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="css">
 </style>

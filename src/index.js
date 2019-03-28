@@ -1,36 +1,43 @@
-import './custom.scss'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VeeValidate from 'vee-validate'
 import App from './App.vue'
 import getRouter from './router'
 import store from './store'
-import VueSocketio from 'vue-socket.io'
+import VueSocketIO from 'vue-socket.io'
+import VueQrcode from '@chenfengyuan/vue-qrcode'
+import './assets/css/tailwind.css'
+import VueChatScroll from 'vue-chat-scroll'
+import VueI18n from 'vue-i18n'
+
+Vue.component(VueQrcode.name, VueQrcode)
 
 Vue.config.productionTip = false
 Vue.use(VueRouter)
 Vue.use(VeeValidate)
-Vue.use(VueSocketio, store.state.websocketUrl, store)
+Vue.use(VueChatScroll)
+Vue.use(VueI18n)
 
-// set localStorage account BEFORE creating router
-try {
-  // eslint-disable-next-line no-undef
-  let account = JSON.parse(localStorage.getItem('account'))
-  if (account) {
-    store.commit('setAccount', account)
+// Create VueI18n instance with options
+const i18n = new VueI18n({
+  locale: 'en', // set locale
+  messages: store.state.i18nTexts // set locale messages
+})
+
+Vue.use(new VueSocketIO({
+  debug: true,
+  connection: store.state.websocketUrl,
+  vuex: {
+    store,
+    actionPrefix: 'SOCKET_',
+    mutationPrefix: 'SOCKET_'
   }
+}))
 
-  // eslint-disable-next-line no-undef
-  let beerHashes = JSON.parse(localStorage.getItem('beerHashes'))
-  if (beerHashes) {
-    store.commit('setBeerHashes', beerHashes)
-  }
-} catch (e) {
-  console.log(e)
-}
-
-console.info('about to render Vue App')
+// p=ak_bobS3qRvWfDxCpmedQYzp3xrK5jVUS4MSto99QrCdySSMjYnd&k=565ea7300f070858838a0bd6c3fe6640f7591c825536ef84126ad1fda02a13804f067606e2f0cb38fed7a1f2a8ca7696330ae2cd8fa9187960ebbd0962f6798a&n=aet_ua
+store.dispatch('initAe')
 new Vue({
+  i18n,
   sockets: {
     connect () {
       console.log('socket connected')
@@ -48,5 +55,26 @@ new Vue({
   store,
   render: h => h(App),
   mounted () {
+    this.sockets.subscribe('bar_state', (status) => {
+      console.log(`bar is now ${status.state}`)
+      this.$store.commit('setBarState', status.state)
+    })
+  },
+  async beforeMount () {
+    await store.dispatch('initAe')
+    try {
+      // eslint-disable-next-line no-undef
+      let account = JSON.parse(localStorage.getItem('account'))
+      if (account) {
+        store.commit('setAccount', account)
+      }
+      // eslint-disable-next-line no-undef
+      let beerHashes = JSON.parse(localStorage.getItem('beerHashes'))
+      if (beerHashes) {
+        store.commit('setBeerHashes', beerHashes)
+      }
+    } catch (e) {
+      console.log(e)
+    }
   }
 }).$mount('#app')
