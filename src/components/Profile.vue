@@ -17,7 +17,7 @@
           <span>
             My Transactions
           </span>
-          <ArrowRight class=""/>
+          <ArrowRight />
         </a>
         <div class="mt-8 text-2xl font-sans flex flex-wrap flex-col justify-between no-underline text-black">
           <span>
