@@ -8,8 +8,11 @@
         <div class="second"></div>
         <div class="third"></div>
       </div>
-      <template v-else-if="msg.id === 'show-userpub-qr'">
-        <qr-code user="" :qrcode="msg.content" />
+      <template v-else-if="msg.id === 'show-userpub-qr' || msg.id === 'show-order-qr'">
+        <qr-code user=""
+          :qrcode="msg.content"
+          :isOrder="(msg.id === 'show-order-qr')"
+        />
       </template>
       <template v-else>
         <p class="font-sans-medium text-28" v-html="msg.content"></p>

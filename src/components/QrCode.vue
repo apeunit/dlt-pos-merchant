@@ -2,15 +2,16 @@
   <div class="app-qr-code" :class="[{ full }]" @click.capture="toggle">
     <div v-html="qrcode"></div>
     <div class="app-qr-code-content text-white mt-12">
-      <h2 class="mb-12">Open 'Camera' and scan to transfer Ape Coins 💸</h2>
-      <h3 class="mb-6">
+      <h2 v-if="isOrder" class="mb-12">Get this scanned at our bar to get an Ice Cream</h2>
+      <h2 v-else class="mb-12">Open 'Camera' and scan to transfer Ape Coins 💸</h2>
+      <h3 v-if="!isOrder" class="mb-6">
         <ae-identity-avatar
           class="app-qr-code-identicon"
           :address="address"
         />
         {{ getUserName }}
       </h3>
-      <ul class="app-address list-reset">
+      <ul v-if="!isOrder" class="app-address list-reset">
         <li class="font-mono font-base leading-loose" v-for="(chunk, index) in splitAddress" :key="index">
           {{ chunk }}
         </li>
@@ -27,7 +28,8 @@ export default {
     AeIdentityAvatar
   },
   props: {
-    qrcode: null
+    qrcode: null,
+    isOrder: false
   },
   data: function () {
     return { full: false }
