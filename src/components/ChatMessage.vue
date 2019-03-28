@@ -3,11 +3,14 @@
 
     <!-- Message Content -->
     <div class="app-message-enter" v-show="msg.content">
-      <div class="app-spinner" v-if="msg.content === '...'">
+      <div class="app-spinner" v-if="msg.id === 'wait'">
         <div class="first"></div>
         <div class="second"></div>
         <div class="third"></div>
       </div>
+      <template v-else-if="msg.id === 'show-userpub-qr'">
+        <qr-code user="" :qrcode="msg.content" />
+      </template>
       <template v-else>
         <p class="font-sans-medium text-28" v-html="msg.content"></p>
         <p class="text-xs font-sans mt-2">{{ msg.time }}</p>
@@ -33,8 +36,13 @@ import formatUnit from '../filters'
 import { sign, verify, decodeBase58Check } from '@aeternity/aepp-sdk/es/utils/crypto.js'
 import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
 
+import QrCode from './QRCode.vue'
+
 export default {
   name: 'ChatMessage',
+  components: {
+    QrCode
+  },
   props: [
     'msg',
     'isLast'
@@ -150,21 +158,8 @@ export default {
       this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
       this.$router.push({ path: `/scan` })
     },
-    async searchAddrByName () {
+    searchAddrByName () {
       this.$store.commit('setModalOpened', true)
-      /* const name = prompt('enter user name?')
-      if (name) {
-        const receiver = await this.$store.dispatch('getPubkeyByName', { name })
-        if(receiver){
-          this.$store.commit('setScanQR', receiver)
-          let message = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-input-user'))
-          message.content = message.content.replace('xxx', name)
-          this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
-        } else {
-          // show error that name is wrong
-        }
-      } */
-
     },
     orderIceCream () {
       const message = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'order')
@@ -236,7 +231,7 @@ export default {
     },
     getFreeCoin () {
       const message = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'tweet'))
-      const url     = this.$store.state.twitterBase + encodeURIComponent(message.content.replace('xxx', this.$store.state.account.pub))
+      const url     = this.$store.state.twitterBase + encodeURIComponent(message.content.replace('xxx', this.$store.state.account.pub).replace('yyy', this.$store.state.account.name))
       const win     = window.open(url, '_blank')
       win.focus()
 

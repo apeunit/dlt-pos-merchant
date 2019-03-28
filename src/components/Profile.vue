@@ -39,7 +39,7 @@
             My Public Key
           </span>
           <ul class="app-address list-reset">
-            <li class="font-mono" v-for="(chunk, index) in splitAddress" :key="">
+            <li class="font-mono" v-for="(chunk, index) in splitAddress" :key="index">
               {{ chunk }}
             </li>
           </ul>
