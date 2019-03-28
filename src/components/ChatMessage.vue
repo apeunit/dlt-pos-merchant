@@ -120,7 +120,7 @@ export default {
           const nextMsg = app.chatMessagesList[app.$i18n.locale].find(o => o.id === msg.next)
           // console.log(`NEXT:`, nextMsg)
           app.$store.commit('addMessage', { message: nextMsg, lang: app.$i18n.locale })
-          console.log('cleanNextMessages --- beforeDestroy chatArea')
+          console.log('cleanNextMessages --- beforeDestroy chatMessage')
           app.$store.commit('cleanNextMessages')
         })
       }

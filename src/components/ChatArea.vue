@@ -84,13 +84,22 @@ export default {
       welcome.next = "ape-coin-usage"
       this.$store.commit('addMessage', { message: welcome, lang: this.$i18n.locale })
     } else if (!this.chatStarted) {
-      const firstMsgEn = this.chatMessagesList.en.find(o => o.id === 'intro')
-      this.$store.commit('addMessage', { message: firstMsgEn, lang: "en" })
+      // print first message
+      const firstMsg = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'intro')
+      this.$store.commit('addMessage', { message: firstMsg, lang: this.$i18n.locale })
 
-      const firstMsgDe = this.chatMessagesList.de.find(o => o.id === 'intro')
-      this.$store.commit('addMessage', { message: firstMsgDe, lang: "de" })
-      const secondMessageDe = this.chatMessagesList.de.find(o => o.id === 'intro-2')
-      this.$store.commit('addMessage', { message: secondMessageDe, lang: "de" })
+      // print the (first 2) messages in the other language (to have them ready when refreshing)
+      if(this.$i18n.locale === 'en'){
+        const firstMsgDe = this.chatMessagesList.de.find(o => o.id === 'intro')
+        this.$store.commit('addMessage', { message: firstMsgDe, lang: "de" })
+        const secondMsgDe = this.chatMessagesList.de.find(o => o.id === 'intro-2')
+        this.$store.commit('addMessage', { message: secondMsgDe, lang: "de" })
+      } else {
+        const firstMsgEn = this.chatMessagesList.en.find(o => o.id === 'intro')
+        this.$store.commit('addMessage', { message: firstMsgEn, lang: "en" })
+        const secondMsgEn = this.chatMessagesList.en.find(o => o.id === 'intro-2')
+        this.$store.commit('addMessage', { message: secondMsgEn, lang: "en" })
+      }
     }
   },
   beforeDestroy () {
