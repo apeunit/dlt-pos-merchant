@@ -38,8 +38,7 @@ import formatUnit from '../filters'
 
 import { sign, verify, decodeBase58Check } from '@aeternity/aepp-sdk/es/utils/crypto.js'
 import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
-
-import QrCode from './QRCode.vue'
+import QrCode from './QrCode.vue'
 
 export default {
   name: 'ChatMessage',
