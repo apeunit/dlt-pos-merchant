@@ -48,7 +48,7 @@
           </p>
         </div>
         <div class="mt-8 mb-8 text-2xl font-sans flex flex-wrap flex-col justify-between">
-          <a @click.prevent="resetStorage" class="text-black" href="#">Reset Messages</a>
+          <a @click.prevent="resetStorage" class="text-black" href="#">Reset message history</a>
         </div>
       </div>
 
