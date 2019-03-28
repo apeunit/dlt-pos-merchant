@@ -323,7 +323,7 @@
           "type": "function"
         },
         {
-          "title": "I changed my mind",
+          "title": "Wait, go back",
           "action": "cancel-message",
           "type": "message-white"
         }
@@ -353,6 +353,12 @@
     {
       "id": "post-order-message-3",
       "content": "Done! It's on the blockchain ⛓",
+      "from": "computer",
+      "time": null
+    },
+    {
+      "id": "post-order-message-4",
+      "content": "Pick up your \uD83C\uDF66 by showing this QR code.",
       "from": "computer",
       "time": null
     },

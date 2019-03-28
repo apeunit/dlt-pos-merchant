@@ -225,7 +225,9 @@ export default {
         'time': null
       }
       const order3    = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'post-order-message-3')
+      const order4    = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'post-order-message-4')
       this.$store.commit('addMessage', { message: order3, lang: this.$i18n.locale })
+      this.$store.commit('addMessage', { message: order4, lang: this.$i18n.locale })
       this.$store.commit('addMessage', { message: txMessage, lang: this.$i18n.locale })
 
       const afterOrder = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'question-main-2')
