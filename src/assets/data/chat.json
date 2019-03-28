@@ -323,7 +323,7 @@
           "type": "function"
         },
         {
-          "title": "Wait, go back",
+          "title": "I changed my mind",
           "action": "cancel-message",
           "type": "message-white"
         }
