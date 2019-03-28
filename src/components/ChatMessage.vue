@@ -3,11 +3,14 @@
 
     <!-- Message Content -->
     <div class="app-message-enter" v-show="msg.content">
-      <div class="app-spinner" v-if="msg.content === '...'">
+      <div class="app-spinner" v-if="msg.id === 'wait'">
         <div class="first"></div>
         <div class="second"></div>
         <div class="third"></div>
       </div>
+      <template v-else-if="msg.id === 'show-userpub-qr'">
+        <qr-code user="" :qrcode="msg.content" />
+      </template>
       <template v-else>
         <p class="font-sans-medium text-28" v-html="msg.content"></p>
         <p class="text-xs font-sans mt-2">{{ msg.time }}</p>
@@ -33,8 +36,13 @@ import formatUnit from '../filters'
 import { sign, verify, decodeBase58Check } from '@aeternity/aepp-sdk/es/utils/crypto.js'
 import { encode } from '@aeternity/aepp-sdk/es/tx/builder/helpers.js'
 
+import QrCode from './QRCode.vue'
+
 export default {
   name: 'ChatMessage',
+  components: {
+    QrCode
+  },
   props: [
     'msg',
     'isLast'
