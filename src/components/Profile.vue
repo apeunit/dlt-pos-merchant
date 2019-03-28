@@ -24,12 +24,15 @@
             Identicon
           </span>
           <ae-identity-avatar class="w-6 h-6" :address="address"></ae-identity-avatar>
-        </div>
-        <div class="mt-8 text-2xl font-sans flex flex-wrap flex-col justify-between no-underline text-black">
-          <span>
+
+          <span class="mt-6">
             Unique Name
           </span>
           Prenzlauer Allee 169
+
+          <p class="text-base font-sans mt-4">
+            The identicon and random unique name make your public key easy to recognize and share.
+          </p>
         </div>
         <div class="mt-8 mb-8 text-2xl font-sans flex flex-wrap flex-col justify-between no-underline text-black">
           <span>
@@ -40,16 +43,12 @@
               {{ chunk }}
             </li>
           </ul>
+          <p class="text-base font-sans mt-4">
+            The public key is your address. This cryptographic code allows users to receive cryptocurrencies.
+          </p>
         </div>
       </div>
 
-      <p class="font-sans mt-4">
-        The identicon and random unique name make your public key easy to recognize and share.
-      </p>
-
-      <p class="font-sans mt-4">
-        The public key is your address. This cryptographic code allows users to receive cryptocurrencies.
-      </p>
     </div>
   </div>
 </template>
