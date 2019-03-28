@@ -4,7 +4,8 @@
       Ape Unit
     </router-link>
     <router-link class="header-account" to="/profile">
-      <span>{{ balance | formatUnit }} Ape Coins</span>
+      <span v-if="isBalanceLoading">Getting balance...</span>
+      <span v-else>{{ balance | formatUnit }} Ape Coins</span>
       <ae-identity-avatar
         class="w-4"
         :address="account.pub"
@@ -36,6 +37,9 @@ export default {
     },
     balance () {
       return this.$store.state.balance
+    },
+    isBalanceLoading () {
+      return this.$store.state.isBalanceLoading
     }
   }
 }
