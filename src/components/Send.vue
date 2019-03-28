@@ -36,11 +36,10 @@ export default {
   },
   methods: {
     onDecode (content) {
+      // only move forward if addr is valid. no error messages for incorrect qr
       if(this.isValidAddress(content)) {
         this.$store.commit('setScanQR', content)
         this.$router.push({ path: `/` })
-      } else {
-        alert('invalid address')
       }
     },
     async onInit (promise) {

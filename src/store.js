@@ -25,6 +25,7 @@ const store = new Vuex.Store({
     barPubKey: 'ak_BARmHG4mjUeUKY522wxyv7Q8hMEVpC5Qm9GSpuSiSLv17B1sg',
     websocketUrl: 'https://api.pos.apeunit.com', // 'http://localhost:5000',
     twitterBase: 'https://twitter.com/intent/tweet?text=',
+    explorer: 'https://explorer.apeunit.com',
     socketConnected: false,
     barState: null,
     ae: null,

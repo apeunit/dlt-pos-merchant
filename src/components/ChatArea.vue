@@ -69,13 +69,20 @@ export default {
       account = JSON.parse(acc)
     }
     if(this.eventEnded || account.pub === 'seeyou') {
-      const firstMsg = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'bye-bye')
-      this.$store.commit('addMessage', { message: firstMsg, lang: this.$i18n.locale })
       this.$store.commit('setChatStarted', true)
+      this.$store.commit('setChatHistory', {en:[], de: []})
+      const firstMsg = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'bye-bye-1')
+      this.$store.commit('addMessage', { message: firstMsg, lang: this.$i18n.locale })
     } else if(this.burned || account.pub === 'burned') {
-      const firstMsg = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'burned')
-      this.$store.commit('addMessage', { message: firstMsg, lang: this.$i18n.locale })
       this.$store.commit('setChatStarted', true)
+      this.$store.commit('setChatHistory', {en: [], de: []})
+      const intro = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'intro'))
+      delete intro.next
+      this.$store.commit('addMessage', { message: intro, lang: this.$i18n.locale })
+
+      const welcome = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'welcome-2'))
+      welcome.next = "ape-coin-usage"
+      this.$store.commit('addMessage', { message: welcome, lang: this.$i18n.locale })
     } else if (!this.chatStarted) {
       const firstMsg = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'intro')
       this.$store.commit('addMessage', { message: firstMsg, lang: this.$i18n.locale })

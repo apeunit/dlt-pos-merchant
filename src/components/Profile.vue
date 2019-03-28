@@ -14,12 +14,12 @@
       </p>
 
       <div class="list-reset w-full mt-8">
-        <router-link to="/transactions" class="text-28 font-sans flex justify-between no-underline text-black">
+        <a :href='transactionURL' class="text-28 font-sans flex justify-between no-underline text-black">
           <span>
             My Transactions
           </span>
           <ArrowRight class=""/>
-        </router-link>
+        </a>
         <div class="mt-8 text-28 font-sans flex flex-wrap flex-col justify-between no-underline text-black">
           <span>
             My Identicon
@@ -72,7 +72,8 @@ export default {
   },
   data () {
     return {
-      address: this.$store.state.account.pub
+      address: this.$store.state.account.pub,
+      transactionURL: this.$store.state.explorer + '/' + this.$store.state.account.pub
     }
   },
   computed: {
