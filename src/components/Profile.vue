@@ -28,7 +28,7 @@
           <span class="mt-6">
             Unique Name
           </span>
-          Prenzlauer Allee 169
+          {{ getUserName }}
 
           <p class="text-base font-sans mt-4">
             The identicon and random unique name make your public key easy to recognize and share.
@@ -95,7 +95,10 @@ export default {
     },
     isBalanceLoading () {
       return this.$store.state.isBalanceLoading
-    }
+    },
+    getUserName () {
+       return this.$store.state.account.name 
+    } 
   },
   mounted () {
     window.scrollTo(0, 0)

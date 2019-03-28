@@ -3,7 +3,7 @@
     <router-link class="header-logo" to="/about">
       Ape Unit
     </router-link>
-    <router-link class="header-account" to="/profile">
+    <router-link v-if="!hideProfile" class="header-account" to="/profile">
       <span v-if="isBalanceLoading">Getting balance...</span>
       <span v-else>{{ balance | formatUnit }} Ape Coins</span>
       <ae-identity-avatar
@@ -40,6 +40,9 @@ export default {
     },
     isBalanceLoading () {
       return this.$store.state.isBalanceLoading
+    },
+    hideProfile () {
+      return this.$store.state.account.pub === 'burned' || this.$store.state.account.pub === 'seeyou'
     }
   }
 }
