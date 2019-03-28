@@ -17,7 +17,7 @@
       <input class="app-modal-input" v-model="accountName" type="text" placeholder="Unique Name or address">
       <footer>
         <div>
-          <span v-if="showError" style="color:red">
+          <span v-if="showError" style="color:#DC143C">
           {{ error }}
         </span>
         </div>
@@ -29,13 +29,8 @@
   </div>
 </template>
 <script>
-import { AeIdentityAvatar } from '@aeternity/aepp-components'
-
 export default {
   name: 'Modal',
-  components: {
-    AeIdentityAvatar
-  },
   data () {
     return {
       accountName: '',
@@ -192,5 +187,9 @@ export default {
 
 .app-modal-identicon {
   @apply w-8 h-8 !important;
+}
+
+.error {
+  
 }
 </style>
