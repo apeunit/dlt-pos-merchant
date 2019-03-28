@@ -47,6 +47,9 @@
             The public key is your address. This cryptographic code allows users to receive cryptocurrencies.
           </p>
         </div>
+        <div class="mt-8 mb-8 text-2xl font-sans flex flex-wrap flex-col justify-between">
+          <a @click.prevent="resetStorage" class="text-black" href="#">Reset Messages</a>
+        </div>
       </div>
 
     </div>
@@ -97,8 +100,13 @@ export default {
       return this.$store.state.isBalanceLoading
     },
     getUserName () {
-       return this.$store.state.account.name 
-    } 
+       return this.$store.state.account.name
+    }
+  },
+  methods: {
+    resetStorage () {
+      window.localStorage.removeItem('vuex')
+    }
   },
   mounted () {
     window.scrollTo(0, 0)
