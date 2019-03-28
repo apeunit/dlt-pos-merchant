@@ -150,7 +150,8 @@ export default {
       this.$router.push({ path: `/scan` })
     },
     async searchAddrByName () {
-      const name = prompt('enter user name?')
+      this.$store.commit('setModalOpened', true)
+      /* const name = prompt('enter user name?')
       if (name) {
         const receiver = await this.$store.dispatch('getPubkeyByName', { name })
         if(receiver){
@@ -161,7 +162,7 @@ export default {
         } else {
           // show error that name is wrong
         }
-      }
+      } */
 
     },
     orderIceCream () {
@@ -224,7 +225,9 @@ export default {
         'time': null
       }
       const order3    = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'post-order-message-3')
+      const order4    = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'post-order-message-4')
       this.$store.commit('addMessage', { message: order3, lang: this.$i18n.locale })
+      this.$store.commit('addMessage', { message: order4, lang: this.$i18n.locale })
       this.$store.commit('addMessage', { message: txMessage, lang: this.$i18n.locale })
 
       const afterOrder = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'question-main-2')
