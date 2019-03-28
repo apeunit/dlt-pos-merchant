@@ -234,7 +234,7 @@
     },
     {
       "id": "tweet",
-      "content": "Ape Unit Rocks! My Awesome public key xxx #ApeUnit"
+      "content": "Hey @apeunit ✌️🌴 Please send some Ape Coins to xxx 🍦 #berlinproduziert #ApeUnit #HM19"
     },
     {
       "id": "post-tweet",
@@ -253,7 +253,7 @@
 
     {
       "id": "out-of-goods",
-      "content": "Sorry, we're out of ice cream right now. But still come visit us at Halle 6",
+      "content": "Oh no, we are out of ice cream at the moment 🤷‍♂️ Please check again later! But you can still come visit us at Halle 6 ",
       "from": "computer",
       "buttons": [
         {
@@ -277,7 +277,7 @@
 
     {
       "id": "closed",
-      "content": "Sorry the bar is closed right now",
+      "content": "Sorry the bar is closed at the moment 🏕. We are open daily from 12 p.m.",
       "from": "computer",
       "buttons": [
         {
@@ -668,6 +668,13 @@
           "type": "message-white"
         }
       ],
+      "time": null
+    },
+    {
+      "id": "not-enough-balance-transfer",
+      "content": "Oops, not enough coins.",
+      "from": "computer",
+      "next": "not-enough-balance-receive",
       "time": null
     }
   ],

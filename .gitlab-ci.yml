@@ -55,3 +55,4 @@ deploy stage:
   script:
     - pip install awscli
     - aws s3 sync ./dist s3://icecream.apeunit.com
+    - aws cloudfront create-invalidation --distribution-id $CF_DISTRIBUTION_ID --paths '/*'

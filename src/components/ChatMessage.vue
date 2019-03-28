@@ -140,7 +140,7 @@ export default {
         const msg = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-type-choice')
         this.$store.commit('addMessage', { message: msg, lang: this.$i18n.locale })
       } else {
-        const msg = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'not-enough-balance')
+        const msg = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'not-enough-balance-transfer')
         this.$store.commit('addMessage', { message: msg, lang: this.$i18n.locale })
       }
     },
@@ -153,13 +153,14 @@ export default {
       const name = prompt('enter user name?')
       if (name) {
         const receiver = await this.$store.dispatch('getPubkeyByName', { name })
-        this.$store.commit('setScanQR', receiver)
-        let message = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-input-user'))
-        message.content = message.content.replace('xxx', name)
-        this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
-
-        // message  = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-confirmation-1'))
-        // this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
+        if(receiver){
+          this.$store.commit('setScanQR', receiver)
+          let message = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-input-user'))
+          message.content = message.content.replace('xxx', name)
+          this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
+        } else {
+          // show error that name is wrong
+        }
       }
 
     },
