@@ -153,13 +153,14 @@ export default {
       const name = prompt('enter user name?')
       if (name) {
         const receiver = await this.$store.dispatch('getPubkeyByName', { name })
-        this.$store.commit('setScanQR', receiver)
-        let message = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-input-user'))
-        message.content = message.content.replace('xxx', name)
-        this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
-
-        // message  = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-confirmation-1'))
-        // this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
+        if(receiver){
+          this.$store.commit('setScanQR', receiver)
+          let message = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-input-user'))
+          message.content = message.content.replace('xxx', name)
+          this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
+        } else {
+          // show error that name is wrong
+        }
       }
 
     },

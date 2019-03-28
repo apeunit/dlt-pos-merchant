@@ -263,10 +263,15 @@ const store = new Vuex.Store({
       return uri
     },
     async getPubkeyByName ({ commit, state }, { name }) {
-      // eslint-disable-next-line no-undef
-      const req = await fetch(`${state.websocketUrl}/rest/address/${name}`)
-      const address = (await req.json()).address
-      return address
+      try {
+        // eslint-disable-next-line no-undef
+        const req = await fetch(`${state.websocketUrl}/rest/address/${name}`)
+        const address = (await req.json()).address
+        return address
+      } catch (error) {
+        console.log(error)
+        return null
+      }
     }
   },
   plugins: [
