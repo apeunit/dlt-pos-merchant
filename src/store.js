@@ -18,6 +18,7 @@ const store = new Vuex.Store({
       name: null
     },
     balance: 0,
+    isBalanceLoading: true,
     beerHashes: [],
     itemPrice: 1000000000000000000,
     fee: 18000000000000,
@@ -150,6 +151,9 @@ const store = new Vuex.Store({
     setBalance (state, newBalance) {
       state.balance = newBalance
     },
+    setBalanceLoading (state, isBalanceLoading) {
+      state.isBalanceLoading = isBalanceLoading
+    },
     addMessage (state, {
       message,
       lang
@@ -207,6 +211,7 @@ const store = new Vuex.Store({
   actions: {
     async updateBalance ({ commit, state }) {
       const pubKey = state.account.pub
+
       if (pubKey && pubKey !== 'burned' && pubKey !== 'seeyou') {
         state.ae
           .balance(pubKey, {
@@ -214,6 +219,7 @@ const store = new Vuex.Store({
           })
           .then(balance => {
             commit('setBalance', balance)
+            commit('setBalanceLoading', false)
             return balance
           })
           .catch(e => {

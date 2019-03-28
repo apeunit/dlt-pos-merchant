@@ -1,66 +1,61 @@
 <template>
   <div class="about">
     <go-back>Conversations</go-back>
-    <div class="bg-black text-white pb-8 pt-32">
-      <div class="container flex px-4 text-28 font-sans leading-normal">
-        IMAGE
+    <div class="bg-black text-white pb-8 pt-24">
+      <div class="container flex flex-col px-4 text-28 font-sans leading-normal">
+        <template v-if="isBalanceLoading">Getting balance...</template>
+        <template v-else>
+          <h1>{{ balance | formatUnit }}</h1>
+          <span>Ape Coins</span>
+        </template>
       </div>
     </div>
     <div class="container flex flex-wrap px-4 leading-normal pt-8 pb-8">
 
-      <p class="text-28 font-sans leading-normal">
-        Find us in Halle 6 🖐☝️<br/>
-        In the Berlin Partners booth, E39.
-      </p>
-
-      <div class="list-reset w-full mt-8">
-        <a :href='getTransactionURL' class="text-28 font-sans flex justify-between no-underline text-black">
+      <div class="list-reset w-full">
+        <a :href='getTransactionURL' target="_blank" class="text-2xl font-sans flex justify-between no-underline text-black">
           <span>
             My Transactions
           </span>
           <ArrowRight class=""/>
         </a>
-        <div class="mt-8 text-28 font-sans flex flex-wrap flex-col justify-between no-underline text-black">
+        <div class="mt-8 text-2xl font-sans flex flex-wrap flex-col justify-between no-underline text-black">
           <span>
-            My Identicon
+            Identicon
           </span>
-          <ae-identity-avatar :address="address"></ae-identity-avatar>
-        </div>
-        <div class="mt-8 text-28 font-sans flex flex-wrap flex-col justify-between no-underline text-black">
-          <span>
-            My Unique Identifier
+          <ae-identity-avatar class="w-6 h-6" :address="address"></ae-identity-avatar>
+
+          <span class="mt-6">
+            Unique Name
           </span>
           Prenzlauer Allee 169
+
+          <p class="text-base font-sans mt-4">
+            The identicon and random unique name make your public key easy to recognize and share.
+          </p>
         </div>
-        <div class="mt-8 text-28 font-sans flex flex-wrap flex-col justify-between no-underline text-black">
+        <div class="mt-8 mb-8 text-2xl font-sans flex flex-wrap flex-col justify-between no-underline text-black">
           <span>
             My Public Key
           </span>
-          <div class="flex">
-            <div class="item font-mono" >
-              {{address}}
-            </div>
-          </div>
+          <ul class="app-address list-reset">
+            <li class="font-mono" v-for="(chunk, index) in splitAddress" :key="">
+              {{ chunk }}
+            </li>
+          </ul>
+          <p class="text-base font-sans mt-4">
+            The public key is your address. This cryptographic code allows users to receive cryptocurrencies.
+          </p>
         </div>
       </div>
 
-      <div class="font-sans mt-4">
-        <p class="py-4">
-          Messegelände<br/>
-          30521 Hannover<br/>
-          Germany<br/>
-        </p>
-        <p class="py-4">
-          1st until 5th of April 2019<br/>
-          Daily from 12:00<br/>
-        </p>
-      </div>
     </div>
   </div>
 </template>
 <script>
 import ArrowRight from './ArrowRight.vue'
 import GoBack from './GoBack.vue'
+import formatUnit from '../filters'
 import { AeIdentityAvatar } from '@aeternity/aepp-components'
 
 export default {
@@ -69,6 +64,9 @@ export default {
     ArrowRight,
     GoBack,
     AeIdentityAvatar
+  },
+  filters: {
+    formatUnit
   },
   data () {
     return {
@@ -91,6 +89,12 @@ export default {
          return this.transactionURL
        }
        return  this.transactionURL + '/' + this.address
+    },
+    balance () {
+      return this.$store.state.balance
+    },
+    isBalanceLoading () {
+      return this.$store.state.isBalanceLoading
     }
   },
   mounted () {
@@ -98,3 +102,9 @@ export default {
   }
 }
 </script>
+<style lang="css">
+.app-address {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+</style>

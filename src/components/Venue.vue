@@ -1,10 +1,8 @@
 <template>
   <div class="about">
     <go-back>Ape Unit</go-back>
-    <div class="bg-black text-white pb-8 pt-32">
-      <div class="container flex px-4 text-28 font-sans leading-normal">
-        IMAGE
-      </div>
+    <div class="bg-black text-white p-8">
+      <img :src="require('../assets/location.png')" alt="Find us in Halle 6 In the Berlin Partners booth, E39.">
     </div>
     <div class="container flex flex-wrap px-4 leading-normal pt-8 pb-8">
 
