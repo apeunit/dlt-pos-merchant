@@ -94,6 +94,7 @@ export default {
   beforeDestroy () {
     // remove ".next" prop to already printed messages
     // so they won't re-printed when ChatMessage.vue gets mounted()
+    console.log('cleanNextMessages --- beforeDestroy chatArea')
     this.$store.commit('cleanNextMessages')
   }
 }
