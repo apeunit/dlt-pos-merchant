@@ -9,6 +9,7 @@ Vue.use(Vuex)
 const initLang = navigator.language.split('-')[0] || navigator.userLanguage.split('-')[0]
 const store = new Vuex.Store({
   state: {
+    printingMessages: true,
     costToCharge: 0,
     chatStarted: false,
     currentLang: initLang,
@@ -46,6 +47,9 @@ const store = new Vuex.Store({
     modalOpened: false
   },
   getters: {
+    printingMessages (state) {
+      return state.printingMessages
+    },
     costToCharge (state) {
       return state.costToCharge
     },
@@ -181,6 +185,8 @@ const store = new Vuex.Store({
           minute: 'numeric'
         })
       }
+      // eslint-disable-next-line
+      state.printingMessages = clonedMsg.buttons ? false : true
       state.chatHistory[lang].push(clonedMsg)
     },
     removeMessage (state, {

@@ -35,6 +35,9 @@ export default {
     account () {
       return this.$store.state.account
     },
+    printingMessages () {
+      return this.$store.state.printingMessages
+    },
     balance () {
       return this.$store.state.balance
     },

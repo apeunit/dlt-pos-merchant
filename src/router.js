@@ -21,6 +21,14 @@ import Transactions from './components/Transactions.vue'
 import Send from './components/Send.vue'
 
 export default (store) => {
+  const beforeEnter = (to, from, next) => {
+    if (store.state.printingMessages) {
+      next(false)
+    } else {
+      next()
+    }
+  }
+
   const routes = [
     {
       path: '/',
@@ -44,7 +52,8 @@ export default (store) => {
     {
       path: '/profile',
       name: 'profile',
-      component: Profile
+      component: Profile,
+      beforeEnter: beforeEnter
     },
     {
       path: '/scan',
@@ -54,7 +63,8 @@ export default (store) => {
     {
       path: '/about',
       name: 'about',
-      component: About
+      component: About,
+      beforeEnter: beforeEnter
     },
     {
       path: '/venue',
