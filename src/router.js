@@ -96,18 +96,25 @@ export default (store) => {
 
   router.beforeEach(async (to, from, next) => {
     if (to.query.k === 'burned') {
-      store.commit('setBurned', true)
-      const account = {
-        pub: to.query.k,
-        priv: to.query.k,
-        name: to.query.k
+      // if the address is burned, but it already belogn to this device (in the state/store),
+      // then start the regular app
+      if (store.state.account.pub.startsWith('ak_')) {
+        // console.log('HEREEEEEEEE', store.state.account.pub)
+        next('/')
+      } else {
+        store.commit('setBurned', true)
+        const account = {
+          pub: to.query.k,
+          priv: to.query.k,
+          name: to.query.k
+        }
+        store.commit('setAccount', account)
+        // console.log('GO TO:', to.name)
+        next({
+          name: to.name,
+          query: null
+        })
       }
-      store.commit('setAccount', account)
-      console.log('GO TO:', to.name)
-      next({
-        name: to.name,
-        query: null
-      })
     } else if (to.query.k === 'seeyou') {
       const account = {
         pub: to.query.k,
