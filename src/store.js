@@ -279,7 +279,7 @@ const store = new Vuex.Store({
     },
     async generateQRURI ({ commit, state }, { data }) {
       const uri = await QRCode.toDataURL(data, {
-        errorCorrectionLevel: 'H'
+        errorCorrectionLevel: 'L'
       })
       return uri
     },

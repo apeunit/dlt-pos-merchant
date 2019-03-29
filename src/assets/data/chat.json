@@ -163,6 +163,13 @@
       ],
       "time": null
     },
+    {
+      "id": "show-my-qr",
+      "content": "Show my QR code.",
+      "from": "user",
+      "time": null
+    },
+
 
     {
       "id": "ape-coin-usage",
@@ -848,6 +855,12 @@
           "type": "message-white"
         }
       ],
+      "time": null
+    },
+    {
+      "id": "show-my-qr",
+      "content": "Zeig mir den QR Code.",
+      "from": "user",
       "time": null
     },
 

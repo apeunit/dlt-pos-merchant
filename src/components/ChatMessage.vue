@@ -244,6 +244,9 @@ export default {
       this.$store.commit('addMessage', { message: postTweet, lang: this.$i18n.locale })
     },
     async showQR (arg) {
+      const qrShow = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'show-my-qr'))
+      this.$store.commit('addMessage', { message: qrShow, lang: this.$i18n.locale })
+
       const dataURI   = await this.$store.dispatch('generateQRURI', { data: this.$store.state.account.pub })
       const img       = `<img src="${dataURI}" alt="order" height="300" width="300">`
       const txMessage = {

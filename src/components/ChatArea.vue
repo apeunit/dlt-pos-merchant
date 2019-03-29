@@ -87,6 +87,7 @@ export default {
       // print first message
       const firstMsg = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'intro')
       this.$store.commit('addMessage', { message: firstMsg, lang: this.$i18n.locale })
+      this.$store.commit('setChatStarted', true)
 
       // print the (first 2) messages in the other language (to have them ready when refreshing)
       if(this.$i18n.locale === 'en'){
