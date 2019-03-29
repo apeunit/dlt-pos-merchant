@@ -1,6 +1,5 @@
 {
-  "en": [
-    {
+  "en": [{
       "id": "yes",
       "content": "Yes, let's go!",
       "from": "user",
@@ -18,8 +17,7 @@
       "id": "intro-2",
       "content": "Is English okay — oder lieber Deutsch?",
       "from": "computer",
-      "buttons": [
-        {
+      "buttons": [{
           "title": "English",
           "action": "chooseLang",
           "params": "en",
@@ -75,8 +73,7 @@
       "id": "question-main",
       "content": "So, what are we going to do?",
       "from": "computer",
-      "buttons": [
-        {
+      "buttons": [{
           "title": "Get Ice Cream",
           "action": "orderIceCream",
           "type": "function"
@@ -98,8 +95,7 @@
       "id": "question-main-2",
       "content": "What's next?",
       "from": "computer",
-      "buttons": [
-        {
+      "buttons": [{
           "title": "Get Ice Cream",
           "action": "orderIceCream",
           "type": "function"
@@ -144,8 +140,7 @@
       "id": "question-receive-3",
       "content": "Or tweet your public key and we will top you up for free. 🐥",
       "from": "computer",
-      "buttons": [
-        {
+      "buttons": [{
           "title": "Show QR code",
           "action": "showQR",
           "type": "function"
@@ -170,7 +165,6 @@
       "time": null
     },
 
-
     {
       "id": "ape-coin-usage",
       "content": "We're giving away Ape Coins for you to buy ice cream🍦 through blockchain tech.",
@@ -178,14 +172,26 @@
       "next": "burned",
       "time": null
     },
-
     {
       "id": "burned",
       "content": "Bummer, the coins from this handout have already been claimed. Ask one of our Apes for a new one 💰",
       "from": "computer",
+      "next": "burned-2",
       "time": null
     },
-
+    {
+      "id": "burned-2",
+      "content": "Find us in Halle 6, stand E39! <a href='https://goo.gl/Dehkdt' target='_blank' rel='noopener'>(https://goo.gl/Dehkdt)</a>",
+      "from": "computer",
+      "next": "burned-3",
+      "time": null
+    },
+    {
+      "id": "burned-3",
+      "content": "<a href='https://goo.gl/Dehkdt' target='_blank' rel='noopener'><img class='location-chat-image' src='location.png'/></a>",
+      "from": "computer",
+      "time": null
+    },
     {
       "id": "bye-bye-1",
       "content": "Oh no, the Hannover Messe 2019 is history now. ",
@@ -225,8 +231,7 @@
       "id": "generate-tweet",
       "content": "Great. We've created your tweet: it contains your public key and @apeunit",
       "from": "computer",
-      "buttons": [
-        {
+      "buttons": [{
           "title": "Tweet",
           "action": "getFreeCoin",
           "type": "function"
@@ -262,8 +267,7 @@
       "id": "out-of-goods",
       "content": "Oh no, we are out of ice cream at the moment 🤷‍♂️ Please check again later! But you can still come visit us at Halle 6 ",
       "from": "computer",
-      "buttons": [
-        {
+      "buttons": [{
           "title": "Send Coins",
           "action": "transfer",
           "type": "message"
@@ -286,8 +290,7 @@
       "id": "closed",
       "content": "Sorry the bar is closed at the moment 🏕. We are open daily from 12 p.m.",
       "from": "computer",
-      "buttons": [
-        {
+      "buttons": [{
           "title": "Send Coins",
           "action": "transfer",
           "type": "message"
@@ -310,8 +313,7 @@
       "id": "question-order",
       "content": "How many?",
       "from": "computer",
-      "buttons": [
-        {
+      "buttons": [{
           "title": "1",
           "action": "saveOrder",
           "params": 1,
@@ -375,8 +377,7 @@
       "content": "I would like to do a scan",
       "from": "user",
       "time": null,
-      "buttons": [
-        {
+      "buttons": [{
           "title": "Try scanning again?",
           "action": "scanQR",
           "type": "function"
@@ -412,8 +413,7 @@
       "content": "Go?",
       "from": "computer",
       "time": null,
-      "buttons": [
-        {
+      "buttons": [{
           "title": "Yes",
           "action": "orderItem",
           "type": "function"
@@ -447,8 +447,7 @@
       "id": "transfer-confirmation-2",
       "content": "Are we doing this?",
       "from": "computer",
-      "buttons": [
-        {
+      "buttons": [{
           "title": "Yes",
           "action": "triggerTransfer",
           "type": "function"
@@ -474,8 +473,7 @@
       "content": "Would you like to get the Ice Cream now?",
       "from": "computer",
       "time": null,
-      "buttons": [
-        {
+      "buttons": [{
           "title": "Yes",
           "action": "orderItem",
           "type": "function"
@@ -546,8 +544,7 @@
       "id": "transfer-type-choice",
       "content": "Do you want to scan a QR Code \uD83E\uDD33 or enter user name ✍️?",
       "from": "computer",
-      "buttons": [
-        {
+      "buttons": [{
           "title": "Scan QR Code",
           "action": "scanQR",
           "type": "function"
@@ -570,8 +567,7 @@
       "id": "question-transfer",
       "content": "How many Ape Coins do you want to send?",
       "from": "computer",
-      "buttons": [
-        {
+      "buttons": [{
           "title": "1",
           "action": "transferCoins",
           "params": 1,
@@ -609,8 +605,7 @@
       "id": "explain-question-transfer",
       "content": "You can trasf",
       "from": "computer",
-      "buttons": [
-        {
+      "buttons": [{
           "title": "1",
           "action": "transferCoins",
           "params": 1,
@@ -648,8 +643,7 @@
       "id": "not-enough-balance-receive",
       "content": "Maybe receiving some coins first?",
       "from": "computer",
-      "buttons": [
-        {
+      "buttons": [{
           "title": "Try Again",
           "action": "order",
           "type": "message"
@@ -678,8 +672,7 @@
       "id": "not-enough-balance-transfer-receive",
       "content": "Maybe receiving some coins first?",
       "from": "computer",
-      "buttons": [
-        {
+      "buttons": [{
           "title": "Receive Coins",
           "action": "receive",
           "type": "message"
@@ -693,8 +686,7 @@
       "time": null
     }
   ],
-  "de": [
-    {
+  "de": [{
       "id": "yes",
       "content": "Los geht's!",
       "from": "user",
@@ -712,8 +704,7 @@
       "id": "intro-2",
       "content": "Ist Deutsch in Ordnung, or would you prefer English?",
       "from": "computer",
-      "buttons": [
-        {
+      "buttons": [{
           "title": "English",
           "action": "chooseLang",
           "params": "en",
@@ -769,8 +760,7 @@
       "id": "question-main",
       "content": "Also, was möchtest Du tun?",
       "from": "computer",
-      "buttons": [
-        {
+      "buttons": [{
           "title": "Eis abholen",
           "action": "orderIceCream",
           "type": "function"
@@ -792,8 +782,7 @@
       "id": "question-main-2",
       "content": "Was möchtest Du als nächstes tun?",
       "from": "computer",
-      "buttons": [
-        {
+      "buttons": [{
           "title": "Eis abholen",
           "action": "orderIceCream",
           "type": "function"
@@ -838,8 +827,7 @@
       "id": "question-receive-3",
       "content": "Oder Deinen public key tweeten und wir senden Dir neue Coins. 🐥",
       "from": "computer",
-      "buttons": [
-        {
+      "buttons": [{
           "title": "QR Code anzeigen",
           "action": "showQR",
           "type": "function"
@@ -863,7 +851,6 @@
       "from": "user",
       "time": null
     },
-
     {
       "id": "ape-coin-usage",
       "content": "We're giving away Ape Coins for you to buy ice cream🍦 through blockchain tech.",
@@ -871,14 +858,26 @@
       "next": "burned",
       "time": null
     },
-
     {
       "id": "burned",
       "content": "Bummer, the coins from this handout have already been claimed. Ask one of our Apes for a new one 💰",
       "from": "computer",
+      "next": "burned-2",
       "time": null
     },
-
+    {
+      "id": "burned-2",
+      "content": "Find us in Halle 6, stand E39! <a href='https://goo.gl/Dehkdt' target='_blank' rel='noopener'>(https://maps.app.goo.gl/i/WwXt-)</a>",
+      "from": "computer",
+      "next": "burned-3",
+      "time": null
+    },
+    {
+      "id": "burned-3",
+      "content": "<a href='https://goo.gl/Dehkdt' target='_blank' rel='noopener'><img class='location-chat-image' src='location.png'/></a>",
+      "from": "computer",
+      "time": null
+    },
     {
       "id": "bye-bye-1",
       "content": "Oh nein, die Hannover Messe 2019 ist zu Ende!",
@@ -918,8 +917,7 @@
       "id": "generate-tweet",
       "content": "Sehr gut, wir haben einen Tweet vorbereitet: er beinhaltet Deinen public key und @apeunit",
       "from": "computer",
-      "buttons": [
-        {
+      "buttons": [{
           "title": "Tweet",
           "action": "getFreeCoin",
           "type": "function"
@@ -955,8 +953,7 @@
       "id": "out-of-goods",
       "content": "Oh no, we are out of ice cream at the moment 🤷‍♂️ Please check again later! But you can still come visit us at Halle 6 ",
       "from": "computer",
-      "buttons": [
-        {
+      "buttons": [{
           "title": "Coins versenden",
           "action": "transfer",
           "type": "message"
@@ -979,8 +976,7 @@
       "id": "closed",
       "content": "Sorry the bar is closed at the moment 🏕. We are open daily from 12 p.m.",
       "from": "computer",
-      "buttons": [
-        {
+      "buttons": [{
           "title": "Send Coins",
           "action": "transfer",
           "type": "message"
@@ -1003,8 +999,7 @@
       "id": "question-order",
       "content": "Wie viele möchtest Du?",
       "from": "computer",
-      "buttons": [
-        {
+      "buttons": [{
           "title": "1",
           "action": "saveOrder",
           "params": 1,
@@ -1062,8 +1057,7 @@
       "content": "I would like to do a scan",
       "from": "user",
       "time": null,
-      "buttons": [
-        {
+      "buttons": [{
           "title": "Try scanning again?",
           "action": "scanQR",
           "type": "function"
@@ -1099,8 +1093,7 @@
       "content": "Los?",
       "from": "computer",
       "time": null,
-      "buttons": [
-        {
+      "buttons": [{
           "title": "Ja",
           "action": "orderItem",
           "type": "function"
@@ -1134,8 +1127,7 @@
       "id": "transfer-confirmation-2",
       "content": "Willst Du das?",
       "from": "computer",
-      "buttons": [
-        {
+      "buttons": [{
           "title": "Ja",
           "action": "triggerTransfer",
           "type": "function"
@@ -1161,8 +1153,7 @@
       "content": "Would you like to get the Ice Cream now?",
       "from": "computer",
       "time": null,
-      "buttons": [
-        {
+      "buttons": [{
           "title": "Ja",
           "action": "orderItem",
           "type": "function"
@@ -1233,8 +1224,7 @@
       "id": "transfer-type-choice",
       "content": "Möchtest Du einen QR Code scannen 🤳 oder eine Adresse eingeben ✍️?",
       "from": "computer",
-      "buttons": [
-        {
+      "buttons": [{
           "title": "Scan QR Code",
           "action": "scanQR",
           "type": "function"
@@ -1257,8 +1247,7 @@
       "id": "question-transfer",
       "content": "Wie viele Coins möchtest Du senden?",
       "from": "computer",
-      "buttons": [
-        {
+      "buttons": [{
           "title": "1",
           "action": "transferCoins",
           "params": 1,
@@ -1309,8 +1298,7 @@
       "id": "not-enough-balance-receive",
       "content": "Du könntest neue Coins empfangen.",
       "from": "computer",
-      "buttons": [
-        {
+      "buttons": [{
           "title": "Nächster Versuch",
           "action": "order",
           "type": "message"

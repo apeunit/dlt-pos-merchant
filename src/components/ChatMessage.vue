@@ -315,6 +315,10 @@ export default {
 }
 </script>
 <style lang="css">
+.location-chat-image {
+  background-color: black
+}
+
 .app-message-enter {
   animation: slide-in-up 0.5s ease-out;
 }
