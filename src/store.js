@@ -6,7 +6,10 @@ import QRCode from 'qrcode'
 import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
-const initLang = navigator.language.split('-')[0] || navigator.userLanguage.split('-')[0]
+let initLang = navigator.language.split('-')[0] || navigator.userLanguage.split('-')[0]
+if (!initLang) {
+  initLang = 'en'
+}
 const store = new Vuex.Store({
   state: {
     printingMessages: true,
@@ -142,6 +145,8 @@ const store = new Vuex.Store({
         de: []
       }
       state.chatHistory = cleanHistory
+      state.burned = false
+      state.eventEnded = false
     },
     setAccount (state, {
       pub,
@@ -161,7 +166,7 @@ const store = new Vuex.Store({
       }
     },
     setCurrentLang (state, lang) {
-      console.log(`setting ${lang}!`)
+      // console.log(`setting ${lang}!`)
       state.currentLang = lang
     },
     setAe (state, ae) {
@@ -186,7 +191,7 @@ const store = new Vuex.Store({
         })
       }
       // eslint-disable-next-line
-      state.printingMessages = (clonedMsg.buttons || clonedMsg.id === 'burned' || clonedMsg.id === 'seeyou') ? false : true
+      state.printingMessages = (clonedMsg.buttons || clonedMsg.id === 'burned' || clonedMsg.id === 'burned-2' || clonedMsg.id === 'burned-3' || clonedMsg.id === 'seeyou') ? false : true
       state.chatHistory[lang].push(clonedMsg)
     },
     removeMessage (state, {
@@ -194,10 +199,10 @@ const store = new Vuex.Store({
       lang
     }) {
       const newMessages = state.chatHistory[lang].filter(function (obj) {
-        console.log(obj.id !== messageId)
+        // console.log(obj.id !== messageId)
         return obj.id !== messageId
       })
-      console.log('newMessages', newMessages)
+      // console.log('newMessages', newMessages)
       state.chatHistory[lang] = newMessages
     },
     addBeerHash (state, beerHash) {
@@ -220,7 +225,7 @@ const store = new Vuex.Store({
       state.socketConnected = false
     },
     SOCKET_BAR_STATE (state, barState) {
-      console.log('SOCKET_BAR_STATE', barState)
+      // console.log('SOCKET_BAR_STATE', barState)
       if (Array.isArray(barState) && barState.length >= 0) {
         barState = barState[0]
       }

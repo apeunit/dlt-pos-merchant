@@ -3,7 +3,7 @@
     <go-back>Conversations</go-back>
     <div class="bg-black text-white pb-8 pt-8">
       <div class="container flex flex-col px-4 text-28 font-sans leading-normal">
-        Scan Receiver's QR Code
+        Scan QR Code
       </div>
     </div>
     <div class="container flex flex-wrap leading-normal pt-8 pb-8">
@@ -47,6 +47,12 @@ export default {
       if (this.isValidAddress(content)) {
         this.$store.commit("setScanQR", content);
         this.$router.push({ path: `/` });
+      } else if (content.startsWith('https://apeun.it')) {
+        // it's a APE UNIT URL
+        this.$store.commit('resetChatHistory')
+        setTimeout(()=>{
+          window.location.href = content
+        }, 1000)
       }
     },
     async onInit(promise) {

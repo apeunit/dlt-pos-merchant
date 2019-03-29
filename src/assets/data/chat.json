@@ -190,7 +190,14 @@
       "id": "burned-3",
       "content": "<a href='https://goo.gl/Dehkdt' target='_blank' rel='noopener'><img class='location-chat-image' src='location.png'/></a>",
       "from": "computer",
-      "time": null
+      "time": null,
+      "buttons": [{
+          "title": "Scan a new Card",
+          "action": "scanQR",
+          "params": "reset",
+          "type": "function"
+        }
+      ]
     },
     {
       "id": "bye-bye-1",
@@ -876,7 +883,13 @@
       "id": "burned-3",
       "content": "<a href='https://goo.gl/Dehkdt' target='_blank' rel='noopener'><img class='location-chat-image' src='location.png'/></a>",
       "from": "computer",
-      "time": null
+      "time": null,
+      "buttons": [{
+        "title": "Scan a new Card",
+        "action": "scanQR",
+        "params": "reset",
+        "type": "function"
+      }]
     },
     {
       "id": "bye-bye-1",

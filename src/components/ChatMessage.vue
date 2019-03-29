@@ -105,23 +105,21 @@ export default {
         setTimeout(() => resolve(fn(par)), 2000)
       })
     },
-    sendNextMessage (msg) {
-      const app = this
+    async sendNextMessage (msg) {
 
       if (msg.next) {
         // show waiting message
         this.playWaitMessage()
         // remove wait message and play next
-        this.wait(this.removeWaitMessage, { locale: app.$i18n.locale }).then(function () {
-          // play next message (from computer)
-          // console.log(`pick and play ID: ${msg.next}`)
-          // console.log(`from`, app.chatMessagesList[app.$i18n.locale])
-          const nextMsg = app.chatMessagesList[app.$i18n.locale].find(o => o.id === msg.next)
-          // console.log(`NEXT:`, nextMsg)
-          app.$store.commit('addMessage', { message: nextMsg, lang: app.$i18n.locale })
-          console.log('cleanNextMessages --- beforeDestroy chatMessage')
-          app.$store.commit('cleanNextMessages')
-        })
+        await this.wait(this.removeWaitMessage, { locale: this.$i18n.locale })
+        // play next message (from computer)
+        // console.log(`pick and play ID: ${msg.next}`)
+        // console.log(`from`, this.chatMessagesList[this.$i18n.locale])
+        const nextMsg = this.chatMessagesList[this.$i18n.locale].find(o => o.id === msg.next)
+        // console.log(`NEXT:`, nextMsg)
+        this.$store.commit('addMessage', { message: nextMsg, lang: this.$i18n.locale })
+        // console.log('cleanNextMessages --- beforeDestroy chatMessage')
+        this.$store.commit('cleanNextMessages')
       }
     },
     playWaitMessage () {
@@ -158,10 +156,16 @@ export default {
         this.$store.commit('addMessage', { message: msg, lang: this.$i18n.locale })
       }
     },
-    scanQR () {
-      const message = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'select-qr-scan'))
-      this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
-      this.$router.push({ path: `/scan` })
+    scanQR (arg) {
+      if (arg == 'reset') {
+        const message = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'select-qr-scan'))
+        this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
+        this.$router.push({ path: `/scan` })
+      } else {
+        const message = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'select-qr-scan'))
+        this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
+        this.$router.push({ path: `/scan` })
+      }
     },
     searchAddrByName () {
       this.$store.commit('setModalOpened', true)
@@ -296,7 +300,7 @@ export default {
   async mounted () {
     // send next message, if first message has a "next"
     this.sendNextMessage(this.msg)
-    console.log('Mounted: message component', this.msg)
+    // console.log('Mounted: message component', this.msg)
     Array.from(document.getElementsByClassName('order-qr')).forEach((el) => {
       const elClone = el.cloneNode(true)
       elClone.addEventListener('click', this.handleQRClicks)

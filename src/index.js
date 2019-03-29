@@ -38,11 +38,13 @@ Vue.use(new VueSocketIO({
 store.dispatch('initAe')
 new Vue({
   i18n,
+  router: getRouter(store),
+  store,
   sockets: {
     connect () {
-      console.log('socket connected')
+      // console.log('socket connected')
       // set the initial bar state after connecting
-      console.log('asking bar state')
+      // console.log('asking bar state')
       this.$socket.emit('get_bar_state', (barState) => {
         console.log('get_bar_state', barState)
         if (barState && barState.state) {
@@ -51,8 +53,6 @@ new Vue({
       })
     }
   },
-  router: getRouter(store),
-  store,
   render: h => h(App),
   mounted () {
     this.sockets.subscribe('bar_state', (status) => {

@@ -71,18 +71,21 @@ export default {
       account = JSON.parse(acc)
     }
     if(this.eventEnded || account.pub === 'seeyou') {
-      this.$store.commit('setChatHistory', {en:[], de: []})
+      this.$store.commit('resetChatHistory')
       const firstMsg = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'bye-bye-1')
       this.$store.commit('addMessage', { message: firstMsg, lang: this.$i18n.locale })
     } else if(this.burned || account.pub === 'burned') {
-      this.$store.commit('setChatHistory', {en: [], de: []})
-      const intro = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'intro'))
-      delete intro.next
-      this.$store.commit('addMessage', { message: intro, lang: this.$i18n.locale })
+      this.$store.commit('resetChatHistory')
+      setTimeout(()=>{
+        const intro = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'intro'))
+        delete intro.next
+        this.$store.commit('addMessage', { message: intro, lang: this.$i18n.locale })
 
-      let welcome = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'welcome-2'))
-      welcome.next = 'ape-coin-usage'
-      this.$store.commit('addMessage', { message: welcome, lang: this.$i18n.locale })
+        let welcome = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'welcome-2'))
+        welcome.next = 'ape-coin-usage'
+        this.$store.commit('addMessage', { message: welcome, lang: this.$i18n.locale })
+      }, 1000)
+
     } else if (!this.chatStarted) {
       // print first message
       const firstMsg = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'intro')
@@ -106,7 +109,7 @@ export default {
   beforeDestroy () {
     // remove ".next" prop to already printed messages
     // so they won't re-printed when ChatMessage.vue gets mounted()
-    console.log('cleanNextMessages --- beforeDestroy chatArea')
+    // console.log('cleanNextMessages --- beforeDestroy chatArea')
     this.$store.commit('cleanNextMessages')
   }
 }

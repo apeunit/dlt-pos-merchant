@@ -103,6 +103,7 @@ export default (store) => {
         name: to.query.k
       }
       store.commit('setAccount', account)
+      console.log('GO TO:', to.name)
       next({
         name: to.name,
         query: null
