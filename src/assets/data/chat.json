@@ -853,21 +853,21 @@
     },
     {
       "id": "ape-coin-usage",
-      "content": "We're giving away Ape Coins for you to buy ice cream🍦 through blockchain tech.",
+      "content": "Wir schenken Dir Ape Coins, die Du gegen Eis 🍦eintauschen kannst, alles per Blockchain.",
       "from": "computer",
       "next": "burned",
       "time": null
     },
     {
       "id": "burned",
-      "content": "Bummer, the coins from this handout have already been claimed. Ask one of our Apes for a new one 💰",
+      "content": "Verdammt, die coins von dieser Karte wurden schon benutzt. Frag uns nach einer neuen Karte 💰",
       "from": "computer",
       "next": "burned-2",
       "time": null
     },
     {
       "id": "burned-2",
-      "content": "Find us in Halle 6, stand E39! <a href='https://goo.gl/Dehkdt' target='_blank' rel='noopener'>(https://maps.app.goo.gl/i/WwXt-)</a>",
+      "content": "Finde uns in Halle 6, Stand E39! <a href='https://goo.gl/Dehkdt' target='_blank' rel='noopener'>(https://maps.app.goo.gl/i/WwXt-)</a>",
       "from": "computer",
       "next": "burned-3",
       "time": null
