@@ -147,7 +147,7 @@ export default {
       message.content = arg > 1 || isNaN(arg) ? message.content + 's' : message.content
       this.$store.commit('addMessage', { message, lang: this.$i18n.locale })
 
-      let amount = isNaN(arg) ? (this.userBalance - this.$store.state.fee) : arg * this.$store.state.itemPrice
+      let amount = isNaN(arg) ? ((Number(formatUnit(this.userBalance)) * this.$store.state.itemPrice) - this.$store.state.fee) : arg * this.$store.state.itemPrice
       amount     = amount < 0 ? 0 : amount
       if (this.userBalance >= (amount + this.$store.state.fee)) {
         this.$store.commit('setCostToCharge', amount)
