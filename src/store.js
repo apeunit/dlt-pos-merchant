@@ -186,7 +186,7 @@ const store = new Vuex.Store({
         })
       }
       // eslint-disable-next-line
-      state.printingMessages = clonedMsg.buttons ? false : true
+      state.printingMessages = (clonedMsg.buttons || clonedMsg.id === 'burned' || clonedMsg.id === 'seeyou') ? false : true
       state.chatHistory[lang].push(clonedMsg)
     },
     removeMessage (state, {
