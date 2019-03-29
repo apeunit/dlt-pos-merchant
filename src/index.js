@@ -59,22 +59,5 @@ new Vue({
       console.log(`bar is now ${status.state}`)
       this.$store.commit('setBarState', status.state)
     })
-  },
-  async beforeMount () {
-    await store.dispatch('initAe')
-    try {
-      // eslint-disable-next-line no-undef
-      let account = JSON.parse(localStorage.getItem('account'))
-      if (account) {
-        store.commit('setAccount', account)
-      }
-      // eslint-disable-next-line no-undef
-      let beerHashes = JSON.parse(localStorage.getItem('beerHashes'))
-      if (beerHashes) {
-        store.commit('setBeerHashes', beerHashes)
-      }
-    } catch (e) {
-      console.log(e)
-    }
   }
 }).$mount('#app')

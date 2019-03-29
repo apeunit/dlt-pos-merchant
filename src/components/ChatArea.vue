@@ -80,8 +80,8 @@ export default {
       delete intro.next
       this.$store.commit('addMessage', { message: intro, lang: this.$i18n.locale })
 
-      const welcome = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'welcome-2'))
-      welcome.next = "ape-coin-usage"
+      let welcome = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'welcome-2'))
+      welcome.next = 'ape-coin-usage'
       this.$store.commit('addMessage', { message: welcome, lang: this.$i18n.locale })
     } else if (!this.chatStarted) {
       // print first message

@@ -108,7 +108,6 @@ export default (store) => {
         query: null
       })
     } else if (to.query.k === 'seeyou') {
-      store.commit('setEventStatus', true)
       const account = {
         pub: to.query.k,
         priv: to.query.k,
@@ -124,13 +123,8 @@ export default (store) => {
     if (pub && priv && name) {
       const account = { pub, priv, name }
       if (!store.state.account.pub || store.state.account.pub !== account.pub) {
-        // set account in store
-        if (!store.state.ae) {
-          await store.dispatch('initAe')
-        }
+        await store.dispatch('initAe')
         store.commit('setAccount', account)
-        // remove existing beers
-        store.commit('setBeerHashes', [])
       }
       // remove query params and keep on routing
       next({
