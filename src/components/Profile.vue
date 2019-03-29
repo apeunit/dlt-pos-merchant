@@ -47,9 +47,9 @@
             The public key is your address. This cryptographic code allows users to receive cryptocurrencies.
           </p>
         </div>
-        <div class="mt-8 mb-8 text-2xl font-sans flex flex-wrap flex-col justify-between">
+        <!-- <div class="mt-8 mb-8 text-2xl font-sans flex flex-wrap flex-col justify-between">
           <a @click.prevent="resetStorage" class="text-black" href="#">Reset message history</a>
-        </div>
+        </div> -->
       </div>
 
     </div>
