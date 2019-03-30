@@ -489,7 +489,7 @@
     },
     {
       "id": "explain-fee-2",
-      "content": "Would you like to get the Ice Cream now?",
+      "content": "Would you like to get some Ice Cream now?",
       "from": "computer",
       "time": null,
       "buttons": [{
@@ -507,7 +507,7 @@
 
     {
       "id": "transfer-user-message",
-      "content": "I would like to transfer xxx Ape Coin 🐵",
+      "content": "I would like to transfer xxx 🐵 Ape Coin",
       "from": "user",
       "time": null
     },
@@ -866,7 +866,7 @@
           "type": "function"
         },
         {
-          "title": "Post A Tweet",
+          "title": "Tweet posten",
           "action": "pre-tweet",
           "type": "message"
         },
@@ -911,7 +911,7 @@
       "from": "computer",
       "time": null,
       "buttons": [{
-        "title": "Scan a new Card",
+        "title": "Eine neue Karte scannen",
         "action": "scanQR",
         "params": "reset",
         "type": "function"
@@ -990,7 +990,7 @@
 
     {
       "id": "out-of-goods",
-      "content": "Oh no, we are out of ice cream at the moment 🤷‍♂️ Please check again later! But you can still come visit us at Halle 6 ",
+      "content": "Oh nein, wir habem im Moment kein Eis! Versuch es später noch einmal. Du kannst uns trotzdem in Halle 6 besuchen!",
       "from": "computer",
       "buttons": [{
           "title": "Coins versenden",
@@ -1013,7 +1013,7 @@
 
     {
       "id": "closed",
-      "content": "Sorry the bar is closed at the moment 🏕. We are open daily from 12 p.m.",
+      "content": "Entschuldigung, die Bar ist im Moment geschlossen. Wir haben täglich ab 12:00 geöffnet.",
       "from": "computer",
       "buttons": [{
           "title": "Coins versenden",
@@ -1092,22 +1092,22 @@
     },
     {
       "id": "post-order-message-4",
-      "content": "Hol Dir Dein 🍦, indem Du uns diesen Code zeigst.",
+      "content": "Hol Dir Dein 🍦, mit diesem Code in Halle 6, Stand E39.",
       "from": "computer",
       "time": null
     },
     {
       "id": "select-qr-scan",
-      "content": "I would like to do a scan",
+      "content": "Ich möchte einen QR Code scannen",
       "from": "user",
       "time": null,
       "buttons": [{
-          "title": "Try scanning again?",
+          "title": "Nochmal versuchen",
           "action": "scanQR",
           "type": "function"
         },
         {
-          "title": "Enter Username",
+          "title": "Namen eingeben",
           "action": "searchAddrByName",
           "type": "function"
         },
@@ -1134,7 +1134,7 @@
     },
     {
       "id": "show-order-details-3",
-      "content": "Los?",
+      "content": "Weiter?",
       "from": "computer",
       "time": null,
       "buttons": [{
@@ -1187,14 +1187,14 @@
 
     {
       "id": "explain-fee",
-      "content": "Jede Transaktion beinhaltet eine kleine Gebühr. Sie ist ein Anreiz für alle Betreiber, die Blockchain am Laufen zu halten. Erfahre mehr an unserer Bar in Halle 6!",
+      "content": "Jede Transaktion beinhaltet eine kleine Gebühr. Sie ist ein Anreiz für Menschen auf der ganzen Welt, die Blockchain am Laufen zu halten. Erfahre mehr an unserer Bar in Halle 6!",
       "from": "computer",
       "time": null,
       "next": "explain-fee-2"
     },
     {
       "id": "explain-fee-2",
-      "content": "Would you like to get the Ice Cream now?",
+      "content": "Möchtest du ein Eis?",
       "from": "computer",
       "time": null,
       "buttons": [{
@@ -1212,26 +1212,26 @@
 
     {
       "id": "transfer-user-message",
-      "content": "Ich möchte 1 Ape Coin senden 🐵",
+      "content": "Ich sende xxx 🐵Ape Coin",
       "from": "user",
       "time": null
     },
     {
       "id": "transfer-input-user",
-      "content": "I would like to initiate the transfer towards user xxx",
+      "content": "Ich möchte Ape Coins an xxx senden.",
       "from": "user",
       "time": null
     },
     {
       "id": "transfer-done",
-      "content": "Transfer complete.",
+      "content": "Transaktion erfolgreich.",
       "from": "computer",
       "next": "question-main-2",
       "time": null
     },
     {
       "id": "transfer-failed",
-      "content": "Transaction failed. Please Nächster Versuch in a few minutes",
+      "content": "Oops. Transaction fehlgeschlagen. Versuch es noch einmal in ein paar Minuten",
       "from": "computer",
       "next": "question-main-2",
       "time": null
@@ -1245,7 +1245,7 @@
     },
     {
       "id": "cancel-message-response",
-      "content": "Ok. Choose wisely now \uD83E\uDDD0",
+      "content": "Ok. Wähle mit bedacht \uD83E\uDDD0",
       "from": "computer",
       "next": "question-main"
     },
@@ -1266,15 +1266,15 @@
     },
     {
       "id": "transfer-type-choice",
-      "content": "Möchtest Du einen QR Code scannen 🤳 oder eine Adresse eingeben ✍️?",
+      "content": "Möchtest Du einen QR Code scannen 🤳 oder einen Namen eingeben ✍️?",
       "from": "computer",
       "buttons": [{
-          "title": "Scan QR Code",
+          "title": "QR Code scannen",
           "action": "scanQR",
           "type": "function"
         },
         {
-          "title": "Enter Username",
+          "title": "Namen eingeben",
           "action": "searchAddrByName",
           "type": "function"
         },
@@ -1306,7 +1306,7 @@
         {
           "title": "Alle die ich habe",
           "action": "transferCoins",
-          "params": "all my",
+          "params": "alle meine",
           "type": "function"
         },
         {
@@ -1320,7 +1320,7 @@
 
     {
       "id": "explain-transfer",
-      "content": "Können Sie mir bitte mehr über diese Übertragung erklären?",
+      "content": "Können Sie mir bitte mehr über diese Transaktion erklären?",
       "from": "user",
       "next": "explain-question-transfer",
       "time": null
@@ -1357,7 +1357,7 @@
     },
     {
       "id": "not-enough-balance-transfer",
-      "content": "Oops, not enough coins.",
+      "content": "Hoppla, nicht genug Ape Coins.",
       "from": "computer",
       "next": "not-enough-balance-receive",
       "time": null
