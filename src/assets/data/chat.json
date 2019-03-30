@@ -1062,7 +1062,12 @@
       "from": "computer",
       "time": null
     },
-
+    {
+      "id": "post-order-message-4",
+      "content": "Hol Dir Dein 🍦, indem Du uns diesen Code zeigst.",
+      "from": "computer",
+      "time": null
+    },
     {
       "id": "select-qr-scan",
       "content": "I would like to do a scan",

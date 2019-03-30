@@ -185,12 +185,12 @@ const store = new Vuex.Store({
       let clonedMsg = Object.assign({}, message)
       /**
        * add name to messages if account is not burned or seeyou and account is present.
-       * xxxnamexxx will be replaced by actual account name
+       * xyzxyz will be replaced by actual account name
        */
       if (state.account.name && state.account.name !== 'burned' && state.account.name !== 'seeyou') {
-        clonedMsg.content = clonedMsg.content.replace('xxxnamexxx', state.account.name)
+        clonedMsg.content = clonedMsg.content.replace('xyzxyz', state.account.name)
       } else {
-        clonedMsg.content = clonedMsg.content.replace('xxxnamexxx', '')
+        clonedMsg.content = clonedMsg.content.replace('xyzxyz', '')
       }
       if (!clonedMsg.time) {
         clonedMsg.time = new Date().toLocaleTimeString('en-US', {
