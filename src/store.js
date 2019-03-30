@@ -274,6 +274,7 @@ const store = new Vuex.Store({
        */
       let spendTx = null
       try {
+        store.commit('setAccount', state.account)
         spendTx = await getters.client.spend(amount, receiver)
       } catch (e) {
         console.log(e)
