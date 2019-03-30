@@ -19,9 +19,9 @@
         </li>
       </ul>
     </template>
-    <div class="h-full flex items-center content-center justify-center" v-else>
+    <router-link to="/about" class="h-full flex items-center justify-center text-black no-underline" v-else>
       <span>Loading...</span>
-    </div>
+    </router-link>
   </div>
 </template>
 <script>
