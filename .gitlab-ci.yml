@@ -8,8 +8,6 @@ build prod:
   only:
     - tags
   script:
-    # Install vuecli
-    - npm install -g @vue/cli@latest
     # Install dependencies
     - npm install
     # Build App
@@ -35,8 +33,6 @@ build stage:
   only:
     - develop
   script:
-    # Install vuecli
-    - npm install -g @vue/cli@latest
     # Install dependencies
     - npm install
     # Build App
