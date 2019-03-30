@@ -55,14 +55,28 @@
     },
     {
       "id": "welcome-4",
-      "content": "Trade them or use them to buy ice cream in Halle 6. \uD83C\uDF66\uD83C\uDF66",
+      "content": "Trade them for ice cream at our bar in Hall 6 or send them to friends. \uD83C\uDF66\uD83C\uDF66",
       "from": "computer",
       "next": "welcome-5",
       "time": null
     },
     {
       "id": "welcome-5",
-      "content": "All through blockchain tech!",
+      "content": "We use blockchain technology to make that happen. ",
+      "from": "computer",
+      "next": "welcome-6",
+      "time": null
+    },
+    {
+      "id": "welcome-6",
+      "content": "The blockchain stores how many Ape Coins you own.",
+      "from": "computer",
+      "next": "welcome-7",
+      "time": null
+    },
+    {
+      "id": "welcome-7",
+      "content": "We assigned the name xyzxyz to your account! It makes it easy for others to send you Ape Coins.",
       "from": "computer",
       "next": "question-main",
       "time": null
@@ -354,7 +368,7 @@
 
     {
       "id": "post-order-message-1",
-      "content": "The transaction is now being generated and signed with your private key \uD83D\uDD11",
+      "content": "The transaction is now being generated and signed with your account \uD83D\uDD11",
       "from": "computer",
       "time": null
     },
@@ -372,7 +386,7 @@
     },
     {
       "id": "post-order-message-4",
-      "content": "Pick up your \uD83C\uDF66 by showing this QR code.",
+      "content": "Pick up your \uD83C\uDF66 by showing this at our bar in hall 6, booth E39.",
       "from": "computer",
       "time": null
     },
@@ -408,7 +422,7 @@
     },
     {
       "id": "show-order-details-2",
-      "content": "You're about to transfer xxx Ape Coin plus transaction fee to our bar.",
+      "content": "You're about to transfer xxx Ape Coin to our bar.",
       "from": "computer",
       "time": null,
       "next": "show-order-details-3"
@@ -443,7 +457,7 @@
 
     {
       "id": "transfer-confirmation-1",
-      "content": "You're about to transfer xxx Ape Coin, and the transaction comes with a small fee.",
+      "content": "You're about to transfer xxx Ape Coin.",
       "from": "computer",
       "next": "transfer-confirmation-2",
       "time": null
@@ -468,7 +482,7 @@
 
     {
       "id": "explain-fee",
-      "content": "The transaction fee is for the block miners, who keep the blockchain running with their computing power.",
+      "content": "Every transaction includes a small fee, that creates an incentive for people around the world to keep the blockchain running. Learn more at our bar in Hall 6!",
       "from": "computer",
       "time": null,
       "next": "explain-fee-2"
@@ -748,14 +762,28 @@
     },
     {
       "id": "welcome-4",
-      "content": "Du kannst sie mit anderen tauschen, oder Dir bei uns in Halle 6 ein Eis holen. \uD83C\uDF66\uD83C\uDF66",
+      "content": "Tausche sie in Halle 6 gegen ein Eis, oder sende sie an Freunde. \uD83C\uDF66\uD83C\uDF66",
       "from": "computer",
       "next": "welcome-5",
       "time": null
     },
     {
       "id": "welcome-5",
-      "content": "Alles auf Basis von Blockchain!",
+      "content": "Alles auf Basis von Blockchain Technologie!",
+      "from": "computer",
+      "next": "welcome-6",
+      "time": null
+    },
+    {
+      "id": "welcome-6",
+      "content": "Wie viele Ape Coins Du hast, wird auf der Blockchain gespeichert.",
+      "from": "computer",
+      "next": "welcome-7",
+      "time": null
+    },
+    {
+      "id": "welcome-7",
+      "content": "Wir haben Dir den Namen xyzxyz zugewiesen, dadurch ist es für andere einfacher Dir Ape Coins zu senden.",
       "from": "computer",
       "next": "question-main",
       "time": null
@@ -766,7 +794,7 @@
       "content": "Also, was möchtest Du tun?",
       "from": "computer",
       "buttons": [{
-          "title": "Eis abholen",
+          "title": "Eis essen",
           "action": "orderIceCream",
           "type": "function"
         },
@@ -788,7 +816,7 @@
       "content": "Was möchtest Du als nächstes tun?",
       "from": "computer",
       "buttons": [{
-          "title": "Eis abholen",
+          "title": "Eis essen",
           "action": "orderIceCream",
           "type": "function"
         },
@@ -1046,7 +1074,7 @@
 
     {
       "id": "post-order-message-1",
-      "content": "Die Transaktion wird jetzt getätigt und dabei mit deinem private key signiert \uD83D\uDD11",
+      "content": "Die Transaktion wird jetzt erstellt und mit Deinem Account signiert \uD83D\uDD11",
       "from": "computer",
       "time": null
     },
@@ -1094,7 +1122,7 @@
     },
     {
       "id": "show-order-details-2",
-      "content": "Du bist dabei xxx Ape Coin plus eine kleine Transaktionsgebühr an unsere Bar zu senden.",
+      "content": "Du bist dabei xxx Ape Coin an unsere Bar zu senden.",
       "from": "computer",
       "time": null,
       "next": "show-order-details-3"
@@ -1129,7 +1157,7 @@
 
     {
       "id": "transfer-confirmation-1",
-      "content": "Du bist dabei xxx Ape Coin zu senden, die transaktion kostet eine kleine Geb.",
+      "content": "Du bist dabei xxx Ape Coin zu senden.",
       "from": "computer",
       "next": "transfer-confirmation-2",
       "time": null
@@ -1154,7 +1182,7 @@
 
     {
       "id": "explain-fee",
-      "content": "The transaction fee is for the block miners, who keep the blockchain running with their computing power.",
+      "content": "Jede Transaktion beinhaltet eine kleine Gebühr. Sie ist ein Anreiz für alle Betreiber, die Blockchain am Laufen zu halten. Erfahre mehr an unserer Bar in Halle 6!",
       "from": "computer",
       "time": null,
       "next": "explain-fee-2"
@@ -1275,11 +1303,6 @@
           "action": "transferCoins",
           "params": "all my",
           "type": "function"
-        },
-        {
-          "title": "Wie geht das?",
-          "action": "explain-transfer",
-          "type": "message-white"
         },
         {
           "title": "Ich möchte zurück",
