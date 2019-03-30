@@ -5,7 +5,6 @@
       "from": "user",
       "time": null
     },
-
     {
       "id": "intro",
       "content": "Hey there! \uD83D\uDC4B",
@@ -192,12 +191,11 @@
       "from": "computer",
       "time": null,
       "buttons": [{
-          "title": "Scan a new Card",
-          "action": "scanQR",
-          "params": "reset",
-          "type": "function"
-        }
-      ]
+        "title": "Scan a new Card",
+        "action": "scanQR",
+        "params": "reset",
+        "type": "function"
+      }]
     },
     {
       "id": "bye-bye-1",
@@ -257,7 +255,7 @@
     },
     {
       "id": "post-tweet",
-      "content": "Ok, that worked! You just received 1 extra Ape Coin.",
+      "content": "Ok, that worked! You just received 0.75 extra Ape Coin.",
       "from": "computer",
       "next": "question-main-2",
       "time": null
@@ -949,7 +947,7 @@
     },
     {
       "id": "post-tweet",
-      "content": "Das war erfolgreich! Du hast 1 Ape Coin bekommen.",
+      "content": "Das war erfolgreich! Du hast 0.75 Ape Coin bekommen.",
       "from": "computer",
       "next": "question-main-2",
       "time": null
@@ -990,7 +988,7 @@
       "content": "Sorry the bar is closed at the moment 🏕. We are open daily from 12 p.m.",
       "from": "computer",
       "buttons": [{
-          "title": "Send Coins",
+          "title": "Coins versenden",
           "action": "transfer",
           "type": "message"
         },
