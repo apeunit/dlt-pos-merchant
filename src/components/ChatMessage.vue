@@ -184,7 +184,7 @@ export default {
     saveOrder (arg) {
       const order   = Object.assign({}, this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'show-order-details'))
       order.content = order.content.replace('xxx', arg)
-      order.content = arg > 1 ? order.content + 's' : order.content
+      // order.content = arg > 1 ? order.content + 's' : order.content
       this.$store.commit('addMessage', { message: order, lang: this.$i18n.locale })
 
       const amount = arg * this.$store.state.itemPrice

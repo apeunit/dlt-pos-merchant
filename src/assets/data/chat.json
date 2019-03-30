@@ -402,7 +402,7 @@
           "type": "function"
         },
         {
-          "title": "Enter Username",
+          "title": "Enter Name",
           "action": "searchAddrByName",
           "type": "function"
         },
@@ -569,7 +569,7 @@
           "type": "function"
         },
         {
-          "title": "Enter Username",
+          "title": "Enter Name",
           "action": "searchAddrByName",
           "type": "function"
         },

@@ -20,7 +20,7 @@
       </span>
       </div>
       <div class="flex justify-between items-center mb-8">
-        <input class="app-modal-input text-white h-12 text-2xl bg-transparent w-2/3" v-model="accountName" type="text" placeholder="Unique Name or address">
+        <input class="app-modal-input text-white h-12 text-2xl bg-transparent w-2/3" v-model="accountName" type="text" placeholder="Name/Address">
         <button class="app-modal-button w-1/3 h-12 py-4" @click="checkAddress">
           Go
         </button>
