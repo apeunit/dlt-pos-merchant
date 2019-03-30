@@ -14,17 +14,17 @@
           </svg>
         </button>
       </header>
-      <input class="app-modal-input" v-model="accountName" type="text" placeholder="Unique Name or address">
-      <footer>
-        <div>
-          <span v-if="showError" style="color:#DC143C">
-          {{ error }}
-        </span>
-        </div>
-        <button class="app-modal-button" @click="checkAddress">
+      <div>
+        <span v-if="showError" style="color:#DC143C">
+        {{ error }}
+      </span>
+      </div>
+      <div class="flex justify-between items-center mb-8">
+        <input class="app-modal-input text-white h-12 text-2xl bg-transparent w-2/3" v-model="accountName" type="text" placeholder="Unique Name or address">
+        <button class="app-modal-button w-1/3 h-12 py-4" @click="checkAddress">
           Go
         </button>
-      </footer>
+      </div>
     </div>
   </div>
 </template>
@@ -116,8 +116,7 @@ export default {
   @apply bg-black;
 }
 
-.app-modal > header,
-.app-modal > footer {
+.app-modal > header {
   @apply flex;
   @apply justify-between;
   @apply items-center;
@@ -139,22 +138,16 @@ export default {
   tracking-wide
   cursor-pointer;
 
-  outline: none;
+  outline: 0;
 }
 
 .app-modal-input {
-  @apply text-white;
-  @apply text-2xl;
-  @apply bg-transparent;
-  @apply mb-8;
-  @apply h-12;
-
-  outline: none;
+  outline: 0;
 }
 
 .app-modal-input:focus,
 .app-modal-input:hover {
-  outline: none;
+  outline: 0;
 }
 
 .app-modal-input::placeholder {
@@ -162,6 +155,7 @@ export default {
 }
 
 .app-modal-button {
+  outline: 0;
   @apply
   rounded-full
   font-sans
@@ -190,6 +184,6 @@ export default {
 }
 
 .error {
-  
+
 }
 </style>

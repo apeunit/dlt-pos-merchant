@@ -612,45 +612,6 @@
       ],
       "time": null
     },
-
-    {
-      "id": "explain-transfer",
-      "content": "Can you please explain me more about this transfer?",
-      "from": "user",
-      "next": "explain-question-transfer",
-      "time": null
-    },
-    {
-      "id": "explain-question-transfer",
-      "content": "You can trasf",
-      "from": "computer",
-      "buttons": [{
-          "title": "1",
-          "action": "transferCoins",
-          "params": 1,
-          "type": "function"
-        },
-        {
-          "title": "2",
-          "action": "transferCoins",
-          "params": 2,
-          "type": "function"
-        },
-        {
-          "title": "Everything I own",
-          "action": "transferCoins",
-          "params": "all my",
-          "type": "function"
-        },
-        {
-          "title": "I changed my mind",
-          "action": "cancel-message",
-          "type": "message-white"
-        }
-      ],
-      "time": null
-    },
-
     {
       "id": "not-enough-balance",
       "content": "Oops, not enough coins: 1\uD83C\uDF66 costs 1 Ape Coin.",
@@ -1317,15 +1278,6 @@
       ],
       "time": null
     },
-
-    {
-      "id": "explain-transfer",
-      "content": "Können Sie mir bitte mehr über diese Transaktion erklären?",
-      "from": "user",
-      "next": "explain-question-transfer",
-      "time": null
-    },
-
     {
       "id": "not-enough-balance",
       "content": "Oh, Du hast nicht genug Coins: 1\uD83C\uDF66 kostet 1 Ape Coin.",
@@ -1359,7 +1311,24 @@
       "id": "not-enough-balance-transfer",
       "content": "Hoppla, nicht genug Ape Coins.",
       "from": "computer",
-      "next": "not-enough-balance-receive",
+      "next": "not-enough-balance-transfer-receive",
+      "time": null
+    },
+    {
+      "id": "not-enough-balance-transfer-receive",
+      "content": "Du könntest neue Coins empfangen.",
+      "from": "computer",
+      "buttons": [{
+          "title": "Coins empfangen",
+          "action": "receive",
+          "type": "message"
+        },
+        {
+          "title": "Ich möchte zurück",
+          "action": "cancel-message",
+          "type": "message-white"
+        }
+      ],
       "time": null
     }
   ]

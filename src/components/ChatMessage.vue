@@ -147,7 +147,7 @@ export default {
 
       let amount = isNaN(arg) ? ((Number(formatUnit(this.userBalance)) * this.$store.state.itemPrice) - this.$store.state.fee) : arg * this.$store.state.itemPrice
       amount     = amount < 0 ? 0 : amount
-      if (this.userBalance >= (amount + this.$store.state.fee)) {
+      if (this.userBalance >= (amount + this.$store.state.fee) && amount > 0) {
         this.$store.commit('setCostToCharge', amount)
         const msg = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'transfer-type-choice')
         this.$store.commit('addMessage', { message: msg, lang: this.$i18n.locale })
