@@ -72,8 +72,10 @@ export default {
     }
     if(this.eventEnded || account.pub === 'seeyou') {
       this.$store.commit('resetChatHistory')
-      const firstMsg = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'bye-bye-1')
-      this.$store.commit('addMessage', { message: firstMsg, lang: this.$i18n.locale })
+      setTimeout(()=>{
+        const firstMsg = this.chatMessagesList[this.$i18n.locale].find(o => o.id === 'bye-bye-1')
+        this.$store.commit('addMessage', { message: firstMsg, lang: this.$i18n.locale })
+      }, 1000)
     } else if(this.burned || account.pub === 'burned') {
       this.$store.commit('resetChatHistory')
       setTimeout(()=>{
