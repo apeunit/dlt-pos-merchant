@@ -183,6 +183,15 @@ const store = new Vuex.Store({
       lang
     }) {
       let clonedMsg = Object.assign({}, message)
+      /**
+       * add name to messages if account is not burned or seeyou and account is present.
+       * xyzxyz will be replaced by actual account name
+       */
+      if (state.account.name && state.account.name !== 'burned' && state.account.name !== 'seeyou') {
+        clonedMsg.content = clonedMsg.content.replace('xyzxyz', state.account.name)
+      } else {
+        clonedMsg.content = clonedMsg.content.replace('xyzxyz', '')
+      }
       if (!clonedMsg.time) {
         clonedMsg.time = new Date().toLocaleTimeString('en-US', {
           hour: 'numeric',
@@ -274,6 +283,7 @@ const store = new Vuex.Store({
        */
       let spendTx = null
       try {
+        store.commit('setAccount', state.account)
         spendTx = await getters.client.spend(amount, receiver)
       } catch (e) {
         console.log(e)

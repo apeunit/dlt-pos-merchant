@@ -234,7 +234,7 @@
     },
     {
       "id": "bye-bye-4",
-      "content": "Go to <a href='apeunit.com' target='_blank' rel='noopener'>apeunit.com</a> or get in touch via <a href='mailto:office@apeunit.com' target='_blank'>office@apeunit.com</a>",
+      "content": "Go to <a href='https://apeunit.com' target='_blank' rel='noopener'>apeunit.com</a> or get in touch via <a href='mailto:office@apeunit.com' target='_blank'>office@apeunit.com</a>",
       "from": "computer",
       "time": null
     },
@@ -940,7 +940,7 @@
     },
     {
       "id": "bye-bye-4",
-      "content": "Besuche uns auf <a href='apeunit.com' target='_blank' rel='noopener'>apeunit.com</a> oder schreib uns: <a href='mailto:office@apeunit.com' target='_blank'>office@apeunit.com</a>",
+      "content": "Besuche uns auf <a href='https://apeunit.com' target='_blank' rel='noopener'>apeunit.com</a> oder schreib uns: <a href='mailto:office@apeunit.com' target='_blank'>office@apeunit.com</a>",
       "from": "computer",
       "time": null
     },
@@ -1090,7 +1090,12 @@
       "from": "computer",
       "time": null
     },
-
+    {
+      "id": "post-order-message-4",
+      "content": "Hol Dir Dein 🍦, indem Du uns diesen Code zeigst.",
+      "from": "computer",
+      "time": null
+    },
     {
       "id": "select-qr-scan",
       "content": "I would like to do a scan",

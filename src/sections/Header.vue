@@ -45,7 +45,7 @@ export default {
       return this.$store.state.isBalanceLoading
     },
     hideProfile () {
-      return this.$store.state.account.pub === 'burned' || this.$store.state.account.pub === 'seeyou'
+      return this.$store.state.account.pub === 'burned' || this.$store.state.account.pub === 'seeyou' || this.$store.state.account.pub == null
     }
   }
 }
