@@ -98,7 +98,7 @@ export default (store) => {
     if (to.query.k === 'burned') {
       // if the address is burned, but it already belogn to this device (in the state/store),
       // then start the regular app
-      if (store.state.account.pub.startsWith('ak_')) {
+      if (store.state.account.pub && store.state.account.pub.startsWith('ak_')) {
         // console.log('HEREEEEEEEE', store.state.account.pub)
         next('/')
       } else {
