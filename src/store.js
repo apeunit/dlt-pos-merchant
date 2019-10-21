@@ -27,7 +27,7 @@ const store = new Vuex.Store({
     itemPrice: 1000000000000000000,
     fee: 18000000000000,
     barPubKey: 'ak_BARmHG4mjUeUKY522wxyv7Q8hMEVpC5Qm9GSpuSiSLv17B1sg',
-    websocketUrl: 'https://api.pos.apeunit.com', // 'http://localhost:5000',
+    websocketUrl: 'https://api.pos.apeunit.com', /*'http://localhost:5000',*/
     twitterBase: 'https://twitter.com/intent/tweet?text=',
     explorer: 'https://explorer.apeunit.com',
     socketConnected: false,
@@ -157,7 +157,7 @@ const store = new Vuex.Store({
       state.account.priv = priv
       state.account.name = name
       // eslint-disable-next-line no-undef
-      localStorage.setItem('account', JSON.stringify(state.account))
+      // localStorage.setItem('account', JSON.stringify(state.account))
       if (pub !== 'burned' && pub !== 'seeyou') {
         state.ae.setKeypair({
           secretKey: state.account.priv,
@@ -311,7 +311,12 @@ const store = new Vuex.Store({
     }
   },
   plugins: [
-    createPersistedState()
+    createPersistedState({
+      key: 'merchant-state',
+      storage: window.localStorage,
+      reducer: state => state.account
+    })
+
   ]
 })
 

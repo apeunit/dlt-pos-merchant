@@ -14,7 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "@aeternity/aepp-components": "^2.0.15",
-    "@aeternity/aepp-sdk": "^2.3.2",
+    "@aeternity/aepp-sdk": "^6.0.0",
     "@chenfengyuan/vue-qrcode": "^1.0.0",
     "bignumber.js": "8.1.1",
     "isomorphic-fetch": "^2.2.1",
@@ -31,7 +31,7 @@
     "vuex-persistedstate": "^2.5.4"
   },
   "devDependencies": {
-    "@babel/cli": "^7.2.3",
+    "@babel/cli": "^7.6.4",
     "@babel/core": "^7.3.4",
     "@babel/plugin-proposal-class-properties": "^7.3.4",
     "@babel/plugin-proposal-decorators": "^7.3.0",
