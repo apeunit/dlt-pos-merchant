@@ -277,6 +277,16 @@ const store = new Vuex.Store({
         })
       )
     },
+    flushData ({ state, commit }) {
+      const account = {
+          pub: null,
+          priv: null,
+          name: null
+        }
+      commit('setAccount', account)
+      window.localStorage.removeItem('vuex')
+      console.log(window.localStorage, state.account)
+    },
     async transfer ({ commit, state, getters, dispatch }, { amount, receiver }) {
       /**
        *  TODO: check for same account. user balance etc
@@ -312,7 +322,7 @@ const store = new Vuex.Store({
   },
   plugins: [
     createPersistedState({
-      key: 'merchant-state',
+      key: 'vuex',
       storage: window.localStorage,
       reducer: state => state.account
     })
