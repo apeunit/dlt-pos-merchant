@@ -12,6 +12,7 @@ import Header from './sections/Header.vue'
  * Views
  */
 import ChatArea from './components/ChatArea.vue'
+import Merchant from './components/Merchant.vue'
 import Impressum from './components/Impressum.vue'
 import About from './components/About.vue'
 import Venue from './components/Venue.vue'
@@ -38,7 +39,8 @@ export default (store) => {
       }),
       components: {
         header: Header,
-        default: ChatArea
+        default: ChatArea,
+        merchant: Merchant
       }
     },
     {
@@ -85,6 +87,14 @@ export default (store) => {
       components: {
         header: Header,
         default: Transactions
+      }
+    },
+    {
+      path: '/merchant',
+      name: 'Merchant',
+      components: {
+        header: Header,
+        default: Merchant
       }
     }
   ]
