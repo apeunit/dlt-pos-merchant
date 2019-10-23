@@ -14,8 +14,9 @@
 <style scoped>
   button {
     border: 1px solid black;
-    border-radius: 5px;
-    padding: 10px;
+    border-radius: 2px;
+    padding: 5px;
     margin: 5px;
+    font-size: 8px;
   }
 </style>

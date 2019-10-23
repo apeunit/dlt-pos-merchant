@@ -18,4 +18,12 @@
     }
   }
 </script>
-
+<style scoped>
+  button {
+    height: 55px;
+    /*width: 161px;*/
+  }
+  button::after {
+    content: ' →';
+  }
+</style>

@@ -2,11 +2,13 @@
   <div>
     <logout-button @handle-click="logout"/>
     <div class="body">
-      <text-component :msg="greeting"/>
+      <text-component :msg="greeting" id="showcase-greeting"/>
       <input-component @on-change="handleInput"/>
-      <span v-for="label in buttonLabels" :key="label.key">
-        <action-button :button-label="label" @handle-click="handleClick" />
+      <div class="action-buttons">
+        <span v-for="label in buttonLabels" :key="label.key" class="action-button">
+        <action-button :button-label="label" @handle-click="handleClick"/>
       </span>
+      </div>
     </div>
   </div>
 </template>
@@ -55,7 +57,24 @@
   }
 </script>
 <style scoped>
-  button {
-    color: red;
+  div.body {
+    width: 375px;
+    height: 100%;
+    padding-left: 46px;
+    padding-right: 62px;
+    margin: 0 auto;
+    border: 1px solid black;
+  }
+  #showcase-greeting {
+    height: 248px;
+    width: 267px;
+    /*color: #FFFFFF;*/
+    font-size: 40px;
+    line-height: 47px;
+  }
+  .action-button {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
   }
 </style>

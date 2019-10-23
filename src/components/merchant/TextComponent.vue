@@ -11,3 +11,9 @@
     }
   }
 </script>
+<style scoped>
+  p {
+    font-size: 40px;
+    line-height: 47px;
+  }
+</style>
