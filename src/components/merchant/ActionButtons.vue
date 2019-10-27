@@ -24,7 +24,7 @@
             route += 'check-order'
             break
           case 'Top Up Ape Coins':
-            route += ''
+            route += 'top-up-coins'
             break
         }
         return route
@@ -33,11 +33,18 @@
   }
 </script>
 <style scoped>
-  button {
-    height: 55px;
+  a {
+    line-height: 28px;
+    text-decoration: none;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
     /*width: 161px;*/
   }
-  button::after {
+  a, a:visited, a:hover, a:active {
+    color: inherit;
+  }
+  a::after {
     content: ' →';
   }
 </style>

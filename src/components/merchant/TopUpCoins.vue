@@ -1,28 +1,28 @@
 <template>
   <div>
-    <header-component :view-title="'Check Order'"/>
-    <p id="confirmation-message">{{ confirmationMsg }}</p>
-    <explorer-link :url="'/'" />
+    <header-component :view-title="'Top Up Ape Coins'" />
+    <p>{{ msg }}</p>
+    <explorer-link :url="''" />
   </div>
 </template>
 <script>
   import HeaderComponent from './HeaderComponent.vue'
   import ExplorerLink from './ExplorerLink.vue'
   export default {
-    name: 'CheckOrder',
+    name: 'TopUpCoins',
     components: {
       HeaderComponent,
       ExplorerLink
     },
     data () {
       return {
-        confirmationMsg: 'successfully ordered 1 beer, give it!',
+        msg: 'You just successfully gave 5AE to'
       }
     }
   }
 </script>
 <style scoped>
-  p#confirmation-message {
+  p {
     font-size: 40px;
     line-height: 47px;
   }

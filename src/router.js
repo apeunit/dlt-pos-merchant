@@ -16,6 +16,7 @@ import Merchant from './components/Merchant.vue'
 import Cockpit from './components/merchant/Cockpit.vue'
 import GenerateWallet from './components/merchant/GenerateWallet.vue'
 import CheckOrder from './components/merchant/CheckOrder.vue'
+import TopUpCoins from './components/merchant/TopUpCoins.vue'
 import Impressum from './components/Impressum.vue'
 import About from './components/About.vue'
 import Venue from './components/Venue.vue'
@@ -53,6 +54,10 @@ export default (store) => {
         {
           path: 'check-order',
           component: CheckOrder
+        },
+        {
+          path: 'top-up-coins',
+          component: TopUpCoins
         }
       ]
     },
