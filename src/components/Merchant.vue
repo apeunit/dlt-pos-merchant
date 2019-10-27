@@ -3,12 +3,13 @@
     <logout-button @handle-click="logout"/>
     <div class="body">
       <text-component :msg="greeting" id="showcase-greeting"/>
-      <input-component @on-change="handleInput"/>
-      <div class="action-buttons">
-        <span v-for="label in buttonLabels" :key="label.key" class="action-button">
-        <action-button :button-label="label" @handle-click="handleClick"/>
+      <router-view/>
+      <span v-if="!loggedIn">
+        <mnemonic @on-change="handleInput"/>
       </span>
-      </div>
+      <span v-else-if="loggedIn">
+        <action-buttons :button-labels="buttonLabels"/>
+      </span>
     </div>
   </div>
 </template>
@@ -16,19 +17,19 @@
   import { mapActions } from 'vuex'
   import LogoutButton from './merchant/LogoutButton.vue'
   import TextComponent from './merchant/TextComponent.vue'
-  import ActionButton from './merchant/ActionButton.vue'
-  import InputComponent from './merchant/InputComponent.vue'
+  import ActionButtons from './merchant/ActionButtons.vue'
+  import Mnemonic from './merchant/Mnemonic.vue'
   export default {
     name: 'Merchant',
     components: {
-      ActionButton,
+      ActionButtons,
       LogoutButton,
       TextComponent,
-      InputComponent
+      Mnemonic
     },
     data() {
       return {
-        msg: 'hello',
+        loggedIn: true,
         mnemonic: ''
       }
     },
@@ -51,6 +52,7 @@
       },
       logout() {
         console.log('logging out')
+        this.loggedIn = false
         this.flushData()
       }
     }
