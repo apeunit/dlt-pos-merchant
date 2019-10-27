@@ -24,7 +24,7 @@
             route += 'check-order'
             break
           case 'Top Up Ape Coins':
-            route += 'top-up-coins'
+            route += ''
             break
         }
         return route

@@ -13,8 +13,9 @@ import Header from './sections/Header.vue'
  */
 import ChatArea from './components/ChatArea.vue'
 import Merchant from './components/Merchant.vue'
-import GenerateWallet from './components/GenerateWallet.vue'
-import CheckOrder from './components/CheckOrder.vue'
+import Cockpit from './components/merchant/Cockpit.vue'
+import GenerateWallet from './components/merchant/GenerateWallet.vue'
+import CheckOrder from './components/merchant/CheckOrder.vue'
 import Impressum from './components/Impressum.vue'
 import About from './components/About.vue'
 import Venue from './components/Venue.vue'
@@ -41,6 +42,10 @@ export default (store) => {
       // }),
       component: Merchant,
       children: [
+        {
+          path: '/',
+          component: Cockpit
+        },
         {
           path: 'generate-wallet',
           component: GenerateWallet
