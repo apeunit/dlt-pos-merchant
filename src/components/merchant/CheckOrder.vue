@@ -1,8 +1,10 @@
 <template>
   <div>
     <header-component :view-title="'Check Order'"/>
-    <p id="confirmation-message">{{ confirmationMsg }}</p>
-    <explorer-link :url="'/'" />
+    <div class="wrapper">
+      <p id="confirmation-message">{{ confirmationMsg }}</p>
+      <explorer-link :url="'/'" />
+    </div>
   </div>
 </template>
 <script>
@@ -22,6 +24,12 @@
   }
 </script>
 <style scoped>
+  div.wrapper {
+    margin-left: 30px;
+    margin-top: 40px;
+    width: 267px;
+    height: 667px;
+  }
   p#confirmation-message {
     font-size: 40px;
     line-height: 47px;

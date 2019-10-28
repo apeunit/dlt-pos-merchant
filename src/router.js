@@ -38,9 +38,9 @@ export default (store) => {
     {
       path: '/',
       name: 'merchant',
-      // props: route => ({
-      //   query: route.query
-      // }),
+      props: route => ({
+        query: route.query
+      }),
       component: Merchant,
       children: [
         {

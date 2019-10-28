@@ -13,10 +13,10 @@
 <style scoped>
   div.body {
     /*width: 375px;*/
-    height: 667px;
-    padding-left: 46px;
-    padding-right: 45px;
+    /*height: 667px;*/
+    /*padding-left: 46px;*/
+    /*padding-right: 45px;*/
     margin: 0 auto;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
   }
 </style>

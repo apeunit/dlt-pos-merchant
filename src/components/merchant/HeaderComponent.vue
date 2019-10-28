@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container">
+    <div class="wrapper">
       <div class="content">
         <router-link to="/">Back</router-link>
         <h5>{{ viewTitle }}</h5>
@@ -22,15 +22,16 @@
 </script>
 
 <style scoped>
-  div.container {
+  div.wrapper {
     height: 134px;
-    width: 100%;
-    color: black;
-    /*background-color: black;*/
+    /*width: 500px;*/
+    color: white;
+    background-color: black;
     position: relative;
     /*border-bottom: 1px solid black;*/
   }
   div.content {
+    margin-left: 30px;
     position: absolute;
     top: 25%;
   }

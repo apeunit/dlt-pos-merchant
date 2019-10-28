@@ -13,7 +13,9 @@
 </script>
 <style scoped>
   button {
-    border: 1px solid black;
+    color: #FFFFFF;
+    opacity: 0.4;
+    /*border: 1px solid white;*/
     border-radius: 0px;
     padding: 5px;
     margin: 5px;

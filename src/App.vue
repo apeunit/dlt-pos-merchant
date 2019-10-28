@@ -20,9 +20,13 @@ export default {
   },
   methods: {},
   async mounted () {
-    // const keyPair = Crypto.generateKeyPair()
-    // await this.$store.commit('setAccount', { pub: 'ak_tmxaxYsUEMNKFfH12dDZ7jKZV7hoVzMy7wZFCSad3ndhyCt5C', priv: `45a786556a9dd030a9850f5f89ae590986cc43a7c5a82b7abee6deccf2a9f8d1758fd20ed55e9782c555944de207ac08943e0cf8f1af5922641c9af983b7afa9`, name: 'hello'})
-    // console.log('account is ',this.$store.state.account)
+    const keyPair = await Crypto.generateKeyPair()
+    console.log(keyPair)
+    await this.$store.commit('setAccount', { pub: 'ak_tmxaxYsUEMNKFfH12dDZ7jKZV7hoVzMy7wZFCSad3ndhyCt5C', priv: `45a786556a9dd030a9850f5f89ae590986cc43a7c5a82b7abee6deccf2a9f8d1758fd20ed55e9782c555944de207ac08943e0cf8f1af5922641c9af983b7afa9`, name: 'hello'})
+    // await this.$store.commit('setAccount',
+    //   { pub: keyPair.publicKey, priv: keyPair.secretKey, name: 'hello' }
+    // )
+    console.log('account is ',this.$store.state.account)
     // update balance after 5sec (wait for 'initAe' in store)
     setTimeout(() => {
       this.$store.dispatch('updateBalance')

@@ -1,14 +1,24 @@
 <template>
   <div>
-    <logout-button @handle-click="logout"/>
-    <text-component :msg="greeting" id="showcase-greeting"/>
-    <router-view/>
-    <span v-if="!loggedIn">
-        <mnemonic @on-change="handleInput"/>
+    <div class="wrapper">
+      <text-component :msg="greeting" id="showcase-greeting"/>
+      <router-view/>
+      <span v-if="!loggedIn">
+        <mnemonic
+          @on-change="handleInput"
+          @on-click="handleClick"
+          class="mnemonic"/>
+        <logout-button
+          @handle-click="logout"
+          class="log-out"
+        />
       </span>
-    <span v-else-if="loggedIn">
-        <action-buttons :button-labels="buttonLabels" class="button-group"/>
+        <span v-else-if="loggedIn">
+        <action-buttons
+          :button-labels="buttonLabels"
+          class="button-group"/>
       </span>
+    </div>
   </div>
 </template>
 <script>
@@ -27,7 +37,7 @@
     },
     data () {
       return {
-        loggedIn: true,
+        loggedIn: false,
         mnemonic: ''
       }
     },
@@ -45,6 +55,9 @@
         console.log(e)
         this.mnemonic = e // mnemonic to be verified via vuex
       },
+      handleClick() {
+        this.loggedIn = true
+      },
       logout() {
         console.log('logging out')
         this.loggedIn = false
@@ -54,13 +67,23 @@
   }
 </script>
 <style scoped>
+  div.wrapper {
+    padding-left: 30px;
+    padding-right: 45px;
+    height: 667px;
+    background-color: black;
+    color: #FFFFFF;
+  }
   #showcase-greeting {
     height: 248px;
     width: 267px;
-    /*color: #FFFFFF;*/
     font-size: 40px;
     line-height: 47px;
-    margin-top: 24px;
+    padding-top: 48px;
+    /*margin-top: 24px;*/
+  }
+  .mnemonic {
+    margin-top: 82px;
   }
   .button-group {
     margin-top: 241px;

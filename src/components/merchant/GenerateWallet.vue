@@ -1,7 +1,9 @@
 <template>
   <div>
     <header-component :view-title="'Generate Wallet'" />
-    <p>{{ msg }}</p>
+    <div class="wrapper">
+      <p>{{ msg }}</p>
+    </div>
   </div>
 </template>
 <script>
@@ -19,6 +21,12 @@
   }
 </script>
 <style scoped>
+  div.wrapper {
+    margin-left: 30px;
+    margin-top: 30px;
+    width: 267px;
+    height: 667px;
+  }
   p {
     font-size: 28px;
     line-height: 34px;

@@ -279,11 +279,11 @@ const store = new Vuex.Store({
     },
     flushData ({ state, commit }) {
       const account = {
-          pub: null,
-          priv: null,
-          name: null
-        }
-      commit('setAccount', account)
+        pub: null,
+        priv: null,
+        name: null
+      }
+      // commit('setAccount', account)
       window.localStorage.removeItem('vuex')
       console.log(window.localStorage, state.account)
     },
