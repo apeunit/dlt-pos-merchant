@@ -2,23 +2,31 @@
   <div>
     <header-component :view-title="'Check Order'"/>
     <div class="wrapper">
-      <p id="confirmation-message">{{ confirmationMsg }}</p>
-      <explorer-link :url="'/'" />
+<!--      <p id="confirmation-message">{{ confirmationMsg }}</p>-->
+<!--      <explorer-link :url="'/'" />-->
+          <SendComponent @onFinish="onDone"/>
     </div>
   </div>
 </template>
 <script>
+  import SendComponent from '../Send.vue'
   import HeaderComponent from './HeaderComponent.vue'
   import ExplorerLink from './ExplorerLink.vue'
   export default {
     name: 'CheckOrder',
     components: {
       HeaderComponent,
+      SendComponent,
       ExplorerLink
     },
     data () {
       return {
         confirmationMsg: 'successfully ordered 1 beer, give it!',
+      }
+    },
+    methods: {
+      onDone (result) {
+          debugger
       }
     }
   }

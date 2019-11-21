@@ -267,13 +267,9 @@ const store = new Vuex.Store({
       commit(
         'setAe',
         await Ae({
-          url: 'https://blockchain.apeunit.com',
-          internalUrl: 'https://blockchain.apeunit.com',
-          networkId: 'ae_uat', // or any other networkId your client should connect to
-          keypair: {
-            secretKey: '',
-            publicKey: ''
-          }
+          url: 'https://testnet.aeternal.io',
+          internalUrl: 'https://testnet.aeternal.io',
+          compilerUrl: 'https://compiler.aepps.com'
         })
       )
     },

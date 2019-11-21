@@ -27,6 +27,8 @@
   import ActionButtons from './ActionButtons.vue'
   import Mnemonic from './Mnemonic.vue'
   import LogoutButton from './LogoutButton.vue'
+  import { HdWallet } from '@aeternity/aepp-sdk/es/index'
+
   export default  {
     name: 'Cockpit',
     components: {
@@ -52,10 +54,13 @@
     methods: {
       ...mapActions(['flushData']),
       handleInput(e) {
-        console.log(e)
         this.mnemonic = e // mnemonic to be verified via vuex
       },
-      handleClick() {
+      async handleClick() {
+        const account = HdWallet.getHdWalletAccountFromMnemonic(this.mnemonic, 0)
+          // Set account
+        await this.$store.commit('setAccount', { pub: account.publicKey, priv: account.secretKey, name: 'merchant'})
+         //
         this.loggedIn = true
       },
       logout() {
