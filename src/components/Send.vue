@@ -23,7 +23,6 @@
 import GoBack from "./GoBack.vue";
 import ArrowRight from './ArrowRight.vue'
 import { QrcodeStream } from "vue-qrcode-reader";
-import merchantContract from '../../contract/merchant'
 
 export default {
   name: "Send",
@@ -44,25 +43,9 @@ export default {
   },
   methods: {
     async onDecode(content) {
-        debugger
-      // Make a fake transaction
-      const buyIceCreamTx = await this.$store.state.ae.spend(10000, await this.$store.state.ae.address())
-        debugger
-      const txHashSignature = this.$store.state.ae.sign(txHash)
       // Extract txHash and signature from qrCode
-      const txHash = ''
-      const signature = ''
-      try {
-          // Create contract instance
-          const cInstance = await this.$store.state.ae.getContractInstance(merchantContract, { contractAddress: 'ct_WbMSB4FySwzJhCmNsDjxm5P7nefMJGdzuoxc3VfUhzsTyvta2' })
-          const { tx: { senderId: customerAddress }} = await this.$store.state.ae.tx(txHash)
-          // Call the contract
-          const fulfillOrderResult = await cInstance.methods.fulfill_order(customerAddress, txHash, signature)
-          this.$emit('onFinish', fulfillOrderResult)
-      } catch (e) {
-        console.log(e)
-          alert('Oops. Something went wrong, please check the dev console for details')
-      }
+        const [txHash, signature] = content.split(' ')
+        this.$emit('onFinish', [txHash, signature])
     },
     async onInit(promise) {
       console.log("onInit");

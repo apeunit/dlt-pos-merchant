@@ -57,10 +57,13 @@
         this.mnemonic = e // mnemonic to be verified via vuex
       },
       async handleClick() {
-        const account = HdWallet.getHdWalletAccountFromMnemonic(this.mnemonic, 0)
+        // const expectedAccount = 'ak_2JA5C576crDUEvEWuhwhs1DscVFrcwPku6Kd9abQnbPPVbJ3je'
+        // const mnemonic = "flash entry cargo escape palm similar tube already dice main issue dutch"
+
+        const hdwallet = HdWallet.generateSaveHDWallet(this.mnemonic, 'test')
+        const account = HdWallet.getSaveHDWalletAccounts(hdwallet, 'test', 1)[0]
           // Set account
         await this.$store.commit('setAccount', { pub: account.publicKey, priv: account.secretKey, name: 'merchant'})
-         //
         this.loggedIn = true
       },
       logout() {
