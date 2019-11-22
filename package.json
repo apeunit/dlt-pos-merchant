@@ -14,7 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "@aeternity/aepp-components": "^2.0.15",
-    "@aeternity/aepp-sdk": "^6.1.2",
+    "@aeternity/aepp-sdk": "https://github.com/aeternity/aepp-sdk-js.git#fix/hd-wallet",
     "@chenfengyuan/vue-qrcode": "^1.0.1",
     "bignumber.js": "8.1.1",
     "isomorphic-fetch": "^2.2.1",
