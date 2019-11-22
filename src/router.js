@@ -12,6 +12,11 @@ import Header from './sections/Header.vue'
  * Views
  */
 import ChatArea from './components/ChatArea.vue'
+import Merchant from './components/Merchant.vue'
+import Cockpit from './components/merchant/Cockpit.vue'
+import GenerateWallet from './components/merchant/GenerateWallet.vue'
+import CheckOrder from './components/merchant/CheckOrder.vue'
+import TopUpCoins from './components/merchant/TopUpCoins.vue'
 import Impressum from './components/Impressum.vue'
 import About from './components/About.vue'
 import Venue from './components/Venue.vue'
@@ -32,14 +37,29 @@ export default (store) => {
   const routes = [
     {
       path: '/',
-      name: 'ChatArea',
+      name: 'merchant',
       props: route => ({
         query: route.query
       }),
-      components: {
-        header: Header,
-        default: ChatArea
-      }
+      component: Merchant,
+      children: [
+        {
+          path: '/',
+          component: Cockpit
+        },
+        {
+          path: 'generate-wallet',
+          component: GenerateWallet
+        },
+        {
+          path: 'check-order',
+          component: CheckOrder
+        },
+        {
+          path: 'top-up-coins',
+          component: TopUpCoins
+        }
+      ]
     },
     {
       path: '/impressum',
@@ -86,7 +106,16 @@ export default (store) => {
         header: Header,
         default: Transactions
       }
-    }
+    },
+    // {
+    //   path: '/merchant',
+    //   name: 'Merchant',
+    //   components: {
+    //     header: Header,
+    //     default: Merchant
+    //   }
+    // },
+
   ]
 
   const router = new Router({

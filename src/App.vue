@@ -1,10 +1,7 @@
 <template>
   <div id="app" class="relative h-screen">
-    <router-view name="header" />
+<!--    <router-view name="header" />-->
     <router-view class="h-full overflow-x-hidden" />
-    <Modal>
-
-    </Modal>
   </div>
 </template>
 <script>
@@ -21,15 +18,8 @@ export default {
     }
   },
   methods: {},
-  mounted () {
-    // update balance after 5sec (wait for 'initAe' in store)
-    setTimeout(() => {
-      this.$store.dispatch('updateBalance')
-    }, 5000);
-    // update balance every 10sec (poll)
-    setInterval(() => {
-      this.$store.dispatch('updateBalance')
-    }, 10000)
+  async mounted () {
+      const mnemonic = "flash entry cargo escape palm similar tube already dice main issue dutch"
   }
 }
 </script>

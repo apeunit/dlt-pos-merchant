@@ -1,6 +1,6 @@
 <template>
   <div class="scan-qr">
-    <go-back>Conversations</go-back>
+<!--    <go-back>Conversations</go-back>-->
     <div class="bg-black text-white pb-8 pt-8">
       <div class="container flex flex-col px-4 text-28 font-sans leading-normal">
         Scan QR Code
@@ -42,18 +42,10 @@ export default {
     };
   },
   methods: {
-    onDecode(content) {
-      // only move forward if addr is valid. no error messages for incorrect qr
-      if (this.isValidAddress(content)) {
-        this.$store.commit("setScanQR", content);
-        this.$router.push({ path: `/` });
-      } else if (content.startsWith('https://apeun.it')) {
-        // it's a APE UNIT URL
-        this.$store.commit('resetChatHistory')
-        setTimeout(()=>{
-          window.location.href = content
-        }, 1000)
-      }
+    async onDecode(content) {
+      // Extract txHash and signature from qrCode
+        const [txHash, signature] = content.split(' ')
+        this.$emit('onFinish', [txHash, signature])
     },
     async onInit(promise) {
       console.log("onInit");
@@ -79,7 +71,7 @@ export default {
     }
   },
   async mounted() {
-    await this.$store.dispatch("updateBalance");
+    // await this.$store.dispatch("updateBalance");
     this.startQrCode();
   }
 };
