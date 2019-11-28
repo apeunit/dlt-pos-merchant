@@ -3,7 +3,8 @@
     <header-component :view-title="'Check Order'"/>
     <div class="wrapper">
           <p v-if="showLoader"> Checking your transaction. Please wait...</p>
-          <p v-if=explorerUrl id="confirmation-message">{{ confirmationMsg }} </p>
+          <p v-if="explorerUrl && !showError" id="confirmation-message">{{ confirmationMsg }} </p>
+          <p v-if="showError" id="confirmation-message">{{ errorMessage }} </p>
           <explorer-link :url="explorerUrl" v-if="explorerUrl"/>
           <SendComponent @onFinish="onDone" v-if="scanQR"/>
     </div>
@@ -28,7 +29,9 @@
         scanQR: true,
         explorerUrl: null,
         showLoader: false,
+        showError: false,
         confirmationMsg: 'successfully ordered 1 beer, give it!',
+        errorMessage: 'You already get your ice-cream. Don\'t try to cheat me!'
       }
     },
     methods: {
@@ -54,7 +57,7 @@
               this.showLoader = false
           } catch (e) {
               if (e.decodedError && e.decodedError.indexOf('err:exec') !== -1) {
-                  this.explorerUrl = 'https://testnet.explorer.aepps.com/transactions/' + hash
+                  this.showError = true
                   this.showLoader = false
               } else {
                   this.scanQR = true
