@@ -41,7 +41,7 @@
           this.showLoader = true
           try {
               // Create contract instance
-              const cInstance = await this.$store.state.ae.getContractInstance(merchantContract, { contractAddress: 'ct_WbMSB4FySwzJhCmNsDjxm5P7nefMJGdzuoxc3VfUhzsTyvta2' })
+              const cInstance = await this.$store.state.ae.getContractInstance(merchantContract, { contractAddress: 'ct_WbMSB4FySwzJhCmNsDjxm5P7nefMJGdzuoxc3VfUhzsTyvta2', forceCodeCheck: true  })
               const { block_height,  tx: { senderId: customerAddress }} = await this.$store.state.ae.tx(hash)
               if (block_height === -1) {
                   this.scanQR = true
