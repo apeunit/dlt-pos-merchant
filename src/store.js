@@ -161,9 +161,11 @@ const store = new Vuex.Store({
       // localStorage.setItem('account', JSON.stringify(state.account))
       if (pub !== 'burned' && pub !== 'seeyou') {
         state.ae.addAccount(
-          MemoryAccount(keypair: {
-            secretKey: state.account.priv,
-            publicKey: state.account.pub
+          MemoryAccount({
+            keypair: {
+              secretKey: state.account.priv,
+              publicKey: state.account.pub
+            }
           }), { select: true })
       }
     },
