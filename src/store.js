@@ -1,6 +1,7 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
 import Ae from '@aeternity/aepp-sdk/es/ae/universal'
+import MemoryAccount from '@aeternity/aepp-sdk/es/account/memory'
 import chatData from './assets/data/chat.json'
 import QRCode from 'qrcode'
 import createPersistedState from 'vuex-persistedstate'
@@ -50,78 +51,78 @@ const store = new Vuex.Store({
     modalOpened: false
   },
   getters: {
-    printingMessages (state) {
+    printingMessages(state) {
       return state.printingMessages
     },
-    costToCharge (state) {
+    costToCharge(state) {
       return state.costToCharge
     },
-    chatStarted (state) {
+    chatStarted(state) {
       return state.chatStarted
     },
-    currentLang (state) {
+    currentLang(state) {
       return state.currentLang
     },
-    getQRData (state) {
+    getQRData(state) {
       return state.qrData
     },
-    getScannedQR (state) {
+    getScannedQR(state) {
       return state.scannedQR
     },
-    chatMessagesList (state) {
+    chatMessagesList(state) {
       return state.chatMessagesList
     },
-    lastBeerHash (state) {
+    lastBeerHash(state) {
       if (state.beerHashes.length <= 0) {
         return null
       }
       return state.beerHashes[0]
     },
-    userBalance (state) {
+    userBalance(state) {
       return state.balance
     },
-    ae (state) {
+    ae(state) {
       return state.ae
     },
-    chatHistory (state) {
+    chatHistory(state) {
       return state.chatHistory
     },
-    client (state) {
+    client(state) {
       return state.ae
     },
-    burned (state) {
+    burned(state) {
       return state.burned
     },
-    eventEnded (state) {
+    eventEnded(state) {
       return state.eventEnded
     },
-    getBarStatus (state) {
+    getBarStatus(state) {
       return state.barState
     }
   },
   mutations: {
-    setModalOpened (state, val) {
+    setModalOpened(state, val) {
       state.modalOpened = val
     },
-    setReceiver (state, val) {
+    setReceiver(state, val) {
       state.receiver = val
     },
-    setCostToCharge (state, amount) {
+    setCostToCharge(state, amount) {
       state.costToCharge = amount
     },
-    setQRData (state, data) {
+    setQRData(state, data) {
       state.qrData = data
     },
-    setScanQR (state, data) {
+    setScanQR(state, data) {
       state.scannedQR = data
     },
-    setEventStatus (state, data) {
+    setEventStatus(state, data) {
       state.eventEnded = data
     },
-    setBurned (state, data) {
+    setBurned(state, data) {
       state.burned = data
     },
-    cleanNextMessages (state) {
+    cleanNextMessages(state) {
       state.chatHistory.en.forEach(function (o, i, cH) {
         if (o.hasOwnProperty('next') && i <= cH.length - 2) {
           delete o.next
@@ -133,13 +134,13 @@ const store = new Vuex.Store({
         }
       })
     },
-    setChatStarted (state, started) {
+    setChatStarted(state, started) {
       state.chatStarted = started
     },
-    setChatHistory (state, history) {
+    setChatHistory(state, history) {
       state.chatHistory = history
     },
-    resetChatHistory (state, history) {
+    resetChatHistory(state, history) {
       const cleanHistory = {
         en: [],
         de: []
@@ -148,7 +149,7 @@ const store = new Vuex.Store({
       state.burned = false
       state.eventEnded = false
     },
-    setAccount (state, {
+    setAccount(state, {
       pub,
       priv,
       name
@@ -159,26 +160,27 @@ const store = new Vuex.Store({
       // eslint-disable-next-line no-undef
       // localStorage.setItem('account', JSON.stringify(state.account))
       if (pub !== 'burned' && pub !== 'seeyou') {
-        state.ae.setKeypair({
-          secretKey: state.account.priv,
-          publicKey: state.account.pub
-        })
+        state.ae.addAccount(
+          MemoryAccount(keypair: {
+            secretKey: state.account.priv,
+            publicKey: state.account.pub
+          }), { select: true })
       }
     },
-    setCurrentLang (state, lang) {
+    setCurrentLang(state, lang) {
       // console.log(`setting ${lang}!`)
       state.currentLang = lang
     },
-    setAe (state, ae) {
+    setAe(state, ae) {
       state.ae = ae
     },
-    setBalance (state, newBalance) {
+    setBalance(state, newBalance) {
       state.balance = newBalance
     },
-    setBalanceLoading (state, isBalanceLoading) {
+    setBalanceLoading(state, isBalanceLoading) {
       state.isBalanceLoading = isBalanceLoading
     },
-    addMessage (state, {
+    addMessage(state, {
       message,
       lang
     }) {
@@ -203,7 +205,7 @@ const store = new Vuex.Store({
       state.printingMessages = (clonedMsg.buttons || clonedMsg.id === 'burned' || clonedMsg.id === 'burned-2' || clonedMsg.id === 'burned-3' || clonedMsg.id === 'seeyou') ? false : true
       state.chatHistory[lang].push(clonedMsg)
     },
-    removeMessage (state, {
+    removeMessage(state, {
       messageId,
       lang
     }) {
@@ -214,26 +216,26 @@ const store = new Vuex.Store({
       // console.log('newMessages', newMessages)
       state.chatHistory[lang] = newMessages
     },
-    addBeerHash (state, beerHash) {
+    addBeerHash(state, beerHash) {
       state.beerHashes.unshift(beerHash)
       // eslint-disable-next-line no-undef
       localStorage.setItem('beerHashes', JSON.stringify(state.beerHashes))
     },
-    setBeerHashes (state, beerHashes) {
+    setBeerHashes(state, beerHashes) {
       state.beerHashes = beerHashes
       // eslint-disable-next-line no-undef
       localStorage.setItem('beerHashes', JSON.stringify(state.beerHashes))
     },
-    setBarState (state, barState) {
+    setBarState(state, barState) {
       state.barState = barState
     },
-    SOCKET_CONNECT (state, status) {
+    SOCKET_CONNECT(state, status) {
       state.socketConnected = true
     },
-    SOCKET_DISCONNECT (state, status) {
+    SOCKET_DISCONNECT(state, status) {
       state.socketConnected = false
     },
-    SOCKET_BAR_STATE (state, barState) {
+    SOCKET_BAR_STATE(state, barState) {
       // console.log('SOCKET_BAR_STATE', barState)
       if (Array.isArray(barState) && barState.length >= 0) {
         barState = barState[0]
@@ -244,7 +246,7 @@ const store = new Vuex.Store({
     }
   },
   actions: {
-    async updateBalance ({ commit, state }) {
+    async updateBalance({ commit, state }) {
       const pubKey = state.account.pub
 
       if (pubKey && pubKey !== 'burned' && pubKey !== 'seeyou') {
@@ -263,7 +265,7 @@ const store = new Vuex.Store({
       }
       return 0
     },
-    async initAe ({ commit }) {
+    async initAe({ commit }) {
       commit(
         'setAe',
         await Ae({
@@ -273,7 +275,7 @@ const store = new Vuex.Store({
         })
       )
     },
-    flushData ({ state, commit }) {
+    flushData({ state, commit }) {
       const account = {
         pub: null,
         priv: null,
@@ -283,7 +285,7 @@ const store = new Vuex.Store({
       window.localStorage.removeItem('vuex')
       console.log(window.localStorage, state.account)
     },
-    async transfer ({ commit, state, getters, dispatch }, { amount, receiver }) {
+    async transfer({ commit, state, getters, dispatch }, { amount, receiver }) {
       /**
        *  TODO: check for same account. user balance etc
        */
@@ -298,13 +300,13 @@ const store = new Vuex.Store({
       commit('addBeerHash', spendTx)
       return spendTx
     },
-    async generateQRURI ({ commit, state }, { data }) {
+    async generateQRURI({ commit, state }, { data }) {
       const uri = await QRCode.toDataURL(data, {
         errorCorrectionLevel: 'L'
       })
       return uri
     },
-    async getPubkeyByName ({ commit, state }, { name }) {
+    async getPubkeyByName({ commit, state }, { name }) {
       try {
         // eslint-disable-next-line no-undef
         const req = await fetch(`${state.websocketUrl}/rest/address/${name}`)
